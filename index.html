@@ -16,36 +16,57 @@
     </script>
     <style>
         body {
-            background-color: #212121; /* 深黑色背景 */
+            background: linear-gradient(45deg, #1e2a47, #212121); /* 渐变黑色背景 */
+            animation: backgroundAnimation 10s infinite alternate;
             color: #f4f4f4; /* 淺灰色文字 */
         }
-        .text-primary {
-            color: #FFD700; /* 金色文字 */
+
+        @keyframes backgroundAnimation {
+            0% {
+                background: linear-gradient(45deg, #1e2a47, #212121);
+            }
+            50% {
+                background: linear-gradient(45deg, #2c3e50, #34495e);
+            }
+            100% {
+                background: linear-gradient(45deg, #1e2a47, #212121);
+            }
         }
+
+        .text-primary {
+            color: #1E90FF; /* 藍色文字 */
+        }
+
         .text-secondary {
             color: #C0C0C0; /* 銀色文字 */
         }
+
         .btn-primary {
-            background-color: #FFD700; /* 金色按鈕 */
-            border-color: #FFD700;
+            background-color: #1E90FF; /* 藍色按鈕 */
+            border-color: #1E90FF;
         }
+
         .btn-primary:hover {
-            background-color: #FFCC00; /* 金色按鈕懸停 */
-            border-color: #FFCC00;
+            background-color: #4682B4; /* 藍色按鈕懸停 */
+            border-color: #4682B4;
         }
+
         .card {
-            background-color: #333333; /* 深灰色卡片背景 */
+            background-color: #2c3e50; /* 深藍灰色卡片背景 */
             border-radius: 10px;
-            border: 1px solid #FFD700; /* 金色邊框 */
+            border: 1px solid #1E90FF; /* 藍色邊框 */
         }
+
         .card p {
             color: #C0C0C0; /* 銀色文字 */
         }
+
         footer {
             color: #C0C0C0; /* 銀色文字 */
         }
+
         footer p {
-            color: #FFD700; /* 金色版權文字 */
+            color: #1E90FF; /* 藍色版權文字 */
         }
     </style>
 </head>
