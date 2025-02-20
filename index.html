@@ -11,12 +11,12 @@
             let response = await fetch("https://Eddy980814.github.io/my-balance-check/balance.json");
             let data = await response.json();
             let balance = data[userId] || "查無資料";
-            document.getElementById("result").innerText = "你的餘額：" + balance;
+            document.getElementById("result").innerText = "您的餘額：" + balance;
         }
     </script>
 </head>
 <body>
-    <h2>查詢你的餘額</h2>
+    <h2>查詢您的餘額</h2>
     <input type="text" id="userId" placeholder="輸入你的用戶ID">
     <button onclick="checkBalance()">查詢</button>
     <p id="result"></p>
