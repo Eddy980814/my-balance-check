@@ -1,9 +1,9 @@
 {
     "A4uu7014": {
-        "name": "吳奕辰",
+        "name": "用戶吳奕辰",
         "balance": 15388,
-        "hold": 100,
-        "refund": 50,
+        "hold": 0,
+        "refund": 0,
         "available": 15388
     },
     "user456": {
@@ -14,198 +14,158 @@
         "available": 1700
     },
     "user789": {
-        "name": "張三",
-        "balance": 1500,
-        "hold": 200,
-        "refund": 50,
-        "available": 1250
+        "name": "隨機用戶1",
+        "balance": 3500,
+        "hold": 300,
+        "refund": 150,
+        "available": 3050
     },
     "user101": {
-        "name": "李四",
-        "balance": 1200,
-        "hold": 100,
-        "refund": 30,
-        "available": 1070
+        "name": "隨機用戶2",
+        "balance": 1800,
+        "hold": 250,
+        "refund": 200,
+        "available": 1350
     },
     "user202": {
-        "name": "王五",
-        "balance": 1800,
-        "hold": 300,
-        "refund": 120,
-        "available": 1380
+        "name": "隨機用戶3",
+        "balance": 2800,
+        "hold": 100,
+        "refund": 50,
+        "available": 2650
     },
     "user303": {
-        "name": "趙六",
-        "balance": 2200,
-        "hold": 400,
-        "refund": 150,
-        "available": 1650
+        "name": "隨機用戶4",
+        "balance": 5000,
+        "hold": 500,
+        "refund": 300,
+        "available": 4200
     },
     "user404": {
-        "name": "孫七",
-        "balance": 2500,
-        "hold": 500,
-        "refund": 200,
-        "available": 1800
+        "name": "隨機用戶5",
+        "balance": 1500,
+        "hold": 200,
+        "refund": 80,
+        "available": 1220
     },
     "user505": {
-        "name": "周八",
-        "balance": 3000,
-        "hold": 600,
-        "refund": 250,
-        "available": 2100
+        "name": "隨機用戶6",
+        "balance": 1200,
+        "hold": 150,
+        "refund": 100,
+        "available": 950
     },
     "user606": {
-        "name": "鄭九",
-        "balance": 3500,
-        "hold": 700,
-        "refund": 300,
-        "available": 2500
+        "name": "隨機用戶7",
+        "balance": 4200,
+        "hold": 400,
+        "refund": 200,
+        "available": 3600
     },
     "user707": {
-        "name": "冯十",
-        "balance": 4000,
-        "hold": 800,
-        "refund": 350,
-        "available": 2800
+        "name": "隨機用戶8",
+        "balance": 2500,
+        "hold": 300,
+        "refund": 100,
+        "available": 2100
     },
     "user808": {
-        "name": "陳小明",
-        "balance": 4500,
-        "hold": 900,
+        "name": "隨機用戶9",
+        "balance": 6000,
+        "hold": 500,
         "refund": 400,
-        "available": 3150
+        "available": 5100
     },
     "user909": {
-        "name": "李曉華",
+        "name": "隨機用戶10",
+        "balance": 2200,
+        "hold": 100,
+        "refund": 50,
+        "available": 2050
+    }
+}{
+    "user123": {
+        "name": "某某某",
+        "balance": 1000,
+        "hold": 100,
+        "refund": 50,
+        "available": 850
+    },
+    "user456": {
+        "name": "其他其他",
+        "balance": 2000,
+        "hold": 200,
+        "refund": 100,
+        "available": 1700
+    },
+    "user789": {
+        "name": "隨機用戶1",
+        "balance": 3500,
+        "hold": 300,
+        "refund": 150,
+        "available": 3050
+    },
+    "user101": {
+        "name": "隨機用戶2",
+        "balance": 1800,
+        "hold": 250,
+        "refund": 200,
+        "available": 1350
+    },
+    "user202": {
+        "name": "隨機用戶3",
+        "balance": 2800,
+        "hold": 100,
+        "refund": 50,
+        "available": 2650
+    },
+    "user303": {
+        "name": "隨機用戶4",
         "balance": 5000,
-        "hold": 1000,
-        "refund": 450,
-        "available": 3450
+        "hold": 500,
+        "refund": 300,
+        "available": 4200
     },
-    "user1010": {
-        "name": "王一",
-        "balance": 5500,
-        "hold": 1100,
-        "refund": 500,
-        "available": 3900
+    "user404": {
+        "name": "隨機用戶5",
+        "balance": 1500,
+        "hold": 200,
+        "refund": 80,
+        "available": 1220
     },
-    "user1111": {
-        "name": "劉二",
+    "user505": {
+        "name": "隨機用戶6",
+        "balance": 1200,
+        "hold": 150,
+        "refund": 100,
+        "available": 950
+    },
+    "user606": {
+        "name": "隨機用戶7",
+        "balance": 4200,
+        "hold": 400,
+        "refund": 200,
+        "available": 3600
+    },
+    "user707": {
+        "name": "隨機用戶8",
+        "balance": 2500,
+        "hold": 300,
+        "refund": 100,
+        "available": 2100
+    },
+    "user808": {
+        "name": "隨機用戶9",
         "balance": 6000,
-        "hold": 1200,
-        "refund": 550,
-        "available": 4350
+        "hold": 500,
+        "refund": 400,
+        "available": 5100
     },
-    "user1212": {
-        "name": "張三豐",
-        "balance": 6500,
-        "hold": 1300,
-        "refund": 600,
-        "available": 4800
-    },
-    "user1313": {
-        "name": "李四豐",
-        "balance": 7000,
-        "hold": 1400,
-        "refund": 650,
-        "available": 5250
-    },
-    "user1414": {
-        "name": "王五豐",
-        "balance": 7500,
-        "hold": 1500,
-        "refund": 700,
-        "available": 5700
-    },
-    "user1515": {
-        "name": "趙六豐",
-        "balance": 8000,
-        "hold": 1600,
-        "refund": 750,
-        "available": 6150
-    },
-    "user1616": {
-        "name": "孫七豐",
-        "balance": 8500,
-        "hold": 1700,
-        "refund": 800,
-        "available": 6600
-    },
-    "user1717": {
-        "name": "周八豐",
-        "balance": 9000,
-        "hold": 1800,
-        "refund": 850,
-        "available": 7050
-    },
-    "user1818": {
-        "name": "鄭九豐",
-        "balance": 9500,
-        "hold": 1900,
-        "refund": 900,
-        "available": 7500
-    },
-    "user1919": {
-        "name": "冯十豐",
-        "balance": 10000,
-        "hold": 2000,
-        "refund": 950,
-        "available": 8050
-    },
-    "user2020": {
-        "name": "陳小明豐",
-        "balance": 10500,
-        "hold": 2100,
-        "refund": 1000,
-        "available": 8400
-    },
-    "user2121": {
-        "name": "李曉華豐",
-        "balance": 11000,
-        "hold": 2200,
-        "refund": 1050,
-        "available": 8750
-    },
-    "user2222": {
-        "name": "王一豐",
-        "balance": 11500,
-        "hold": 2300,
-        "refund": 1100,
-        "available": 9100
-    },
-    "user2323": {
-        "name": "劉二豐",
-        "balance": 12000,
-        "hold": 2400,
-        "refund": 1150,
-        "available": 9450
-    },
-    "user2424": {
-        "name": "張三豐豐",
-        "balance": 12500,
-        "hold": 2500,
-        "refund": 1200,
-        "available": 9800
-    },
-    "user2525": {
-        "name": "李四豐豐",
-        "balance": 13000,
-        "hold": 2600,
-        "refund": 1250,
-        "available": 10150
-    },
-    "user2626": {
-        "name": "王五豐豐",
-        "balance": 13500,
-        "hold": 2700,
-        "refund": 1300,
-        "available": 10500
-    },
-    "user2727": {
-        "name": "趙六豐豐",
-        "balance": 14000,
-        "hold": 2800,
-        "refund": 1350,
-        "available": 10850
-    },
+    "user909": {
+        "name": "隨機用戶10",
+        "balance": 2200,
+        "hold": 100,
+        "refund": 50,
+        "available": 2050
+    }
+}
