@@ -93,13 +93,18 @@
         <!-- 標題 -->
         <h1 class="text-primary mt-5">歡迎使用 NR Pay 新融科技</h1>
 
-        <!-- 官網其他內容 -->
+        <!-- 查詢餘額卡片 -->
         <div class="card shadow mt-4">
-            <h5 class="text-center text-light">NR Pay 服務介紹</h5>
-            <p class="text-center text-light">我們為您提供安全、便捷的支付解決方案，讓您無憂進行交易。</p>
-            <p class="text-center">
-                <a href="https://lin.ee/sJU66Ce" class="btn btn-primary">了解更多服務</a>
-            </p>
+            <h5 class="text-center text-light">請輸入用戶 ID 查詢餘額</h5>
+            <input type="text" id="userId" class="form-control my-3" placeholder="輸入你的用戶 ID">
+            <button class="btn btn-primary w-100" onclick="checkBalance()">查詢</button>
+            <p id="result" class="text-center mt-3 fw-bold text-success"></p>
+
+            <!-- 客服資訊 -->
+            <div class="mt-3 text-center text-secondary">
+                <p>💬 線上客服：<a href="https://line.me/R/ti/p/@584aotlp" class="text-decoration-none text-primary" target="_blank">@584aotlp</a></p>
+                <p>📧 客服信箱：<a href="mailto:nrt.tw.2025@gmail.com" class="text-decoration-none text-primary">nrt.tw.2025@gmail.com</a></p>
+            </div>
         </div>
 
         <footer class="mt-4 text-center text-secondary">
@@ -107,6 +112,16 @@
         </footer>
 
     </div>
+
+    <script>
+        async function checkBalance() {
+            let userId = document.getElementById("userId").value;
+            let response = await fetch("balance.json");
+            let data = await response.json();
+            let balance = data[userId] || "查無資料";
+            document.getElementById("result").innerText = "你的餘額：" + balance;
+        }
+    </script>
 
 </body>
 </html>
