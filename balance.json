@@ -1,171 +1,62 @@
 {
     "A4uu7014": {
-        "name": "用戶吳奕辰",
         "balance": 15388,
         "hold": 0,
         "refund": 0,
         "available": 15388
     },
     "user456": {
-        "name": "其他其他",
         "balance": 2000,
         "hold": 200,
         "refund": 100,
         "available": 1700
     },
     "user789": {
-        "name": "隨機用戶1",
-        "balance": 3500,
-        "hold": 300,
-        "refund": 150,
-        "available": 3050
+        "balance": 1500,
+        "hold": 150,
+        "refund": 50,
+        "available": 1300
     },
     "user101": {
-        "name": "隨機用戶2",
-        "balance": 1800,
-        "hold": 250,
-        "refund": 200,
-        "available": 1350
-    },
-    "user202": {
-        "name": "隨機用戶3",
-        "balance": 2800,
-        "hold": 100,
-        "refund": 50,
-        "available": 2650
-    },
-    "user303": {
-        "name": "隨機用戶4",
-        "balance": 5000,
-        "hold": 500,
-        "refund": 300,
-        "available": 4200
-    },
-    "user404": {
-        "name": "隨機用戶5",
-        "balance": 1500,
-        "hold": 200,
-        "refund": 80,
-        "available": 1220
-    },
-    "user505": {
-        "name": "隨機用戶6",
-        "balance": 1200,
-        "hold": 150,
-        "refund": 100,
-        "available": 950
-    },
-    "user606": {
-        "name": "隨機用戶7",
-        "balance": 4200,
-        "hold": 400,
-        "refund": 200,
-        "available": 3600
-    },
-    "user707": {
-        "name": "隨機用戶8",
-        "balance": 2500,
-        "hold": 300,
-        "refund": 100,
-        "available": 2100
-    },
-    "user808": {
-        "name": "隨機用戶9",
-        "balance": 6000,
-        "hold": 500,
-        "refund": 400,
-        "available": 5100
-    },
-    "user909": {
-        "name": "隨機用戶10",
         "balance": 2200,
-        "hold": 100,
-        "refund": 50,
-        "available": 2050
-    }
-}{
-    "user123": {
-        "name": "某某某",
-        "balance": 1000,
-        "hold": 100,
-        "refund": 50,
-        "available": 850
-    },
-    "user456": {
-        "name": "其他其他",
-        "balance": 2000,
         "hold": 200,
         "refund": 100,
-        "available": 1700
+        "available": 1900
     },
-    "user789": {
-        "name": "隨機用戶1",
-        "balance": 3500,
+    "user102": {
+        "balance": 3000,
         "hold": 300,
         "refund": 150,
-        "available": 3050
+        "available": 2550
     },
-    "user101": {
-        "name": "隨機用戶2",
-        "balance": 1800,
+    "user103": {
+        "balance": 2500,
         "hold": 250,
-        "refund": 200,
-        "available": 1350
+        "refund": 120,
+        "available": 2130
     },
-    "user202": {
-        "name": "隨機用戶3",
-        "balance": 2800,
-        "hold": 100,
-        "refund": 50,
-        "available": 2650
+    "user104": {
+        "balance": 1800,
+        "hold": 180,
+        "refund": 90,
+        "available": 1530
     },
-    "user303": {
-        "name": "隨機用戶4",
+    "user105": {
         "balance": 5000,
         "hold": 500,
-        "refund": 300,
-        "available": 4200
-    },
-    "user404": {
-        "name": "隨機用戶5",
-        "balance": 1500,
-        "hold": 200,
-        "refund": 80,
-        "available": 1220
-    },
-    "user505": {
-        "name": "隨機用戶6",
-        "balance": 1200,
-        "hold": 150,
-        "refund": 100,
-        "available": 950
-    },
-    "user606": {
-        "name": "隨機用戶7",
-        "balance": 4200,
-        "hold": 400,
         "refund": 200,
-        "available": 3600
+        "available": 4300
     },
-    "user707": {
-        "name": "隨機用戶8",
-        "balance": 2500,
-        "hold": 300,
-        "refund": 100,
-        "available": 2100
+    "user106": {
+        "balance": 4000,
+        "hold": 400,
+        "refund": 150,
+        "available": 3450
     },
-    "user808": {
-        "name": "隨機用戶9",
-        "balance": 6000,
-        "hold": 500,
-        "refund": 400,
-        "available": 5100
-    },
-    "user909": {
-        "name": "隨機用戶10",
-        "balance": 2200,
-        "hold": 100,
-        "refund": 50,
-        "available": 2050
+    "user107": {
+        "balance": 3500,
+        "hold": 350,
+        "refund": 120,
+        "available": 3030
     }
 }
