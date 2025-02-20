@@ -1,116 +1,302 @@
 {
-    "A4uu7014": {
-        "balance": 15388,     
-        "hold": 0,        
-        "refund": 0,      
-        "available": 0    
-    },
-    "100003": {
-        "balance": 200,
-        "hold": 50,
-        "refund": 20,
-        "available": 130
-    },
-    "100004": {
-        "balance": 400,
-        "hold": 100,
-        "refund": 50,
-        "available": 250
-    },
-    "100005": {
-        "balance": 150,
-        "hold": 30,
-        "refund": 10,
-        "available": 110
-    },
-    "100006": {
-        "balance": 520,
-        "hold": 120,
-        "refund": 50,
-        "available": 350
-    },
-    "100007": {
-        "balance": 780,
-        "hold": 200,
-        "refund": 80,
-        "available": 500
-    },
-    "100008": {
-        "balance": 320,
-        "hold": 80,
-        "refund": 30,
-        "available": 210
-    },
-    "100009": {
-        "balance": 950,
-        "hold": 300,
-        "refund": 100,
-        "available": 550
-    },
-    "100010": {
-        "balance": 680,
-        "hold": 150,
-        "refund": 60,
-        "available": 470
-    },
-    "100011": {
-        "balance": 1100,
-        "hold": 400,
-        "refund": 150,
-        "available": 550
-    },
-    "100012": {
-        "balance": 750,
-        "hold": 250,
-        "refund": 90,
-        "available": 410
-    },
-    "100013": {
-        "balance": 580,
-        "hold": 120,
-        "refund": 40,
-        "available": 420
-    },
-    "100014": {
-        "balance": 1020,
-        "hold": 300,
-        "refund": 130,
-        "available": 590
-    },
-    "100015": {
-        "balance": 880,
-        "hold": 250,
-        "refund": 90,
-        "available": 540
-    },
-    "100016": {
-        "balance": 400,
-        "hold": 100,
-        "refund": 30,
-        "available": 270
-    },
-    "100017": {
-        "balance": 620,
-        "hold": 150,
-        "refund": 50,
-        "available": 420
-    },
-    "100018": {
-        "balance": 910,
-        "hold": 280,
-        "refund": 100,
-        "available": 530
-    },
-    "100019": {
-        "balance": 550,
-        "hold": 180,
-        "refund": 70,
-        "available": 300
-    },
-    "100020": {
-        "balance": 1200,
-        "hold": 500,
-        "refund": 200,
-        "available": 500
-    }
+  "A4uu7014": {
+    "balance": 15330,
+    "hold": 0,
+    "refund": 0,
+    "available": 15330
+  },
+  "user002": {
+    "balance": 85000,
+    "hold": 10000,
+    "refund": 5000,
+    "available": 70000
+  },
+  "user003": {
+    "balance": 200000,
+    "hold": 50000,
+    "refund": 20000,
+    "available": 130000
+  },
+  "user004": {
+    "balance": 150000,
+    "hold": 40000,
+    "refund": 15000,
+    "available": 95000
+  },
+  "user005": {
+    "balance": 95000,
+    "hold": 15000,
+    "refund": 7000,
+    "available": 73000
+  },
+  "user006": {
+    "balance": 300000,
+    "hold": 80000,
+    "refund": 25000,
+    "available": 190000
+  },
+  "user007": {
+    "balance": 50000,
+    "hold": 10000,
+    "refund": 3000,
+    "available": 37000
+  },
+  "user008": {
+    "balance": 180000,
+    "hold": 30000,
+    "refund": 15000,
+    "available": 135000
+  },
+  "user009": {
+    "balance": 60000,
+    "hold": 10000,
+    "refund": 2000,
+    "available": 48000
+  },
+  "user010": {
+    "balance": 110000,
+    "hold": 25000,
+    "refund": 8000,
+    "available": 77000
+  },
+  "user011": {
+    "balance": 130000,
+    "hold": 20000,
+    "refund": 12000,
+    "available": 98000
+  },
+  "user012": {
+    "balance": 210000,
+    "hold": 60000,
+    "refund": 25000,
+    "available": 125000
+  },
+  "user013": {
+    "balance": 95000,
+    "hold": 15000,
+    "refund": 7000,
+    "available": 73000
+  },
+  "user014": {
+    "balance": 80000,
+    "hold": 20000,
+    "refund": 6000,
+    "available": 54000
+  },
+  "user015": {
+    "balance": 100000,
+    "hold": 30000,
+    "refund": 12000,
+    "available": 68000
+  },
+  "user016": {
+    "balance": 150000,
+    "hold": 50000,
+    "refund": 15000,
+    "available": 95000
+  },
+  "user017": {
+    "balance": 130000,
+    "hold": 30000,
+    "refund": 10000,
+    "available": 100000
+  },
+  "user018": {
+    "balance": 200000,
+    "hold": 60000,
+    "refund": 30000,
+    "available": 110000
+  },
+  "user019": {
+    "balance": 90000,
+    "hold": 20000,
+    "refund": 8000,
+    "available": 72000
+  },
+  "user020": {
+    "balance": 180000,
+    "hold": 35000,
+    "refund": 15000,
+    "available": 130000
+  },
+  "user021": {
+    "balance": 95000,
+    "hold": 15000,
+    "refund": 4000,
+    "available": 76000
+  },
+  "user022": {
+    "balance": 220000,
+    "hold": 70000,
+    "refund": 30000,
+    "available": 120000
+  },
+  "user023": {
+    "balance": 250000,
+    "hold": 80000,
+    "refund": 35000,
+    "available": 145000
+  },
+  "user024": {
+    "balance": 160000,
+    "hold": 40000,
+    "refund": 10000,
+    "available": 110000
+  },
+  "user025": {
+    "balance": 130000,
+    "hold": 30000,
+    "refund": 7000,
+    "available": 93000
+  },
+  "user026": {
+    "balance": 210000,
+    "hold": 50000,
+    "refund": 20000,
+    "available": 140000
+  },
+  "user027": {
+    "balance": 90000,
+    "hold": 15000,
+    "refund": 5000,
+    "available": 70000
+  },
+  "user028": {
+    "balance": 85000,
+    "hold": 10000,
+    "refund": 3000,
+    "available": 72000
+  },
+  "user029": {
+    "balance": 120000,
+    "hold": 25000,
+    "refund": 7000,
+    "available": 88000
+  },
+  "user030": {
+    "balance": 160000,
+    "hold": 40000,
+    "refund": 12000,
+    "available": 108000
+  },
+  "user031": {
+    "balance": 180000,
+    "hold": 35000,
+    "refund": 10000,
+    "available": 135000
+  },
+  "user032": {
+    "balance": 220000,
+    "hold": 70000,
+    "refund": 20000,
+    "available": 130000
+  },
+  "user033": {
+    "balance": 170000,
+    "hold": 30000,
+    "refund": 8000,
+    "available": 132000
+  },
+  "user034": {
+    "balance": 130000,
+    "hold": 25000,
+    "refund": 10000,
+    "available": 95000
+  },
+  "user035": {
+    "balance": 140000,
+    "hold": 30000,
+    "refund": 15000,
+    "available": 95000
+  },
+  "user036": {
+    "balance": 190000,
+    "hold": 50000,
+    "refund": 20000,
+    "available": 120000
+  },
+  "user037": {
+    "balance": 120000,
+    "hold": 20000,
+    "refund": 5000,
+    "available": 95000
+  },
+  "user038": {
+    "balance": 160000,
+    "hold": 40000,
+    "refund": 8000,
+    "available": 112000
+  },
+  "user039": {
+    "balance": 190000,
+    "hold": 60000,
+    "refund": 25000,
+    "available": 105000
+  },
+  "user040": {
+    "balance": 250000,
+    "hold": 80000,
+    "refund": 30000,
+    "available": 140000
+  },
+  "user041": {
+    "balance": 230000,
+    "hold": 70000,
+    "refund": 25000,
+    "available": 135000
+  },
+  "user042": {
+    "balance": 220000,
+    "hold": 60000,
+    "refund": 20000,
+    "available": 140000
+  },
+  "user043": {
+    "balance": 160000,
+    "hold": 40000,
+    "refund": 12000,
+    "available": 108000
+  },
+  "user044": {
+    "balance": 100000,
+    "hold": 20000,
+    "refund": 5000,
+    "available": 75000
+  },
+  "user045": {
+    "balance": 180000,
+    "hold": 50000,
+    "refund": 20000,
+    "available": 110000
+  },
+  "user046": {
+    "balance": 130000,
+    "hold": 30000,
+    "refund": 10000,
+    "available": 95000
+  },
+  "user047": {
+    "balance": 160000,
+    "hold": 40000,
+    "refund": 15000,
+    "available": 105000
+  },
+  "user048": {
+    "balance": 250000,
+    "hold": 80000,
+    "refund": 35000,
+    "available": 135000
+  },
+  "user049": {
+    "balance": 180000,
+    "hold": 50000,
+    "refund": 20000,
+    "available": 110000
+  },
+  "user050": {
+    "balance": 150000,
+    "hold": 40000,
+    "refund": 15000,
+    "available": 95000
+  }
 }
