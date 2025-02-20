@@ -1,9 +1,9 @@
 {
     "A4uu7014": {
-        "balance": 15388,     // 帳戶總餘額
-        "hold": 0,        // 保留款
-        "refund": 0,      // 退刷負數結算金額
-        "available": 0    // 可用餘額 (balance - hold - refund)
+        "balance": 15388,     
+        "hold": 0,        
+        "refund": 0,      
+        "available": 0    
     },
     "100003": {
         "balance": 200,
