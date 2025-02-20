@@ -15,21 +15,42 @@
         }
     </script>
     <style>
-        /* 背景設置為黑色 */
         body {
-            margin: 0;
-            height: 100vh;
-            background-color: #111;
-            color: white;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background-color: #212121; /* 深黑色背景 */
+            color: #f4f4f4; /* 淺灰色文字 */
             overflow: hidden;
             position: relative;
         }
+        .text-primary {
+            color: #FFD700; /* 金色文字 */
+        }
+        .text-secondary {
+            color: #C0C0C0; /* 銀色文字 */
+        }
+        .btn-primary {
+            background-color: #FFD700; /* 金色按鈕 */
+            border-color: #FFD700;
+        }
+        .btn-primary:hover {
+            background-color: #FFCC00; /* 金色按鈕懸停 */
+            border-color: #FFCC00;
+        }
+        .card {
+            background-color: #333333; /* 深灰色卡片背景 */
+            border-radius: 10px;
+            border: 1px solid #FFD700; /* 金色邊框 */
+        }
+        .card p {
+            color: #C0C0C0; /* 銀色文字 */
+        }
+        footer {
+            color: #C0C0C0; /* 銀色文字 */
+        }
+        footer p {
+            color: #FFD700; /* 金色版權文字 */
+        }
 
-        /* 流星樣式 */
+        /* 流星效果 */
         .rain {
             position: absolute;
             top: 0;
@@ -42,11 +63,11 @@
 
         .star {
             position: absolute;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(148, 0, 211, 0.8); /* 紫色流星 */
             width: 4px;
             height: 4px;
             border-radius: 50%;
-            animation: starFall 3s linear infinite; /* 改為3秒，讓流星動作變慢 */
+            animation: starFall 3s linear infinite; /* 讓流星速度變慢 */
         }
 
         @keyframes starFall {
@@ -57,88 +78,34 @@
                 transform: translateY(100vh) translateX(100vw);
             }
         }
-
-        /* 按鈕樣式 */
-        .btn-primary {
-            background-color: #1E90FF;
-            border-color: #1E90FF;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #4682B4;
-            border-color: #4682B4;
-        }
-
-        .card {
-            background-color: #2c3e50;
-            border-radius: 10px;
-            border: 3px solid #000; /* 深黑色框 */
-            padding: 30px;
-        }
-
-        .form-control {
-            background-color: #333;
-            border: 1px solid black;
-            color: white;
-        }
-
-        .form-control:focus {
-            border-color: #1E90FF;
-            box-shadow: none;
-        }
-
-        .text-primary {
-            color: #1E90FF;
-        }
-
-        footer {
-            color: #C0C0C0;
-        }
-
-        .text-light {
-            color: white;
-        }
-
-        /* 更改 "請輸入用戶 ID" 文字顏色為白色 */
-        .card h5 {
-            color: white;
-        }
-
-        /* 設定卡片內部文字為白色 */
-        .card input, .card button, .card p {
-            color: white;
-        }
     </style>
 </head>
-<body>
+<body class="d-flex flex-column align-items-center justify-content-center vh-100">
     <!-- 流星效果容器 -->
     <div class="rain" id="rain"></div>
 
-    <div class="text-center">
-        <h1 class="mb-3 text-primary fw-bold">歡迎使用 NR Pay 新融科技</h1>
-        <h4 class="text-secondary">查詢你的餘額</h4>
+    <h1 class="mb-3 text-primary fw-bold">歡迎使用 NR Pay 新融科技</h1>
+    <h4 class="text-secondary">查詢你的餘額</h4>
 
-        <div class="card">
-            <h5 class="text-center">請輸入用戶 ID</h5>
-            <input type="text" id="userId" class="form-control my-3" placeholder="輸入你的用戶 ID">
-            <button class="btn btn-primary w-100" onclick="checkBalance()">查詢</button>
-            <p id="result" class="text-center mt-3 fw-bold text-success"></p>
+    <div class="card p-4 shadow" style="width: 350px;">
+        <h5 class="text-center text-light">請輸入用戶 ID</h5>
+        <input type="text" id="userId" class="form-control my-3" placeholder="輸入你的用戶 ID">
+        <button class="btn btn-primary w-100" onclick="checkBalance()">查詢</button>
+        <p id="result" class="text-center mt-3 fw-bold text-success"></p>
 
-            <!-- 客服資訊與信箱 -->
-            <div class="mt-3 text-center text-light">
-                <p>💬 線上客服：<a href="https://line.me/R/ti/p/@584aotlp" class="text-decoration-none text-primary" target="_blank">@584aotlp</a></p>
-                <p>📧 客服信箱：<a href="mailto:nrt.tw.2025@gmail.com" class="text-decoration-none text-primary">nrt.tw.2025@gmail.com</a></p>
-            </div>
+        <!-- 客服資訊與信箱 -->
+        <div class="mt-3 text-center text-secondary">
+            <p>💬 線上客服：<a href="https://line.me/R/ti/p/@584aotlp" class="text-decoration-none text-primary" target="_blank">@584aotlp</a></p>
+            <p>📧 客服信箱：<a href="mailto:nrt.tw.2025@gmail.com" class="text-decoration-none text-primary">nrt.tw.2025@gmail.com</a></p>
         </div>
-
-        <footer class="mt-4 text-center text-secondary">
-            <p class="mt-3">&copy; 2025 NR Pay 新融科技. 版權所有</p>
-        </footer>
     </div>
 
+    <footer class="mt-4 text-center text-secondary">
+        <p class="mt-3">&copy; 2025 NR Pay 新融科技. 版權所有</p>
+    </footer>
+
     <script>
-        // 生成流星
+        // 生成紫色流星
         function createStars() {
             const rainContainer = document.getElementById("rain");
             const numberOfStars = 50;
