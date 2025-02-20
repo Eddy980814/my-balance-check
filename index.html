@@ -151,7 +151,7 @@
 
     <!-- 版本資訊 -->
     <div class="version-info">
-        <p>版本 3.4.8</p>
+        <p>版本 3.4.2</p>
     </div>
 
     <script>
@@ -169,7 +169,7 @@
                 let userBalance = data[userId]; // 查找對應用戶的餘額數據
 
                 if (userBalance) {
-                    let { balance, hold, refund, available } = userBalance; // 解構出餘額的各項數據
+                    let { balance, hold, refund, available } = userBalance; // 只提取餘額相關的數據
 
                     // 更新顯示的餘額數據
                     document.getElementById("balanceAmount").innerText = balance.toLocaleString();
@@ -183,10 +183,6 @@
 
                     // 顯示查詢結果
                     document.getElementById("balanceCard").style.display = "block";
-
-                    // 顯示歡迎訊息
-                    alert(`${userId} 您好，感謝您使用本服務，祝您有一個美好的一天！`);
-
                 } else {
                     alert("查無此用戶，請檢查輸入是否正確！");
                 }
