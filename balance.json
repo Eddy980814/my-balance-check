@@ -1,9 +1,9 @@
 {
     "A4uu7014": {
-        "balance": 15300,
+        "balance": 15388,
         "hold": 0,
-        "refund": 88,
-        "available": 15300
+        "refund": 0,
+        "available": 15388
     },
     "user456": {
         "balance": 2000,
