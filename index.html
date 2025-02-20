@@ -29,7 +29,7 @@
             position: relative;
         }
 
-        /* 雨滴樣式 */
+        /* 流星樣式 */
         .rain {
             position: absolute;
             top: 0;
@@ -40,21 +40,21 @@
             z-index: -1;
         }
 
-        .drop {
+        .star {
             position: absolute;
             background: rgba(255, 255, 255, 0.8);
-            width: 2px;
-            height: 20px;
-            animation: fall 0.5s linear infinite;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            animation: starFall 3s linear infinite; /* 改為3秒，讓流星動作變慢 */
         }
 
-        /* 下雨的動畫效果 */
-        @keyframes fall {
+        @keyframes starFall {
             0% {
-                transform: translateY(0);
+                transform: translateY(0) translateX(0);
             }
             100% {
-                transform: translateY(100vh);
+                transform: translateY(100vh) translateX(100vw);
             }
         }
 
@@ -73,7 +73,7 @@
         .card {
             background-color: #2c3e50;
             border-radius: 10px;
-            border: 1px solid black;
+            border: 3px solid #000; /* 深黑色框 */
             padding: 30px;
         }
 
@@ -99,10 +99,15 @@
         .text-light {
             color: white;
         }
+
+        /* 更改 "請輸入用戶 ID" 文字顏色為白色 */
+        .card h5 {
+            color: white;
+        }
     </style>
 </head>
 <body>
-    <!-- 雨滴容器 -->
+    <!-- 流星效果容器 -->
     <div class="rain" id="rain"></div>
 
     <div class="text-center">
@@ -110,7 +115,7 @@
         <h4 class="text-secondary">查詢你的餘額</h4>
 
         <div class="card">
-            <h5 class="text-center text-light">請輸入用戶 ID</h5>
+            <h5 class="text-center">請輸入用戶 ID</h5>
             <input type="text" id="userId" class="form-control my-3" placeholder="輸入你的用戶 ID">
             <button class="btn btn-primary w-100" onclick="checkBalance()">查詢</button>
             <p id="result" class="text-center mt-3 fw-bold text-success"></p>
@@ -128,24 +133,22 @@
     </div>
 
     <script>
-        // 生成雨滴
-        function createRainDrops() {
+        // 生成流星
+        function createStars() {
             const rainContainer = document.getElementById("rain");
-            const numberOfDrops = 100;
+            const numberOfStars = 50;
 
-            for (let i = 0; i < numberOfDrops; i++) {
-                const drop = document.createElement("div");
-                drop.classList.add("drop");
-
-                // 隨機位置和動畫時間
-                drop.style.left = `${Math.random() * 100}vw`;
-                drop.style.animationDuration = `${Math.random() * 1 + 0.5}s`; // 隨機下落速度
-
-                rainContainer.appendChild(drop);
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement("div");
+                star.classList.add("star");
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.animationDuration = `${Math.random() * 3 + 2}s`; // 隨機設定流星的速度
+                rainContainer.appendChild(star);
             }
         }
 
-        createRainDrops();
+        createStars();
     </script>
 </body>
 </html>
