@@ -6,15 +6,70 @@
     <title>NR Pay - 新融國際科技</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
-        /* 背景動畫 */
+        /* 主體背景和流星動畫 */
         body {
-            background-color: #212121;
-            overflow: hidden;
-            font-family: 'Arial', sans-serif;
+            background-color: #111111;
             color: #f4f4f4;
+            font-family: 'Roboto', sans-serif;
+            overflow: hidden;
         }
 
-        /* 流星效果 */
+        /* 高級金色設計 */
+        .text-primary {
+            color: #FFD700;
+        }
+
+        .btn-primary {
+            background-color: #FFD700;
+            border-color: #FFD700;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #FFCC00;
+            border-color: #FFCC00;
+            box-shadow: 0 5px 15px rgba(255, 204, 0, 0.5);
+        }
+
+        .card {
+            background-color: rgba(50, 50, 50, 0.85);
+            border-radius: 12px;
+            border: 1px solid #FFD700;
+            padding: 40px;
+            margin-top: 40px;
+            width: 400px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .card h5 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .card input {
+            border-radius: 10px;
+            background-color: #333333;
+            border: 1px solid #555555;
+            color: #fff;
+            padding: 12px;
+        }
+
+        .card input::placeholder {
+            color: #B0B0B0;
+        }
+
+        footer {
+            color: #B0B0B0;
+            margin-top: 40px;
+            font-size: 1rem;
+        }
+
+        footer p {
+            color: #FFD700;
+        }
+
+        /* 流星動畫 */
         @keyframes stars {
             0% { top: -10px; left: -10px; }
             100% { top: 100%; left: 100%; }
@@ -22,14 +77,14 @@
 
         .star {
             position: absolute;
-            width: 2px;
-            height: 2px;
-            background-color: #FFD700;
+            width: 4px;
+            height: 4px;
+            background-color: #8A2BE2; /* 紫色流星 */
             border-radius: 50%;
             animation: stars 10s linear infinite;
         }
 
-        /* 打字效果 */
+        /* 設置打字效果 */
         .typewriter h1 {
             overflow: hidden;
             white-space: nowrap;
@@ -47,50 +102,14 @@
             50% { border-color: transparent; }
         }
 
-        /* 按鈕樣式 */
-        .btn-primary {
-            background-color: #FFD700;
-            border-color: #FFD700;
-        }
-
-        .btn-primary:hover {
-            background-color: #FFCC00;
-            border-color: #FFCC00;
-        }
-
-        /* 卡片樣式 */
-        .card {
-            background-color: #333333;
-            border-radius: 10px;
-            border: 1px solid #FFD700;
-            padding: 30px;
-            margin-top: 50px;
-            width: 350px;
-        }
-
-        /* 文字顏色 */
-        .text-primary {
-            color: #FFD700;
-        }
-
-        .text-secondary {
-            color: #C0C0C0;
-        }
-
-        footer {
-            color: #C0C0C0;
-        }
-
-        footer p {
-            color: #FFD700;
-        }
-
         /* 設置標題樣式 */
         h1, h4 {
             text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
         }
 
-        /* 圓形按鈕 */
+        /* 優雅的圓形按鈕 */
         .btn-circle {
             border-radius: 50%;
             padding: 10px 20px;
@@ -101,15 +120,15 @@
 <body>
 
     <!-- 流星動畫 -->
-    <div class="star" style="animation-duration: 15s; left: 10%; top: 10%"></div>
-    <div class="star" style="animation-duration: 10s; left: 20%; top: 20%"></div>
-    <div class="star" style="animation-duration: 8s; left: 30%; top: 30%"></div>
-    <div class="star" style="animation-duration: 12s; left: 40%; top: 50%"></div>
-    <div class="star" style="animation-duration: 9s; left: 50%; top: 60%"></div>
+    <div class="star" style="animation-duration: 15s; left: 5%; top: 5%"></div>
+    <div class="star" style="animation-duration: 12s; left: 25%; top: 25%"></div>
+    <div class="star" style="animation-duration: 10s; left: 45%; top: 15%"></div>
+    <div class="star" style="animation-duration: 14s; left: 60%; top: 50%"></div>
+    <div class="star" style="animation-duration: 18s; left: 80%; top: 80%"></div>
 
     <div class="container d-flex flex-column align-items-center justify-content-center vh-100">
 
-        <!-- 標題 -->
+        <!-- 打字效果 -->
         <div class="typewriter">
             <h1 class="text-primary">歡迎使用 NR Pay 新融科技</h1>
         </div>
