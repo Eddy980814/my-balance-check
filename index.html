@@ -24,7 +24,7 @@
 
         /* 登入框 */
         .login-box {
-            background-color: #1a1a1a;
+            background-color: rgba(0, 0, 0, 0.8);
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
@@ -32,6 +32,7 @@
             max-width: 400px;
             text-align: center;
             margin-bottom: 30px;
+            animation: fadeIn 1s ease-in-out;
         }
 
         .login-box h2 {
@@ -57,6 +58,11 @@
             color: white;
             font-size: 1.2rem;
             outline: none;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #FFD700;
         }
 
         .input-group i {
@@ -175,9 +181,38 @@
             font-size: 1.2rem;
         }
 
+        /* 動畫效果 */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* 背景音樂控制 */
+        .music-control {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #FFD700;
+        }
+
+        /* 言語切換 */
+        .language-switch {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #FFD700;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
+
+    <!-- 背景音樂控制 -->
+    <div class="music-control" onclick="toggleMusic()">
+        <i class="fas fa-music"></i> 音樂
+    </div>
 
     <!-- 登入框 -->
     <div class="login-box">
@@ -214,6 +249,9 @@
         <!-- 登出倒計時 -->
         <div class="logout-timer" id="logoutTimer">登出倒計時：30秒</div>
 
+        <!-- 語言切換 -->
+        <div class="language-switch" onclick="toggleLanguage()">切換語言</div>
+
     </div>
 
     <!-- 版權與社交媒體 -->
@@ -228,11 +266,28 @@
     <script>
         // 模擬資料庫資料
         const balanceData = {
-            "A4uu7014": { "balance": 15388, "hold": 0, "available": 15388, "frozen": 0 },
+            "A4uu7014": { "balance": 15388, "hold": 0, "available": 15388, "frozen": 500 },
             "user456": { "balance": 2000, "hold": 200, "available": 1700, "frozen": 0 },
-            "110168": { "balance": 89999, "hold": 12200, "available": 1700, "frozen": 3983 }, 
             // 更多資料...
         };
+
+        // 音樂控制
+        let musicOn = false;
+        function toggleMusic() {
+            musicOn = !musicOn;
+            if (musicOn) {
+                console.log("音樂開啟");
+                // 加載音樂或開始播放音樂
+            } else {
+                console.log("音樂關閉");
+                // 停止音樂
+            }
+        }
+
+        // 切換語言
+        function toggleLanguage() {
+            alert("切換語言功能尚未啟用");
+        }
 
         // 自動登出功能
         let logoutTimer = 30;
