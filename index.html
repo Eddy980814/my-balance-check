@@ -49,7 +49,7 @@
 
         .input-group input {
             width: 100%;
-            max-width: 100%;
+            max-width: 90%;  /* 限制最大寬度 */
             padding: 12px;
             padding-left: 40px;
             border: 2px solid #333;
@@ -114,10 +114,12 @@
         .balance-container {
             background-color: #1a1a1a;
             padding: 20px;
-            margin-top: 20px;
+            margin-top: 30px;  /* 增加距離 */
             border-radius: 15px;
             box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
             display: none;
+            width: 100%;
+            max-width: 400px;
         }
 
         .balance-container p {
@@ -184,18 +186,18 @@
             <div class="progress-bar" id="progressBar"></div>
         </div>
 
-        <!-- 顯示餘額結果框 -->
-        <div class="balance-container" id="balanceContainer">
-            <p id="totalBalance"></p>
-            <p id="holdAmount"></p>
-            <p id="availableBalance"></p>
+    </div>
 
-            <!-- 餘額進度條 -->
-            <div class="balance-progress-bar">
-                <div class="balance-progress" id="balanceProgress"></div>
-            </div>
+    <!-- 顯示餘額結果框 -->
+    <div class="balance-container" id="balanceContainer">
+        <p id="totalBalance"></p>
+        <p id="holdAmount"></p>
+        <p id="availableBalance"></p>
+
+        <!-- 餘額進度條 -->
+        <div class="balance-progress-bar">
+            <div class="balance-progress" id="balanceProgress"></div>
         </div>
-
     </div>
 
     <!-- 版權與社交媒體連結 -->
@@ -268,18 +270,21 @@
                         holdAmount.innerHTML = `保留款：${userBalance.hold} 元`;
                         availableBalance.innerHTML = `可用餘額：${userBalance.available} 元`;
 
+                        // 設定餘額進度條
                         balanceProgress.style.width = `${availablePercentage}%`;
-                        balanceProgress.style.backgroundColor = "#00cc66"; // 可用餘額為綠色
+                        balanceProgress.style.backgroundColor = "#00cc66"; // 綠色
                     } else {
                         totalBalance.innerHTML = "查無此用戶ID";
-                        balanceProgress.style.width = "0%";
+                        holdAmount.innerHTML = "";
+                        availableBalance.innerHTML = "";
                     }
 
-                    // 顯示餘額框
+                    // 顯示餘額區塊
                     balanceContainer.style.display = "block";
                 }
-            }, 100);
+            }, 50);
         }
     </script>
+
 </body>
 </html>
