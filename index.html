@@ -11,14 +11,14 @@
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #000000; /* 背景改成黑色 */
+            background-color: #2a2a72;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             color: #fff;
             overflow: hidden;
-            text-align: center; /* 讓所有內容置中 */
+            flex-direction: column;
         }
 
         /* 流星背景 */
@@ -36,10 +36,10 @@
         .meteor {
             position: absolute;
             width: 3px;
-            height: 3px; /* 減少流星大小 */
+            height: 100px;
             background: rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            animation: meteor-fall 1s linear infinite; /* 加快流星速度 */
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+            animation: meteor-fall 2s linear infinite;
         }
 
         @keyframes meteor-fall {
@@ -48,20 +48,19 @@
                 opacity: 1;
             }
             100% {
-                transform: translateY(100vh) translateX(100px); /* 流星隨機掉落 */
+                transform: translateY(100vh) translateX(200px);
                 opacity: 0;
             }
         }
 
-        /* 控制流星出現頻率 */
         .meteor:nth-child(odd) {
-            animation-duration: 1s;
-            animation-delay: 0.2s;
+            animation-duration: 1.5s;
+            animation-delay: 0.5s;
         }
 
         .meteor:nth-child(even) {
-            animation-duration: 1.2s;
-            animation-delay: 0.4s;
+            animation-duration: 2s;
+            animation-delay: 1s;
         }
 
         /* 登入框 */
@@ -144,42 +143,61 @@
             margin-top: 10px;
         }
 
-        /* 餘額顯示 */
-        .balance-display {
-            font-size: 1.5rem;
+        /* 進度條顯示餘額 */
+        .balance-progress {
+            width: 100%;
+            margin-top: 20px;
+            text-align: center;
             color: #FFD700;
-            margin-top: 30px;
         }
 
-        .available-balance {
-            font-size: 1.2rem;
-            color: #4CAF50;
+        progress {
+            width: 100%;
+            height: 20px;
+            border-radius: 10px;
+            background-color: #444;
+            border: none;
             margin-top: 10px;
         }
 
-        /* 顏色變化 */
-        .low-balance {
-            color: #FF6347; /* 當餘額低於某個閾值時顯示紅色 */
+        progress[value] {
+            appearance: none;
         }
 
-        .high-balance {
-            color: #32CD32; /* 當餘額高於某個閾值時顯示綠色 */
+        progress::-webkit-progress-bar {
+            background-color: #444;
+            border-radius: 10px;
         }
 
-        /* 社群連結 */
-        .social-links {
-            margin-top: 20px;
+        progress::-webkit-progress-value {
+            background-color: #FFD700;
+            border-radius: 10px;
         }
 
-        .social-links a {
-            font-size: 2rem;
-            color: #FFD700;
-            margin: 0 10px;
-            text-decoration: none;
+        /* 彈出顯示餘額 */
+        .popup-balance {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            opacity: 0;
+            visibility: hidden;
+            animation: popup 1s forwards;
         }
 
-        .social-links a:hover {
-            color: #ff007f;
+        @keyframes popup {
+            0% {
+                opacity: 0;
+                bottom: -50px;
+            }
+            100% {
+                opacity: 1;
+                bottom: 20px;
+            }
         }
 
     </style>
@@ -225,16 +243,18 @@
 
         <!-- 版本號 -->
         <div class="version">版本 8.2.9</div>
+    </div>
 
-        <!-- 餘額顯示 -->
-        <div id="balanceDisplay" class="balance-display"></div>
-        <div id="availableBalance" class="available-balance"></div>
+    <!-- 顯示餘額的進度條 -->
+    <div class="balance-progress">
+        <label for="balance-progress">可用餘額</label>
+        <progress id="balance-progress" value="0" max="100"></progress>
+        <span id="balance-text">$0</span>
+    </div>
 
-        <!-- 社群媒體連結 -->
-        <div class="social-links">
-            <a href="https://www.instagram.com/1xyzzz_x?igsh=Z203MHcyaHRrdnpt&utm_source=qr" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
-            <a href="https://discord.gg/nXBxGYSR" target="_blank" class="social-icon"><i class="fab fa-discord"></i></a>
-        </div>
+    <!-- 顯示彈出餘額 -->
+    <div class="popup-balance" id="popup-balance">
+        <span id="popup-balance-text">$0</span>
     </div>
 
     <script>
@@ -252,26 +272,6 @@
             if (userId) {
                 welcomeMessage.textContent = `歡迎，${userId}！`;
             }
-        }
-
-        // 顯示餘額動畫
-        function animateBalance(value, elementId) {
-            let start = 0;
-            const end = value;
-            const duration = 2; // 2秒內顯示完
-            const step = (end - start) / (duration * 100);
-
-            function updateBalance() {
-                start += step;
-                if (start >= end) {
-                    start = end;
-                }
-                document.getElementById(elementId).textContent = `$${Math.round(start)}`;
-                if (start < end) {
-                    requestAnimationFrame(updateBalance);
-                }
-            }
-            updateBalance();
         }
 
         // 顯示錯誤訊息
@@ -305,25 +305,41 @@
                 const totalBalance = balanceData[userId].balance;
                 const availableBalance = balanceData[userId].available;
 
-                // 顯示金額動畫
-                animateBalance(totalBalance, "balanceDisplay");
-                animateBalance(availableBalance, "availableBalance");
+                // 顯示金額
+                alert(`歡迎 ${userId}\n總餘額：${totalBalance} 元\n可用餘額：${availableBalance} 元`);
 
-                // 根據餘額顯示顏色
-                if (totalBalance < 2000) {
-                    document.getElementById("balanceDisplay").classList.add("low-balance");
-                } else {
-                    document.getElementById("balanceDisplay").classList.add("high-balance");
-                }
+                // 顯示進度條
+                updateBalanceBar(totalBalance, availableBalance);
 
-                if (availableBalance < 2000) {
-                    document.getElementById("availableBalance").classList.add("low-balance");
-                } else {
-                    document.getElementById("availableBalance").classList.add("high-balance");
-                }
+                // 顯示彈出餘額
+                showPopupBalance(totalBalance, availableBalance);
+
             } else {
                 showErrorMessage("用戶ID或密碼錯誤！");
             }
+        }
+
+        // 更新進度條顯示餘額
+        function updateBalanceBar(totalBalance, availableBalance) {
+            const progressBar = document.getElementById("balance-progress");
+            const balanceText = document.getElementById("balance-text");
+
+            const percentage = (availableBalance / totalBalance) * 100;
+            progressBar.value = percentage;
+            balanceText.textContent = `$${availableBalance} / $${totalBalance}`;
+        }
+
+        // 顯示彈出餘額
+        function showPopupBalance(totalBalance, availableBalance) {
+            const popupBalance = document.getElementById("popup-balance");
+            const popupBalanceText = document.getElementById("popup-balance-text");
+
+            popupBalanceText.textContent = `$${availableBalance} / $${totalBalance}`;
+            popupBalance.style.visibility = "visible";
+
+            setTimeout(() => {
+                popupBalance.style.visibility = "hidden";
+            }, 3000); // 3秒後隱藏彈出框
         }
 
         // 重設密碼
