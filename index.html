@@ -41,11 +41,25 @@
             color: #FFD700;
             font-weight: 600;
         }
+/* 用戶ID輸入框 */
+.input-group {
+    position: relative;
+    margin-bottom: 15px;  /* 減少底部的間距 */
+}
 
-        /* 用戶ID輸入框 */
-        .input-group {
-            position: relative;
-            margin-bottom: 25px;
+.input-group input {
+    width: 100%;
+    padding: 8px 20px;  /* 減小內邊距，使框框更小 */
+    font-size: 14px;  /* 減小字型大小 */
+    height: 35px;  /* 降低輸入框的高度 */
+}
+
+.input-group i {
+    left: 10px;  /* 圖示距離左邊的距離 */
+    top: 50%;
+    transform: translateY(-50%);  /* 垂直居中圖示 */
+    font-size: 18px;  /* 減小圖示大小 */
+}
         }
 
         .input-group input {
