@@ -187,32 +187,19 @@
             100% { opacity: 1; }
         }
 
-        /* 背景音樂控制 */
-        .music-control {
+        /* 設定密碼顯示隱藏 */
+        .toggle-password {
             position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 1.5rem;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
             cursor: pointer;
             color: #FFD700;
-        }
-
-        /* 言語切換 */
-        .language-switch {
-            margin-top: 20px;
-            font-size: 1rem;
-            color: #FFD700;
-            cursor: pointer;
         }
 
     </style>
 </head>
 <body>
-
-    <!-- 背景音樂控制 -->
-    <div class="music-control" onclick="toggleMusic()">
-        <i class="fas fa-music"></i> 音樂
-    </div>
 
     <!-- 登入框 -->
     <div class="login-box">
@@ -249,9 +236,6 @@
         <!-- 登出倒計時 -->
         <div class="logout-timer" id="logoutTimer">登出倒計時：30秒</div>
 
-        <!-- 語言切換 -->
-        <div class="language-switch" onclick="toggleLanguage()">切換語言</div>
-
     </div>
 
     <!-- 版權與社交媒體 -->
@@ -270,24 +254,6 @@
             "user456": { "balance": 2000, "hold": 200, "available": 1700, "frozen": 0 },
             // 更多資料...
         };
-
-        // 音樂控制
-        let musicOn = false;
-        function toggleMusic() {
-            musicOn = !musicOn;
-            if (musicOn) {
-                console.log("音樂開啟");
-                // 加載音樂或開始播放音樂
-            } else {
-                console.log("音樂關閉");
-                // 停止音樂
-            }
-        }
-
-        // 切換語言
-        function toggleLanguage() {
-            alert("切換語言功能尚未啟用");
-        }
 
         // 自動登出功能
         let logoutTimer = 30;
