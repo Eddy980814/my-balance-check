@@ -12,48 +12,57 @@
             font-family: 'Arial', sans-serif;
             color: white;
             text-align: center;
+            margin: 0;
+            padding: 0;
         }
 
-        /* 登入卡片 */
-        .login-container {
+        /* 頁面主容器 */
+        .container {
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
+            padding: 0 15px;
         }
 
+        /* 登入框容器 */
         .login-box {
             background-color: #1a1a1a;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
-            width: 300px;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            width: 100%;
+            max-width: 350px;
+            text-align: left;
         }
 
         .login-box h2 {
             margin-bottom: 20px;
+            font-size: 1.8rem;
+            color: #00cc66;
         }
 
         .input-group {
             position: relative;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .input-group input {
             width: 100%;
-            padding: 10px;
-            padding-left: 35px;
+            max-width: 100%;
+            padding: 12px 15px;
+            padding-left: 40px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             background-color: #333;
             color: white;
+            font-size: 1rem;
             outline: none;
         }
 
         .input-group i {
             position: absolute;
-            left: 10px;
+            left: 15px;
             top: 50%;
             transform: translateY(-50%);
             color: #ccc;
@@ -63,14 +72,15 @@
         .btn {
             display: block;
             width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
+            padding: 12px;
+            margin-bottom: 15px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
+            text-align: center;
         }
 
         .btn-green {
@@ -87,167 +97,113 @@
             display: none;
             width: 100%;
             height: 8px;
-            background-color: #28a745;
             border-radius: 5px;
             margin-top: 10px;
         }
 
-        /* 餘額顯示 */
+        /* 餘額顯示區 */
         .balance-result {
-            margin-top: 10px;
-            color: #28a745;
-            font-size: 1.2rem;
-        }
-
-        /* 顯示額外資料的區塊 */
-        .additional-info {
             margin-top: 15px;
-            color: #ccc;
-            font-size: 1rem;
-            background-color: #333;
-            padding: 15px;
-            border-radius: 10px;
-            display: none;
+            font-size: 1.2rem;
+            color: white;
         }
 
         /* 版權資訊 */
         .footer {
             margin-top: 20px;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             color: #ccc;
+        }
+
+        /* 連結區 */
+        .social-links {
+            margin-top: 20px;
+            font-size: 1rem;
+        }
+
+        .social-links a {
+            color: #00cc66;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        .social-links a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
-    <div class="login-container">
+    <div class="container">
         <div class="login-box">
             <h2>NR PAY 4.8.1</h2>
             
             <!-- 用戶ID輸入 -->
             <div class="input-group">
                 <i class="fas fa-user"></i>
-                <input type="text" id="userId" placeholder="用戶ID">
+                <input type="text" id="userId" placeholder="輸入用戶ID">
             </div>
 
             <!-- 查詢餘額按鈕 -->
-            <button class="btn btn-green" onclick="checkBalance()"><i class="fas fa-sign-in-alt"></i> 查詢餘額</button>
+            <button class="btn btn-green" onclick="checkBalance()"><i class="fas fa-search"></i> 查詢餘額</button>
 
             <!-- 查詢進度條 -->
             <div class="progress-bar" id="progressBar"></div>
 
-            <!-- 顯示餘額 -->
+            <!-- 顯示餘額結果 -->
             <div id="balanceResult" class="balance-result"></div>
 
-            <!-- 顯示額外資料 -->
-            <div id="additionalInfo" class="additional-info">
-                <p>保留款：<span id="holdAmount"></span> 元</p>
-                <p>退款：<span id="refundAmount"></span> 元</p>
-                <p>可用餘額：<span id="availableAmount"></span> 元</p>
-            </div>
-
         </div>
+    </div>
 
-        <!-- 版權資訊 -->
-        <div class="footer">
-            <p>&copy; 2025 新融國際科技. All Rights Reserved.</p>
+    <!-- 版權與社交媒體連結 -->
+    <div class="footer">
+        <p>&copy; 2025 新融國際科技. All Rights Reserved.</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/yourinstagram" target="_blank">Instagram</a>
+            <a href="https://discord.gg/yourdiscord" target="_blank">Discord</a>
         </div>
     </div>
 
     <script>
-        // 你的資料庫資料
+        // 模擬資料庫資料
         const balanceData = {
-            "A4uu7014": {
-                "balance": 15388,
-                "hold": 0,
-                "refund": 0,
-                "available": 15388
-            },
-            "user456": {
-                "balance": 2000,
-                "hold": 200,
-                "refund": 100,
-                "available": 1700
-            },
-            "user789": {
-                "balance": 1500,
-                "hold": 150,
-                "refund": 50,
-                "available": 1300
-            },
-            "user101": {
-                "balance": 2200,
-                "hold": 200,
-                "refund": 100,
-                "available": 1900
-            },
-            "user102": {
-                "balance": 3000,
-                "hold": 300,
-                "refund": 150,
-                "available": 2550
-            },
-            "user103": {
-                "balance": 2500,
-                "hold": 250,
-                "refund": 120,
-                "available": 2130
-            },
-            "user104": {
-                "balance": 1800,
-                "hold": 180,
-                "refund": 90,
-                "available": 1530
-            },
-            "user105": {
-                "balance": 5000,
-                "hold": 500,
-                "refund": 200,
-                "available": 4300
-            },
-            "user106": {
-                "balance": 4000,
-                "hold": 400,
-                "refund": 150,
-                "available": 3450
-            },
-            "user107": {
-                "balance": 3500,
-                "hold": 350,
-                "refund": 120,
-                "available": 3030
-            }
+            "A4uu7014": { "balance": 15388, "hold": 0, "available": 15388 },
+            "user456": { "balance": 2000, "hold": 200, "available": 1700 },
+            "user789": { "balance": 1500, "hold": 150, "available": 1300 }
         };
 
-        // 查詢餘額
+        // 查詢餘額功能
         function checkBalance() {
             const userId = document.getElementById("userId").value;
             const progressBar = document.getElementById("progressBar");
             const resultDiv = document.getElementById("balanceResult");
-            const additionalInfo = document.getElementById("additionalInfo");
 
             // 顯示查詢進度條
             progressBar.style.display = "block";
             progressBar.style.width = "0%";
 
-            // 模擬查詢進度
             let progress = 0;
             let interval = setInterval(() => {
                 progress += 10;
                 progressBar.style.width = `${progress}%`;
+
                 if (progress === 100) {
                     clearInterval(interval);
 
-                    // 查詢完成，顯示餘額或錯誤訊息
+                    // 顯示查詢結果
                     if (balanceData[userId]) {
-                        resultDiv.innerHTML = `你的餘額：${balanceData[userId].available} 元`;
-                        document.getElementById("holdAmount").innerText = balanceData[userId].hold;
-                        document.getElementById("refundAmount").innerText = balanceData[userId].refund;
-                        document.getElementById("availableAmount").innerText = balanceData[userId].available;
-                        additionalInfo.style.display = "block"; // 顯示額外資料
+                        const userBalance = balanceData[userId];
+                        const holdPercentage = (userBalance.hold / userBalance.balance) * 100;
+                        const availablePercentage = (userBalance.available / userBalance.balance) * 100;
+                        resultDiv.innerHTML = `
+                            <p>總餘額：${userBalance.balance} 元</p>
+                            <p>保留款：${userBalance.hold} 元</p>
+                            <p>可用餘額：${userBalance.available} 元</p>
+                            <div class="progress-bar" style="background: linear-gradient(to right, red ${holdPercentage}%, green ${availablePercentage}%);"></div>
+                        `;
                     } else {
                         resultDiv.innerHTML = "查無此用戶ID";
-                        additionalInfo.style.display = "none"; // 隱藏額外資料
                     }
                 }
             }, 100);
