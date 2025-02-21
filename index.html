@@ -18,7 +18,6 @@
             height: 100vh;
             color: #fff;
             overflow: hidden;
-            text-align: center; /* 讓所有內容置中 */
         }
 
         /* 流星背景 */
@@ -144,28 +143,6 @@
             margin-top: 10px;
         }
 
-        /* 餘額顯示 */
-        .balance-display {
-            font-size: 1.5rem;
-            color: #FFD700;
-            margin-top: 30px;
-        }
-
-        .available-balance {
-            font-size: 1.2rem;
-            color: #4CAF50;
-            margin-top: 10px;
-        }
-
-        /* 顏色變化 */
-        .low-balance {
-            color: #FF6347; /* 當餘額低於某個閾值時顯示紅色 */
-        }
-
-        .high-balance {
-            color: #32CD32; /* 當餘額高於某個閾值時顯示綠色 */
-        }
-
         /* 社群連結 */
         .social-links {
             margin-top: 20px;
@@ -226,10 +203,6 @@
         <!-- 版本號 -->
         <div class="version">版本 8.2.9</div>
 
-        <!-- 餘額顯示 -->
-        <div id="balanceDisplay" class="balance-display"></div>
-        <div id="availableBalance" class="available-balance"></div>
-
         <!-- 社群媒體連結 -->
         <div class="social-links">
             <a href="https://www.instagram.com/1xyzzz_x?igsh=Z203MHcyaHRrdnpt&utm_source=qr" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
@@ -252,26 +225,6 @@
             if (userId) {
                 welcomeMessage.textContent = `歡迎，${userId}！`;
             }
-        }
-
-        // 顯示餘額動畫
-        function animateBalance(value, elementId) {
-            let start = 0;
-            const end = value;
-            const duration = 2; // 2秒內顯示完
-            const step = (end - start) / (duration * 100);
-
-            function updateBalance() {
-                start += step;
-                if (start >= end) {
-                    start = end;
-                }
-                document.getElementById(elementId).textContent = `$${Math.round(start)}`;
-                if (start < end) {
-                    requestAnimationFrame(updateBalance);
-                }
-            }
-            updateBalance();
         }
 
         // 顯示錯誤訊息
@@ -305,22 +258,8 @@
                 const totalBalance = balanceData[userId].balance;
                 const availableBalance = balanceData[userId].available;
 
-                // 顯示金額動畫
-                animateBalance(totalBalance, "balanceDisplay");
-                animateBalance(availableBalance, "availableBalance");
-
-                // 根據餘額顯示顏色
-                if (totalBalance < 2000) {
-                    document.getElementById("balanceDisplay").classList.add("low-balance");
-                } else {
-                    document.getElementById("balanceDisplay").classList.add("high-balance");
-                }
-
-                if (availableBalance < 2000) {
-                    document.getElementById("availableBalance").classList.add("low-balance");
-                } else {
-                    document.getElementById("availableBalance").classList.add("high-balance");
-                }
+                // 顯示金額
+                alert(`歡迎 ${userId}\n總餘額：${totalBalance} 元\n可用餘額：${availableBalance} 元`);
             } else {
                 showErrorMessage("用戶ID或密碼錯誤！");
             }
