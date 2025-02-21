@@ -3,246 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NR PAY 4.8.1</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>NR Pay - 新融國際科技</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
-        /* 背景設置 */
+        /* 背景設定 */
         body {
-            background-color: #0d0d0d;
+            background-color: #000000;
             font-family: 'Arial', sans-serif;
-            color: white;
-            text-align: center;
-            margin: 0;
-            padding: 0;
+            color: #FFD700;
         }
 
-        /* 登入容器 */
-        .login-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            padding: 20px;
-        }
-
-        /* 登入卡片 */
-        .login-box {
+        /* 卡片樣式 */
+        .card {
             background-color: #1a1a1a;
-            padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+            border: 1px solid #FFD700;
+            padding: 20px;
+            margin-top: 30px;
             width: 100%;
-            max-width: 350px;
-        }
-
-        .login-box h2 {
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            font-weight: bold;
-        }
-
-        /* 輸入框 */
-        .input-group {
-            position: relative;
-            margin-bottom: 15px;
-        }
-
-        .input-group input {
-            width: 100%;
-            max-width: 100%; /* 確保輸入框不會超出容器範圍 */
-            padding: 12px;
-            padding-left: 35px;
-            border: none;
-            border-radius: 5px;
-            background-color: #333;
-            color: white;
-            outline: none;
-            transition: background-color 0.3s;
-        }
-
-        .input-group input:focus {
-            background-color: #444;
-        }
-
-        .input-group i {
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #ccc;
+            max-width: 400px;
         }
 
         /* 按鈕樣式 */
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 10px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1rem;
+        .btn-primary {
+            background-color: #FFD700;
+            border-color: #FFD700;
+            color: #000;
             font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
         }
 
-        .btn-green {
-            background-color: #00cc66;
-            color: white;
+        .btn-primary:hover {
+            background-color: #FFCC00;
+            border-color: #FFCC00;
         }
 
-        .btn-green:hover {
-            background-color: #00994d;
-            transform: scale(1.05);
-        }
-
-        .btn-blue {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .btn-blue:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
-        }
-
-        /* 分隔線 */
-        .divider {
-            margin: 15px 0;
-            font-size: 0.9rem;
-            color: #ccc;
-        }
-
-        /* 社交媒體按鈕 */
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-icons a {
-            text-decoration: none;
-            font-size: 30px;
+        /* 查詢結果區塊 */
+        .balance-card {
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
             color: #fff;
-            background-color: #222;
-            padding: 12px;
-            border-radius: 50%;
-            transition: background-color 0.3s;
+            display: none; /* 預設隱藏 */
         }
 
-        .social-icons a:hover {
-            background-color: #555;
+        .balance-amount {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #32CD32; /* 綠色餘額 */
         }
 
-        /* 版權資訊 */
-        .footer {
-            margin-top: 20px;
-            font-size: 0.8rem;
-            color: #ccc;
-        }
-
-        .footer p {
-            margin: 0;
-        }
-
-        /* 進度條 */
-        .progress-bar-container {
-            margin-top: 20px;
-            display: none;
+        .progress {
+            height: 10px;
+            background-color: #444;
         }
 
         .progress-bar {
-            width: 100%;
-            background-color: #444;
-            height: 20px;
-            border-radius: 5px;
-            overflow: hidden;
-            position: relative;
+            background-color: #32CD32; /* 綠色進度條 */
         }
 
-        .progress-bar span {
-            display: block;
-            height: 100%;
-            background-color: #00cc66;
-            width: 0%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            transition: width 2s;
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            font-size: 1rem;
+            color: #C0C0C0;
         }
 
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .dot-gray { background-color: #C0C0C0; }
+        .dot-yellow { background-color: #FFD700; }
+        .dot-green { background-color: #32CD32; }
+
+        /* 聯絡客服區塊 */
+        .contact-info {
+            font-size: 0.9rem;
+            color: #FFD700;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        /* 版本資訊 */
+        .version-info {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 0.8rem;
+            color: #C0C0C0;
+        }
     </style>
 </head>
 <body>
 
-    <div class="login-container">
-        <div class="login-box">
-            <h2>NR PAY 4.8.1</h2>
-            
-            <!-- 用戶ID輸入 -->
-            <div class="input-group">
-                <i class="fas fa-user"></i>
-                <input type="text" id="userId" placeholder="用戶ID">
+    <div class="container d-flex flex-column align-items-center justify-content-center vh-100">
+        
+        <!-- 查詢餘額輸入框 -->
+        <div class="card shadow">
+            <h5 class="text-center text-light">請輸入用戶 ID 查詢餘額</h5>
+            <input type="text" id="userId" class="form-control my-3" placeholder="輸入你的用戶 ID">
+            <button class="btn btn-primary w-100" onclick="checkBalance()">查詢</button>
+        </div>
+
+        <!-- 查詢結果 -->
+        <div id="balanceCard" class="card balance-card shadow">
+            <div class="text-center">
+                <span class="text-light">NT$</span>
+                <span id="balanceAmount" class="balance-amount">0</span>
             </div>
 
-            <!-- 登入按鈕 -->
-            <button class="btn btn-green" id="loginBtn"><i class="fas fa-sign-in-alt"></i> 登入</button>
-            <div class="divider">or</div>
-            <button class="btn btn-blue"><i class="fas fa-user-cog"></i> 訪客登入</button>
+            <!-- 進度條 -->
+            <div class="progress mt-3">
+                <div id="balanceProgress" class="progress-bar" style="width: 0%;"></div>
+            </div>
 
-            <!-- 查詢餘額後的進度條 -->
-            <div class="progress-bar-container" id="progressContainer">
-                <div class="progress-bar">
-                    <span id="progress"></span>
+            <!-- 餘額詳細資訊 -->
+            <div class="mt-3">
+                <div class="info-item">
+                    <span><span class="dot dot-gray"></span> 保留款</span>
+                    <span id="holdAmount">NT$0</span>
+                </div>
+                <div class="info-item">
+                    <span><span class="dot dot-yellow"></span> 退刷負數結算金額</span>
+                    <span id="refundAmount">NT$0</span>
+                </div>
+                <div class="info-item">
+                    <span><span class="dot dot-green"></span> 可用餘額</span>
+                    <span id="availableAmount">NT$0</span>
                 </div>
             </div>
-
-            <!-- 社交媒體按鈕 -->
-            <div class="social-icons">
-                <a href="https://www.instagram.com/1xyzzz_x?igsh=Z203MHcyaHRrdnpt&utm_source=qr" target="_blank">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://discord.gg/DKYVMG2W" target="_blank">
-                    <i class="fab fa-discord"></i>
-                </a>
-            </div>
         </div>
 
-        <!-- 版權資訊 -->
-        <div class="footer">
-            <p>&copy; 2025 新融國際科技. All Rights Reserved.</p>
-            <p>新融國際科技，禁止轉售、租借或破解</p>
+        <!-- 聯絡客服資訊 -->
+        <div class="contact-info">
+            <p>如有任何問題，請聯絡客服: <a href="mailto:nrt.tw.2025@gmail.com">nrt.tw.2025@gmail.com</a></p>
         </div>
+
+        <footer class="mt-4 text-center text-secondary">
+            <p class="mt-3">&copy; 2025 NR Pay 新融科技. 版權所有</p>
+        </footer>
+    </div>
+
+    <!-- 版本資訊 -->
+    <div class="version-info">
+        <p>版本 3.4.2</p>
     </div>
 
     <script>
-        // 模擬用戶登入邏輯
-        document.getElementById('loginBtn').addEventListener('click', function() {
-            const userId = document.getElementById('userId').value;
-            const correctUserId = 'admin';  // 這是測試用的用戶ID，你可以換成其他ID
-            
-            if (userId === correctUserId) {
-                alert('登入成功！');
-                
-                // 顯示進度條
-                document.getElementById('progressContainer').style.display = 'block';
-                
-                let progress = 0;
-                let interval = setInterval(function() {
-                    progress += 10;
-                    document.getElementById('progress').style.width = progress + '%';
-                    
-                    if (progress >= 100) {
-                        clearInterval(interval);
-                        alert('查詢餘額完成！');
-                    }
-                }, 500);
-            } else {
-                alert('用戶ID錯誤，請再試一次。');
+        function checkBalance() {
+            let userId = document.getElementById("userId").value.trim(); // 獲取用戶輸入
+            if (!userId) {
+                alert("請輸入用戶 ID！");
+                return;
             }
-        });
+
+            // 模擬讀取 balance.json 檔案
+            let data = {
+                "A4uu7014": {
+                    "balance": 15388,
+                    "hold": 0,
+                    "refund": 0,
+                    "available": 15388
+                },
+                "user456": {
+                    "balance": 2000,
+                    "hold": 200,
+                    "refund": 100,
+                    "available": 1700
+                }
+            };
+
+            let userBalance = data[userId]; // 查找對應用戶的餘額數據
+
+            if (userBalance) {
+                let { balance, hold, refund, available } = userBalance; // 解構出餘額的各項數據
+
+                // 更新顯示的餘額數據
+                document.getElementById("balanceAmount").innerText = balance.toLocaleString();
+                document.getElementById("holdAmount").innerText = `NT$${hold.toLocaleString()}`;
+                document.getElementById("refundAmount").innerText = `NT$${refund.toLocaleString()}`;
+                document.getElementById("availableAmount").innerText = `NT$${available.toLocaleString()}`;
+
+                // 計算進度條（假設最大值為帳戶總餘額）
+                let progressWidth = (available / balance) * 100;
+                document.getElementById("balanceProgress").style.width = `${progressWidth}%`;
+
+                // 顯示查詢結果
+                document.getElementById("balanceCard").style.display = "block";
+            } else {
+                alert("查無此用戶，請檢查輸入是否正確！");
+            }
+        }
     </script>
 
 </body>
