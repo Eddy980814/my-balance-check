@@ -6,7 +6,7 @@
     <title>NR PAY 4.8.1</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        /* 背景設置 */
+        /* 全局設置 */
         body {
             background-color: #0d0d0d;
             font-family: 'Arial', sans-serif;
@@ -18,6 +18,7 @@
             align-items: center;
             height: 100vh;
             padding: 0 20px;
+            flex-direction: column;
         }
 
         /* 主要容器 */
@@ -27,9 +28,10 @@
             border-radius: 20px;
             box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
             width: 100%;
-            max-width: 450px;
+            max-width: 400px;
             text-align: center;
             transition: all 0.3s;
+            margin-bottom: 30px;
         }
 
         .login-box h2 {
@@ -39,7 +41,7 @@
             font-weight: 600;
         }
 
-        /* 輸入框 */
+        /* 輸入框設計 */
         .input-group {
             position: relative;
             margin-bottom: 25px;
@@ -47,6 +49,7 @@
 
         .input-group input {
             width: 100%;
+            max-width: 100%;
             padding: 12px;
             padding-left: 40px;
             border: 2px solid #333;
@@ -70,7 +73,7 @@
             color: #ccc;
         }
 
-        /* 查詢按鈕 */
+        /* 查詢按鈕設計 */
         .btn {
             display: block;
             width: 100%;
@@ -91,27 +94,58 @@
         }
 
         /* 查詢進度條 */
-        .progress-bar {
-            display: none;
+        .progress-bar-container {
             width: 100%;
             height: 8px;
+            background-color: #555;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #00cc66;
+            width: 0%;
+            border-radius: 5px;
+        }
+
+        /* 餘額框框 */
+        .balance-container {
+            background-color: #1a1a1a;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            display: none;
+        }
+
+        .balance-container p {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        /* 餘額進度條 */
+        .balance-progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #555;
             border-radius: 5px;
             margin-top: 15px;
-            background-color: #ccc;
         }
 
-        /* 餘額顯示 */
-        .balance-result {
-            margin-top: 20px;
-            font-size: 1.2rem;
-            color: white;
+        .balance-progress {
+            height: 100%;
+            border-radius: 5px;
+            transition: width 0.5s ease;
         }
 
-        /* 版權與社交媒體 */
+        /* 版權與社交媒體連結 */
         .footer {
-            margin-top: 30px;
             font-size: 0.9rem;
             color: #ccc;
+            text-align: center;
+            margin-top: 30px;
         }
 
         .social-links {
@@ -128,17 +162,11 @@
         .social-links a:hover {
             text-decoration: underline;
         }
-
-        /* 保留款和可用餘額進度條 */
-        .progress-bar-inner {
-            height: 8px;
-            border-radius: 5px;
-            transition: width 0.5s ease;
-        }
     </style>
 </head>
 <body>
 
+    <!-- 登入框 -->
     <div class="login-box">
         <h2>NR PAY 4.8.1</h2>
         
@@ -152,12 +180,21 @@
         <button class="btn" onclick="checkBalance()"><i class="fas fa-search"></i> 查詢餘額</button>
 
         <!-- 查詢進度條 -->
-        <div class="progress-bar" id="progressBar">
-            <div class="progress-bar-inner" id="progressBarInner"></div>
+        <div class="progress-bar-container" id="progressBarContainer">
+            <div class="progress-bar" id="progressBar"></div>
         </div>
 
-        <!-- 顯示餘額結果 -->
-        <div id="balanceResult" class="balance-result"></div>
+        <!-- 顯示餘額結果框 -->
+        <div class="balance-container" id="balanceContainer">
+            <p id="totalBalance"></p>
+            <p id="holdAmount"></p>
+            <p id="availableBalance"></p>
+
+            <!-- 餘額進度條 -->
+            <div class="balance-progress-bar">
+                <div class="balance-progress" id="balanceProgress"></div>
+            </div>
+        </div>
 
     </div>
 
@@ -171,97 +208,77 @@
     </div>
 
     <script>
-        // 模擬資料庫資料，50個用戶
+        // 模擬資料庫資料
         const balanceData = {
             "A4uu7014": { "balance": 15388, "hold": 0, "available": 15388 },
-            "user001": { "balance": 5000, "hold": 100, "available": 4900 },
-            "user002": { "balance": 1000, "hold": 200, "available": 800 },
-            "user003": { "balance": 2000, "hold": 100, "available": 1900 },
-            "user004": { "balance": 3000, "hold": 500, "available": 2500 },
-            "user005": { "balance": 12000, "hold": 1000, "available": 11000 },
-            "user006": { "balance": 4500, "hold": 500, "available": 4000 },
-            "user007": { "balance": 8000, "hold": 700, "available": 7300 },
-            "user008": { "balance": 9500, "hold": 500, "available": 9000 },
-            "user009": { "balance": 7000, "hold": 300, "available": 6700 },
-            "user010": { "balance": 6000, "hold": 400, "available": 5600 },
-            "user011": { "balance": 2000, "hold": 300, "available": 1700 },
-            "user012": { "balance": 3500, "hold": 100, "available": 3400 },
-            "user013": { "balance": 16000, "hold": 500, "available": 15500 },
-            "user014": { "balance": 7000, "hold": 600, "available": 6400 },
-            "user015": { "balance": 9500, "hold": 200, "available": 9300 },
-            "user016": { "balance": 12000, "hold": 1000, "available": 11000 },
-            "user017": { "balance": 2500, "hold": 100, "available": 2400 },
-            "user018": { "balance": 4500, "hold": 200, "available": 4300 },
-            "user019": { "balance": 6700, "hold": 300, "available": 6400 },
-            "user020": { "balance": 8500, "hold": 500, "available": 8000 },
-            "user021": { "balance": 9500, "hold": 200, "available": 9300 },
-            "user022": { "balance": 6000, "hold": 500, "available": 5500 },
-            "user023": { "balance": 7000, "hold": 300, "available": 6700 },
-            "user024": { "balance": 5000, "hold": 100, "available": 4900 },
-            "user025": { "balance": 12000, "hold": 300, "available": 11700 },
-            "user026": { "balance": 3000, "hold": 100, "available": 2900 },
-            "user027": { "balance": 4500, "hold": 200, "available": 4300 },
-            "user028": { "balance": 4000, "hold": 300, "available": 3700 },
-            "user029": { "balance": 15000, "hold": 700, "available": 14300 },
-            "user030": { "balance": 7000, "hold": 200, "available": 6800 },
-            "user031": { "balance": 8000, "hold": 400, "available": 7600 },
-            "user032": { "balance": 5000, "hold": 100, "available": 4900 },
-            "user033": { "balance": 13000, "hold": 800, "available": 12200 },
-            "user034": { "balance": 1500, "hold": 100, "available": 1400 },
-            "user035": { "balance": 4000, "hold": 200, "available": 3800 },
-            "user036": { "balance": 6000, "hold": 500, "available": 5500 },
-            "user037": { "balance": 15000, "hold": 1000, "available": 14000 },
-            "user038": { "balance": 7000, "hold": 100, "available": 6900 },
-            "user039": { "balance": 8000, "hold": 500, "available": 7500 },
-            "user040": { "balance": 9500, "hold": 200, "available": 9300 },
-            "user041": { "balance": 10000, "hold": 500, "available": 9500 },
-            "user042": { "balance": 4500, "hold": 300, "available": 4200 },
-            "user043": { "balance": 2500, "hold": 100, "available": 2400 },
-            "user044": { "balance": 7500, "hold": 200, "available": 7300 },
-            "user045": { "balance": 5000, "hold": 500, "available": 4500 },
-            "user046": { "balance": 6000, "hold": 300, "available": 5700 },
-            "user047": { "balance": 8000, "hold": 400, "available": 7600 },
-            "user048": { "balance": 13000, "hold": 700, "available": 12300 },
-            "user049": { "balance": 6000, "hold": 200, "available": 5800 },
-            "user050": { "balance": 8000, "hold": 100, "available": 7900 }
+            "user456": { "balance": 2000, "hold": 200, "available": 1700 },
+            "user789": { "balance": 1500, "hold": 150, "available": 1300 },
+            "user1": { "balance": 10000, "hold": 1000, "available": 9000 },
+            "user2": { "balance": 5000, "hold": 300, "available": 4700 },
+            "user3": { "balance": 1200, "hold": 150, "available": 1050 },
+            "user4": { "balance": 2500, "hold": 400, "available": 2100 },
+            "user5": { "balance": 8000, "hold": 200, "available": 7800 },
+            "user6": { "balance": 900, "hold": 50, "available": 850 },
+            "user7": { "balance": 3000, "hold": 100, "available": 2900 },
+            "user8": { "balance": 25000, "hold": 5000, "available": 20000 },
+            "user9": { "balance": 4500, "hold": 500, "available": 4000 },
+            "user10": { "balance": 10000, "hold": 500, "available": 9500 },
+            "user11": { "balance": 2000, "hold": 100, "available": 1900 },
+            "user12": { "balance": 3500, "hold": 200, "available": 3300 },
+            "user13": { "balance": 5000, "hold": 1000, "available": 4000 },
+            "user14": { "balance": 1000, "hold": 200, "available": 800 },
+            "user15": { "balance": 6000, "hold": 600, "available": 5400 },
+            "user16": { "balance": 7000, "hold": 300, "available": 6700 },
+            "user17": { "balance": 1500, "hold": 100, "available": 1400 },
+            "user18": { "balance": 30000, "hold": 2000, "available": 28000 },
+            "user19": { "balance": 4000, "hold": 300, "available": 3700 },
+            "user20": { "balance": 8500, "hold": 1000, "available": 7500 }
         };
 
-        // 查詢餘額
+        // 查詢餘額功能
         function checkBalance() {
-            let userId = document.getElementById('userId').value;
-            let progressBar = document.getElementById('progressBar');
-            let progressBarInner = document.getElementById('progressBarInner');
-            let balanceResult = document.getElementById('balanceResult');
-            
-            if (userId.trim() === "") {
-                alert("請輸入用戶ID！");
-                return;
-            }
-            
-            progressBar.style.display = "block";
-            progressBarInner.style.width = "0%";
-            balanceResult.innerHTML = "";
-            
-            setTimeout(() => {
-                let userBalance = balanceData[userId];
-                
-                if (userBalance) {
-                    let hold = userBalance.hold;
-                    let available = userBalance.available;
-                    let total = userBalance.balance;
-                    let holdPercentage = (hold / total) * 100;
-                    let availablePercentage = (available / total) * 100;
-                    
-                    progressBarInner.style.width = availablePercentage + "%";
-                    balanceResult.innerHTML = `
-                        <p>保留款: <span style="color:red;">${hold}</span></p>
-                        <p>可用餘額: <span style="color:green;">${available}</span></p>
-                    `;
-                } else {
-                    progressBarInner.style.width = "0%";
-                    balanceResult.innerHTML = `<p style="color:red;">查無此用戶ID</p>`;
+            const userId = document.getElementById("userId").value;
+            const progressBarContainer = document.getElementById("progressBarContainer");
+            const progressBar = document.getElementById("progressBar");
+            const balanceContainer = document.getElementById("balanceContainer");
+            const totalBalance = document.getElementById("totalBalance");
+            const holdAmount = document.getElementById("holdAmount");
+            const availableBalance = document.getElementById("availableBalance");
+            const balanceProgress = document.getElementById("balanceProgress");
+
+            // 顯示查詢進度條
+            progressBarContainer.style.display = "block";
+            progressBar.style.width = "0%";
+
+            let progress = 0;
+            let interval = setInterval(() => {
+                progress += 10;
+                progressBar.style.width = `${progress}%`;
+
+                if (progress === 100) {
+                    clearInterval(interval);
+
+                    // 顯示查詢結果
+                    if (balanceData[userId]) {
+                        const userBalance = balanceData[userId];
+                        const holdPercentage = (userBalance.hold / userBalance.balance) * 100;
+                        const availablePercentage = (userBalance.available / userBalance.balance) * 100;
+
+                        totalBalance.innerHTML = `總餘額：${userBalance.balance} 元`;
+                        holdAmount.innerHTML = `保留款：${userBalance.hold} 元`;
+                        availableBalance.innerHTML = `可用餘額：${userBalance.available} 元`;
+
+                        balanceProgress.style.width = `${availablePercentage}%`;
+                        balanceProgress.style.backgroundColor = "#00cc66"; // 可用餘額為綠色
+                    } else {
+                        totalBalance.innerHTML = "查無此用戶ID";
+                        balanceProgress.style.width = "0%";
+                    }
+
+                    // 顯示餘額框
+                    balanceContainer.style.display = "block";
                 }
-            }, 1000); // 模擬查詢過程
+            }, 100);
         }
     </script>
 </body>
