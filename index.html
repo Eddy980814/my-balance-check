@@ -6,202 +6,253 @@
     <title>NR Pay - 新融國際科技</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
+        /* 背景設置 */
         body {
-            background-color: #F0F2F5;
+            background-color: #0d0d0d;
             font-family: 'Arial', sans-serif;
-            color: #333;
+            color: #FFD700;
             margin: 0;
             padding: 0;
+        }
+
+        /* 整體容器 */
+        .container {
             height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
 
-        .container {
-            width: 100%;
-            max-width: 600px;
-            padding: 40px;
-        }
-
+        /* 卡片樣式 */
         .card {
-            background-color: #fff;
+            background-color: #1f1f1f;
             border-radius: 15px;
             border: none;
             padding: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
         }
 
         .card h5 {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             margin-bottom: 20px;
-            font-weight: 600;
-            color: #333;
         }
 
-        .login-input {
-            font-size: 1rem;
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid #ccc;
-            margin-bottom: 20px;
-            width: 100%;
-        }
-
+        /* 按鈕樣式 */
         .btn-primary {
-            background-color: #004d99;
-            border-color: #004d99;
-            color: #fff;
+            background-color: #FFD700;
+            border-color: #FFD700;
+            color: #000;
             font-weight: bold;
-            padding: 12px;
-            border-radius: 10px;
             transition: background-color 0.3s ease;
-            width: 100%;
         }
 
         .btn-primary:hover {
-            background-color: #003366;
-            border-color: #003366;
+            background-color: #FFCC00;
+            border-color: #FFCC00;
         }
 
+        /* 查詢結果區塊 */
         .balance-card {
-            background: #f8f8f8;
-            padding: 25px;
+            background: #2a2a2a;
+            padding: 20px;
             border-radius: 15px;
-            color: #333;
-            display: none;
+            color: #fff;
+            display: none; /* 預設隱藏 */
             transition: opacity 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         .balance-amount {
             font-size: 2.5rem;
             font-weight: bold;
-            color: #32CD32;
+            color: #32CD32; /* 綠色餘額 */
         }
 
         .progress {
-            height: 15px;
-            background-color: #ddd;
+            height: 12px;
+            background-color: #444;
             border-radius: 8px;
             overflow: hidden;
         }
 
         .progress-bar {
+            background-color: #32CD32; /* 綠色進度條 */
             transition: width 0.5s ease;
         }
 
         .info-item {
             display: flex;
             justify-content: space-between;
-            padding: 12px 0;
+            padding: 10px 0;
             font-size: 1rem;
-            color: #333;
-            border-bottom: 1px solid #ccc;
+            color: #C0C0C0;
+            border-bottom: 1px solid #444;
         }
 
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        .dot-gray { background-color: #C0C0C0; }
+        .dot-yellow { background-color: #FFD700; }
+        .dot-green { background-color: #32CD32; }
+
+        /* 聯絡客服區塊 */
         .contact-info {
             font-size: 1rem;
-            color: #333;
+            color: #FFD700;
+            margin-top: 30px;
             text-align: center;
-            margin-top: 20px;
+            transition: opacity 0.3s ease;
         }
 
+        /* 版本資訊 */
         .version-info {
             position: fixed;
             bottom: 10px;
             right: 10px;
             font-size: 0.8rem;
-            color: #aaa;
+            color: #C0C0C0;
+            transition: opacity 0.3s ease;
         }
 
-        .dynamic-background {
-            background-image: linear-gradient(to right, #00509E, #60C6FF);
-            animation: backgroundMove 10s infinite linear;
+        /* 蠟筆小新卡通人物樣式 */
+        .cartoon-character {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            width: 100px;
+            height: 100px;
+            background-image: url('https://example.com/crayon-shin-chan.png'); /* 使用蠟筆小新圖片 */
+            background-size: cover;
+            background-position: center;
         }
 
-        @keyframes backgroundMove {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
+        /* 下載報表區域 */
+        .download-report {
+            margin-top: 20px;
+            text-align: center;
         }
 
+        .download-btn {
+            background-color: #32CD32;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background-color: #28a745;
+        }
     </style>
 </head>
-<body class="dynamic-background">
+<body>
 
-    <div class="container">
+    <div class="container d-flex flex-column align-items-center justify-content-center vh-100">
         
-        <div class="card">
-            <h5 class="text-center">請輸入用戶 ID 查詢餘額</h5>
-            <input type="text" id="userId" class="login-input" placeholder="輸入你的用戶 ID">
-            <button class="btn btn-primary" onclick="checkBalance()">查詢</button>
+        <!-- 查詢餘額輸入框 -->
+        <div class="card shadow">
+            <h5 class="text-center text-light">請輸入用戶 ID 查詢餘額</h5>
+            <input type="text" id="userId" class="form-control my-3" placeholder="輸入你的用戶 ID">
+            <button class="btn btn-primary w-100" onclick="checkBalance()">查詢</button>
         </div>
 
-        <div id="balanceCard" class="balance-card">
+        <!-- 查詢結果 -->
+        <div id="balanceCard" class="card balance-card shadow">
             <div class="text-center">
-                <span class="text-muted">NT$</span>
+                <span class="text-light">NT$</span>
                 <span id="balanceAmount" class="balance-amount">0</span>
             </div>
 
+            <!-- 進度條 -->
             <div class="progress mt-3">
                 <div id="balanceProgress" class="progress-bar" style="width: 0%;"></div>
             </div>
 
+            <!-- 餘額詳細資訊 -->
             <div class="mt-3">
                 <div class="info-item">
-                    <span>保留款</span>
+                    <span><span class="dot dot-gray"></span> 保留款</span>
                     <span id="holdAmount">NT$0</span>
                 </div>
                 <div class="info-item">
-                    <span>退刷負數結算金額</span>
+                    <span><span class="dot dot-yellow"></span> 退刷負數結算金額</span>
                     <span id="refundAmount">NT$0</span>
                 </div>
                 <div class="info-item">
-                    <span>可用餘額</span>
+                    <span><span class="dot dot-green"></span> 可用餘額</span>
                     <span id="availableAmount">NT$0</span>
                 </div>
             </div>
+
+            <!-- 下載報表按鈕 -->
+            <div class="download-report">
+                <a href="#" class="download-btn">下載餘額報表</a>
+            </div>
         </div>
 
+        <!-- 聯絡客服資訊 -->
         <div class="contact-info">
-            <p>如有任何問題，請聯絡客服: <a href="mailto:nrt.tw.2025@gmail.com" class="text-decoration-none">nrt.tw.2025@gmail.com</a></p>
+            <p>如有任何問題，請聯絡客服: <a href="mailto:nrt.tw.2025@gmail.com">nrt.tw.2025@gmail.com</a></p>
         </div>
 
         <footer class="mt-4 text-center text-secondary">
-            <p>&copy; 2025 NR Pay 新融科技. 版權所有</p>
+            <p class="mt-3">&copy; 2025 NR Pay 新融科技. 版權所有</p>
         </footer>
     </div>
 
+    <!-- 版本資訊 -->
     <div class="version-info">
         <p>版本 3.4.2</p>
     </div>
 
+    <!-- 蠟筆小新卡通人物 -->
+    <div class="cartoon-character"></div>
+
     <script>
         async function checkBalance() {
-            let userId = document.getElementById("userId").value.trim();
+            let userId = document.getElementById("userId").value.trim(); // 獲取用戶輸入
             if (!userId) {
                 alert("請輸入用戶 ID！");
                 return;
             }
 
             try {
-                let response = await fetch("balance.json"); 
+                let response = await fetch("balance.json"); // 從 balance.json 讀取數據
                 let data = await response.json();
 
-                let userBalance = data[userId];
-                if (userBalance) {
-                    let { balance, hold, refund, available } = userBalance;
+                let userBalance = data[userId]; // 查找對應用戶的餘額數據
 
+                if (userBalance) {
+                    let { balance, hold, refund, available } = userBalance; // 只提取餘額相關的數據
+
+                    // 更新顯示的餘額數據
                     document.getElementById("balanceAmount").innerText = balance.toLocaleString();
                     document.getElementById("holdAmount").innerText = `NT$${hold.toLocaleString()}`;
                     document.getElementById("refundAmount").innerText = `NT$${refund.toLocaleString()}`;
                     document.getElementById("availableAmount").innerText = `NT$${available.toLocaleString()}`;
 
+                    // 計算進度條（假設最大值為帳戶總餘額）
                     let progressWidth = (available / balance) * 100;
-                    let progressBar = document.getElementById("balanceProgress");
-                    progressBar.style.width = `${progressWidth}%`;
-                    progressBar.style.backgroundColor = available > 0 ? "#32CD32" : "#FF6347";
+                    document.getElementById("balanceProgress").style.width = `${progressWidth}%`;
 
+                    // 顯示查詢結果
                     document.getElementById("balanceCard").style.display = "block";
                 } else {
                     alert("查無此用戶，請檢查輸入是否正確！");
