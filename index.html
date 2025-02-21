@@ -8,55 +8,111 @@
     <style>
         /* 全局設置 */
         body {
-            background-color: #0d0d0d;
-            font-family: 'Arial', sans-serif;
-            color: white;
             margin: 0;
             padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #2a2a72, #009ffd);
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
             height: 100vh;
-            overflow: auto;
-            padding: 20px;
+            color: #fff;
+            overflow: hidden;
         }
 
-        /* 主要容器 */
+        /* 添加背景圖形 */
+        .background-shapes {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .background-shapes .circle {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: move 6s linear infinite;
+        }
+
+        .background-shapes .circle:nth-child(1) {
+            top: 10%;
+            left: 15%;
+            animation-duration: 8s;
+        }
+
+        .background-shapes .circle:nth-child(2) {
+            top: 30%;
+            left: 70%;
+            animation-duration: 10s;
+        }
+
+        .background-shapes .circle:nth-child(3) {
+            top: 50%;
+            left: 50%;
+            animation-duration: 7s;
+        }
+
+        @keyframes move {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* 登入框 */
         .login-box {
-            background-color: #1a1a1a;
+            background-color: rgba(0, 0, 0, 0.7);
             padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
             width: 100%;
             max-width: 400px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .login-box h2 {
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            color: #FFD700;
-            font-weight: 600;
-        }
-
-        /* 輸入框設計 */
-        .input-group {
             position: relative;
-            margin-bottom: 15px;
+            z-index: 10;
+            transition: transform 0.3s ease;
+        }
+
+        .login-box:hover {
+            transform: scale(1.05);
+        }
+
+        /* 標題 */
+        .login-box h2 {
+            margin-bottom: 30px;
+            font-size: 2rem;
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        /* 輸入框樣式 */
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
         }
 
         .input-group input {
             width: 100%;
-            padding: 8px 20px;
-            font-size: 14px;
-            height: 35px;
-            border-radius: 5px;
-            background-color: #333;
-            color: white;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 8px;
             border: 2px solid #444;
             outline: none;
+            background-color: #333;
+            color: #fff;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: #FFD700;
+        }
+
+        .input-group input::placeholder {
+            color: #aaa;
         }
 
         .input-group i {
@@ -64,25 +120,31 @@
             left: 10px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 16px;
-            color: #ccc;
+            font-size: 18px;
+            color: #FFD700;
         }
 
-        /* 查詢按鈕設計 */
+        /* 登入按鈕 */
         .btn {
             width: 100%;
             padding: 12px;
-            background-color: #FFD700;
-            color: white;
-            border: none;
-            border-radius: 10px;
+            background: linear-gradient(135deg, #FFD700, #ff007f);
+            color: #333;
             font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s ease;
         }
 
         .btn:hover {
-            background-color: #cc9a00;
+            background: linear-gradient(135deg, #e5c100, #ff007f);
+            transform: translateY(-3px);
+        }
+
+        .btn:active {
+            transform: translateY(2px);
         }
 
         /* 加載動畫 */
@@ -90,7 +152,6 @@
             display: none;
             margin-top: 20px;
             font-size: 24px;
-            color: white;
         }
 
         .spinner {
@@ -103,73 +164,12 @@
             border-top: 5px solid #FFD700;
             border-right: 5px solid #ff007f;
             border-bottom: 5px solid #7fff00;
-            animation: rotate 1.5s linear infinite, colorShift 3s ease-in-out infinite;
+            animation: rotate 1.5s linear infinite;
         }
 
-        /* 彩色閃爍動畫 */
         @keyframes rotate {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
-        }
-
-        @keyframes colorShift {
-            0% {
-                border-top-color: #FFD700;
-                border-right-color: #ff007f;
-                border-bottom-color: #7fff00;
-            }
-            25% {
-                border-top-color: #ff007f;
-                border-right-color: #FFD700;
-                border-bottom-color: #7fff00;
-            }
-            50% {
-                border-top-color: #7fff00;
-                border-right-color: #ff007f;
-                border-bottom-color: #FFD700;
-            }
-            75% {
-                border-top-color: #7fff00;
-                border-right-color: #FFD700;
-                border-bottom-color: #ff007f;
-            }
-            100% {
-                border-top-color: #FFD700;
-                border-right-color: #ff007f;
-                border-bottom-color: #7fff00;
-            }
-        }
-
-        /* 查詢進度條 */
-        .progress-bar-container {
-            width: 100%;
-            height: 8px;
-            background-color: #555;
-            border-radius: 5px;
-            display: none;
-            margin-top: 20px;
-        }
-
-        .progress-bar {
-            width: 0%;
-            height: 100%;
-            background-color: #FFD700;
-            border-radius: 5px;
-        }
-
-        /* 餘額顯示 */
-        .balance-container {
-            display: none;
-            background-color: #1a1a1a;
-            padding: 20px;
-            margin-top: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-        }
-
-        .balance-container p {
-            font-size: 16px;
-            margin-bottom: 10px;
         }
 
         /* 版權與社交媒體 */
@@ -189,42 +189,37 @@
         .social-links a:hover {
             text-decoration: underline;
         }
+
     </style>
 </head>
 <body>
+
+    <div class="background-shapes">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
 
     <!-- 登入框 -->
     <div class="login-box">
         <h2>NR PAY 8.2.9</h2>
         
-        <!-- 用戶ID輸入 -->
+        <!-- 用戶ID輸入框 -->
         <div class="input-group">
             <i class="fas fa-user"></i>
             <input type="text" id="userId" placeholder="輸入用戶ID" maxlength="20">
         </div>
 
-        <!-- 查詢餘額按鈕 -->
-        <button class="btn" onclick="checkBalance()">查詢餘額</button>
+        <!-- 登入按鈕 -->
+        <button class="btn" onclick="checkBalance()">登入</button>
 
         <!-- 加載動畫 -->
         <div class="loading-container" id="loadingContainer">
             <div class="spinner"></div> 查詢中...
         </div>
-
-        <!-- 查詢進度條 -->
-        <div class="progress-bar-container" id="progressBarContainer">
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
-
-        <!-- 顯示餘額結果框 -->
-        <div class="balance-container" id="balanceContainer">
-            <p id="totalBalance"></p>
-            <p id="holdAmount"></p>
-            <p id="availableBalance"></p>
-        </div>
     </div>
 
-    <!-- 版權與社交媒體連結 -->
+    <!-- 版權與社交媒體 -->
     <div class="footer">
         <p>&copy; 2025 新融國際科技. All Rights Reserved.</p>
         <div class="social-links">
@@ -243,67 +238,24 @@
             "user2": { "balance": 5000, "hold": 300, "available": 4700 }
         };
 
-        let inactivityTimer;
-
-        // 自動登出功能：超過 5 分鐘無操作自動登出
-        function resetInactivityTimer() {
-            clearTimeout(inactivityTimer);
-            inactivityTimer = setTimeout(logOut, 300000); // 5分鐘
-        }
-
-        // 登出函數
-        function logOut() {
-            alert("您已登出，因為長時間未操作！");
-            window.location.reload(); // 重載頁面
-        }
-
         // 查詢餘額功能
         function checkBalance() {
             const userId = document.getElementById("userId").value;
             const loadingContainer = document.getElementById("loadingContainer");
-            const progressBarContainer = document.getElementById("progressBarContainer");
-            const progressBar = document.getElementById("progressBar");
-            const balanceContainer = document.getElementById("balanceContainer");
-            const totalBalance = document.getElementById("totalBalance");
-            const holdAmount = document.getElementById("holdAmount");
-            const availableBalance = document.getElementById("availableBalance");
 
             // 顯示加載動畫
             loadingContainer.style.display = "block";
-            progressBarContainer.style.display = "block";
-            progressBar.style.width = "0%";
 
-            let progress = 0;
-            let interval = setInterval(() => {
-                progress += 10;
-                progressBar.style.width = `${progress}%`;
+            setTimeout(() => {
+                loadingContainer.style.display = "none";
 
-                if (progress === 100) {
-                    clearInterval(interval);
-
-                    // 顯示查詢結果
-                    if (balanceData[userId]) {
-                        const userBalance = balanceData[userId];
-                        totalBalance.innerHTML = `總餘額：${userBalance.balance} 元`;
-                        holdAmount.innerHTML = `保留款：${userBalance.hold} 元`;
-                        availableBalance.innerHTML = `可用餘額：${userBalance.available} 元`;
-
-                        balanceContainer.style.display = "block";
-                    } else {
-                        totalBalance.innerHTML = "查無此用戶ID";
-                        balanceContainer.style.display = "block";
-                    }
-
-                    // 隱藏加載動畫
-                    loadingContainer.style.display = "none";
+                if (balanceData[userId]) {
+                    alert(`歡迎 ${userId}！\n總餘額：${balanceData[userId].balance} 元\n可用餘額：${balanceData[userId].available} 元`);
+                } else {
+                    alert("查無此用戶ID！");
                 }
-            }, 100); // 每100毫秒更新一次進度
+            }, 2000); // 模擬查詢延遲
         }
-
-        // 監聽用戶操作來重置登出計時器
-        window.onload = resetInactivityTimer;
-        window.onmousemove = resetInactivityTimer;
-        window.onkeydown = resetInactivityTimer;
     </script>
 
 </body>
