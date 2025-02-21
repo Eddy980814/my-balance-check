@@ -8,20 +8,43 @@
     <style>
         /* 背景設定 */
         body {
-            background-color: #000000;
+            background-color: #0d0d0d;
             font-family: 'Arial', sans-serif;
             color: #FFD700;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 整體容器 */
+        .container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         /* 卡片樣式 */
         .card {
-            background-color: #1a1a1a;
-            border-radius: 10px;
-            border: 1px solid #FFD700;
-            padding: 20px;
-            margin-top: 30px;
+            background-color: #1f1f1f;
+            border-radius: 15px;
+            border: none;
+            padding: 30px;
+            margin-top: 20px;
             width: 100%;
-            max-width: 400px;
+            max-width: 450px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .card h5 {
+            font-size: 1.25rem;
+            margin-bottom: 20px;
         }
 
         /* 按鈕樣式 */
@@ -30,6 +53,7 @@
             border-color: #FFD700;
             color: #000;
             font-weight: bold;
+            transition: background-color 0.3s ease;
         }
 
         .btn-primary:hover {
@@ -39,42 +63,47 @@
 
         /* 查詢結果區塊 */
         .balance-card {
-            background: #222;
+            background: #2a2a2a;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 15px;
             color: #fff;
             display: none; /* 預設隱藏 */
+            transition: opacity 0.3s ease;
         }
 
         .balance-amount {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: bold;
             color: #32CD32; /* 綠色餘額 */
         }
 
         .progress {
-            height: 10px;
+            height: 12px;
             background-color: #444;
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         .progress-bar {
             background-color: #32CD32; /* 綠色進度條 */
+            transition: width 0.5s ease;
         }
 
         .info-item {
             display: flex;
             justify-content: space-between;
-            padding: 5px 0;
+            padding: 10px 0;
             font-size: 1rem;
             color: #C0C0C0;
+            border-bottom: 1px solid #444;
         }
 
         .dot {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             display: inline-block;
-            margin-right: 5px;
+            margin-right: 8px;
         }
 
         .dot-gray { background-color: #C0C0C0; }
@@ -83,10 +112,11 @@
 
         /* 聯絡客服區塊 */
         .contact-info {
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: #FFD700;
-            margin-top: 20px;
+            margin-top: 30px;
             text-align: center;
+            transition: opacity 0.3s ease;
         }
 
         /* 版本資訊 */
@@ -96,6 +126,7 @@
             right: 10px;
             font-size: 0.8rem;
             color: #C0C0C0;
+            transition: opacity 0.3s ease;
         }
     </style>
 </head>
