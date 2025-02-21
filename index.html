@@ -9,8 +9,8 @@
         /* 全局設置 */
         body {
             background-color: #0d0d0d;
-            font-family: 'Arial', sans-serif;
-            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            color: #00ff00;
             margin: 0;
             padding: 0;
             display: flex;
@@ -19,14 +19,15 @@
             height: 100vh;
             padding: 0 20px;
             flex-direction: column;
+            overflow: hidden;
         }
 
         /* 主要容器 */
         .login-box {
-            background-color: #1a1a1a;
+            background-color: rgba(0, 0, 0, 0.7);
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
             width: 100%;
             max-width: 400px;
             text-align: center;
@@ -36,8 +37,8 @@
 
         .login-box h2 {
             margin-bottom: 20px;
-            font-size: 2rem;
-            color: #00cc66;
+            font-size: 2.5rem;
+            color: #00ff00;
             font-weight: 600;
         }
 
@@ -49,7 +50,7 @@
 
         .input-group input {
             width: 100%;
-            max-width: 90%;  /* 限制最大寬度 */
+            max-width: 100%;
             padding: 12px;
             padding-left: 40px;
             border: 2px solid #333;
@@ -62,7 +63,7 @@
         }
 
         .input-group input:focus {
-            border-color: #00cc66;
+            border-color: #00ff00;
         }
 
         .input-group i {
@@ -84,13 +85,13 @@
             font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
-            background-color: #00cc66;
+            background-color: #00ff00;
             color: white;
             transition: 0.3s;
         }
 
         .btn:hover {
-            background-color: #00994d;
+            background-color: #009900;
         }
 
         /* 查詢進度條 */
@@ -105,26 +106,26 @@
 
         .progress-bar {
             height: 100%;
-            background-color: #00cc66;
+            background-color: #00ff00;
             width: 0%;
             border-radius: 5px;
         }
 
         /* 餘額框框 */
         .balance-container {
-            background-color: #1a1a1a;
+            background-color: rgba(0, 0, 0, 0.7);
             padding: 20px;
-            margin-top: 30px;  /* 增加距離 */
+            margin-top: 20px;
             border-radius: 15px;
             box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
             display: none;
-            width: 100%;
-            max-width: 400px;
         }
 
         .balance-container p {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             margin-bottom: 10px;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
         }
 
         /* 餘額進度條 */
@@ -144,7 +145,7 @@
 
         /* 版權與社交媒體連結 */
         .footer {
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: #ccc;
             text-align: center;
             margin-top: 30px;
@@ -155,10 +156,10 @@
         }
 
         .social-links a {
-            color: #00cc66;
+            color: #00ff00;
             text-decoration: none;
             margin: 0 15px;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
         }
 
         .social-links a:hover {
@@ -186,18 +187,18 @@
             <div class="progress-bar" id="progressBar"></div>
         </div>
 
-    </div>
+        <!-- 顯示餘額結果框 -->
+        <div class="balance-container" id="balanceContainer">
+            <p id="totalBalance"></p>
+            <p id="holdAmount"></p>
+            <p id="availableBalance"></p>
 
-    <!-- 顯示餘額結果框 -->
-    <div class="balance-container" id="balanceContainer">
-        <p id="totalBalance"></p>
-        <p id="holdAmount"></p>
-        <p id="availableBalance"></p>
-
-        <!-- 餘額進度條 -->
-        <div class="balance-progress-bar">
-            <div class="balance-progress" id="balanceProgress"></div>
+            <!-- 餘額進度條 -->
+            <div class="balance-progress-bar">
+                <div class="balance-progress" id="balanceProgress"></div>
+            </div>
         </div>
+
     </div>
 
     <!-- 版權與社交媒體連結 -->
@@ -210,7 +211,7 @@
     </div>
 
     <script>
-        // 模擬資料庫資料
+        // 模擬資料庫資料（20組）
         const balanceData = {
             "A4uu7014": { "balance": 15388, "hold": 0, "available": 15388 },
             "user456": { "balance": 2000, "hold": 200, "available": 1700 },
@@ -270,21 +271,18 @@
                         holdAmount.innerHTML = `保留款：${userBalance.hold} 元`;
                         availableBalance.innerHTML = `可用餘額：${userBalance.available} 元`;
 
-                        // 設定餘額進度條
                         balanceProgress.style.width = `${availablePercentage}%`;
-                        balanceProgress.style.backgroundColor = "#00cc66"; // 綠色
+                        balanceProgress.style.backgroundColor = "#00ff00";
+                        balanceContainer.style.display = "block";
                     } else {
                         totalBalance.innerHTML = "查無此用戶ID";
                         holdAmount.innerHTML = "";
                         availableBalance.innerHTML = "";
+                        balanceProgress.style.width = "0%";
                     }
-
-                    // 顯示餘額區塊
-                    balanceContainer.style.display = "block";
                 }
-            }, 50);
+            }, 100);
         }
     </script>
-
 </body>
 </html>
