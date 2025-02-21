@@ -22,80 +22,59 @@
             overflow-y: auto;
         }
 
-        /* 登入框 */
+        /* 主要容器 */
         .login-box {
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 40px;
-            border-radius: 20px;
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-radius: 10px;
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
             width: 100%;
             max-width: 400px;
             text-align: center;
-            margin-bottom: 30px;
-            animation: fadeIn 1s ease-in-out;
+            margin-bottom: 20px;
         }
 
         .login-box h2 {
             margin-bottom: 20px;
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: #FFD700;
             font-weight: 600;
         }
-/* 用戶ID輸入框 */
-.input-group {
-    position: relative;
-    margin-bottom: 15px;  /* 減少底部的間距 */
-}
 
-.input-group input {
-    width: 100%;
-    padding: 8px 20px;  /* 減小內邊距，使框框更小 */
-    font-size: 14px;  /* 減小字型大小 */
-    height: 35px;  /* 降低輸入框的高度 */
-}
-
-.input-group i {
-    left: 10px;  /* 圖示距離左邊的距離 */
-    top: 50%;
-    transform: translateY(-50%);  /* 垂直居中圖示 */
-    font-size: 18px;  /* 減小圖示大小 */
-}
+        /* 用戶ID輸入框 */
+        .input-group {
+            position: relative;
+            margin-bottom: 10px;
         }
 
         .input-group input {
             width: 100%;
-            padding: 12px;
-            padding-left: 40px;
-            border: 2px solid #333;
-            border-radius: 10px;
-            background-color: #333;
-            color: white;
-            font-size: 1.2rem;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .input-group input:focus {
-            border-color: #FFD700;
+            padding: 6px 15px;
+            font-size: 12px;
+            height: 30px;
+            border-radius: 5px;
+            border: 1px solid #555;
+            background-color: #222;
+            color: #fff;
         }
 
         .input-group i {
-            position: absolute;
-            left: 15px;
+            left: 8px;
             top: 50%;
             transform: translateY(-50%);
-            color: #ccc;
+            font-size: 16px;
+            color: #aaa;
         }
 
         /* 查詢按鈕 */
         .btn {
             display: block;
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             margin-bottom: 20px;
             border: none;
             border-radius: 10px;
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
             background-color: #FFD700;
@@ -113,7 +92,7 @@
             height: 8px;
             background-color: #555;
             border-radius: 5px;
-            margin-top: 20px;
+            margin-top: 15px;
             display: none;
         }
 
@@ -124,41 +103,27 @@
             border-radius: 5px;
         }
 
-        /* 顯示餘額框 */
+        /* 餘額框 */
         .balance-container {
             background-color: #1a1a1a;
             padding: 20px;
             margin-top: 20px;
-            border-radius: 15px;
+            border-radius: 10px;
             box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
             display: none;
         }
 
         .balance-container p {
-            font-size: 1.2rem;
+            font-size: 1rem;
             margin-bottom: 10px;
         }
 
-        /* 餘額進度條 */
-        .balance-progress-bar {
-            width: 100%;
-            height: 8px;
-            background-color: #555;
-            border-radius: 5px;
-            margin-top: 15px;
-        }
-
-        .balance-progress {
-            height: 100%;
-            border-radius: 5px;
-        }
-
-        /* 版權與社交媒體 */
+        /* 版權與社交媒體連結 */
         .footer {
             font-size: 0.9rem;
             color: #ccc;
             text-align: center;
-            margin-top: 30px;
+            margin-top: 20px;
         }
 
         .social-links {
@@ -168,49 +133,13 @@
         .social-links a {
             color: #FFD700;
             text-decoration: none;
-            margin: 0 15px;
-            font-size: 1.2rem;
+            margin: 0 10px;
+            font-size: 1rem;
         }
 
         .social-links a:hover {
             text-decoration: underline;
         }
-
-        /* 提示框 */
-        .alert {
-            background-color: #333;
-            color: #FFD700;
-            padding: 10px;
-            margin-top: 20px;
-            border-radius: 10px;
-            display: none;
-            font-size: 1.1rem;
-        }
-
-        /* 登出倒計時 */
-        .logout-timer {
-            color: #FF6347;
-            font-weight: bold;
-            margin-top: 20px;
-            font-size: 1.2rem;
-        }
-
-        /* 動畫效果 */
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-
-        /* 設定密碼顯示隱藏 */
-        .toggle-password {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #FFD700;
-        }
-
     </style>
 </head>
 <body>
@@ -233,26 +162,21 @@
             <div class="progress-bar" id="progressBar"></div>
         </div>
 
-        <!-- 顯示餘額結果 -->
+        <!-- 顯示餘額結果框 -->
         <div class="balance-container" id="balanceContainer">
             <p id="totalBalance"></p>
             <p id="holdAmount"></p>
             <p id="availableBalance"></p>
-            <p id="frozenAmount"></p>
+
+            <!-- 餘額進度條 -->
             <div class="balance-progress-bar">
                 <div class="balance-progress" id="balanceProgress"></div>
             </div>
         </div>
 
-        <!-- 提示信息 -->
-        <div class="alert" id="alertBox"></div>
-
-        <!-- 登出倒計時 -->
-        <div class="logout-timer" id="logoutTimer">登出倒計時：30秒</div>
-
     </div>
 
-    <!-- 版權與社交媒體 -->
+    <!-- 版權與社交媒體連結 -->
     <div class="footer">
         <p>&copy; 2025 新融國際科技. All Rights Reserved.</p>
         <div class="social-links">
@@ -264,35 +188,30 @@
     <script>
         // 模擬資料庫資料
         const balanceData = {
-            "A4uu7014": { "balance": 15388, "hold": 0, "available": 15388, "frozen": 500 },
-            "user456": { "balance": 2000, "hold": 200, "available": 1700, "frozen": 0 },
-            // 更多資料...
+            "A4uu7014": { "balance": 15388, "hold": 0, "available": 15388 },
+            "user456": { "balance": 2000, "hold": 200, "available": 1700 },
+            "user789": { "balance": 1500, "hold": 150, "available": 1300 },
+            "user1": { "balance": 10000, "hold": 1000, "available": 9000 },
+            "user2": { "balance": 5000, "hold": 300, "available": 4700 },
+            "user3": { "balance": 1200, "hold": 150, "available": 1050 },
+            "user4": { "balance": 2500, "hold": 400, "available": 2100 },
+            "user5": { "balance": 8000, "hold": 200, "available": 7800 },
+            "user6": { "balance": 900, "hold": 50, "available": 850 },
+            "user7": { "balance": 3000, "hold": 100, "available": 2900 },
+            "user8": { "balance": 25000, "hold": 5000, "available": 20000 },
+            "user9": { "balance": 4500, "hold": 500, "available": 4000 },
+            "user10": { "balance": 10000, "hold": 500, "available": 9500 },
+            "user11": { "balance": 2000, "hold": 100, "available": 1900 },
+            "user12": { "balance": 3500, "hold": 200, "available": 3300 },
+            "user13": { "balance": 5000, "hold": 1000, "available": 4000 },
+            "user14": { "balance": 1000, "hold": 200, "available": 800 },
+            "user15": { "balance": 6000, "hold": 600, "available": 5400 },
+            "user16": { "balance": 7000, "hold": 300, "available": 6700 },
+            "user17": { "balance": 1500, "hold": 100, "available": 1400 },
+            "user18": { "balance": 30000, "hold": 2000, "available": 28000 },
+            "user19": { "balance": 4000, "hold": 300, "available": 3700 },
+            "user20": { "balance": 8500, "hold": 1000, "available": 7500 }
         };
-
-        // 自動登出功能
-        let logoutTimer = 30;
-        let logoutInterval;
-
-        // 開始倒計時
-        function startLogoutTimer() {
-            clearInterval(logoutInterval);
-            logoutTimer = 30;
-            document.getElementById('logoutTimer').innerText = `登出倒計時：${logoutTimer}秒`;
-            logoutInterval = setInterval(() => {
-                logoutTimer--;
-                document.getElementById('logoutTimer').innerText = `登出倒計時：${logoutTimer}秒`;
-                if (logoutTimer === 0) {
-                    clearInterval(logoutInterval);
-                    alert('您已登出');
-                    location.reload();  // 模擬登出
-                }
-            }, 1000);
-        }
-
-        // 重設倒計時
-        function resetLogoutTimer() {
-            startLogoutTimer();
-        }
 
         // 查詢餘額功能
         function checkBalance() {
@@ -303,9 +222,7 @@
             const totalBalance = document.getElementById("totalBalance");
             const holdAmount = document.getElementById("holdAmount");
             const availableBalance = document.getElementById("availableBalance");
-            const frozenAmount = document.getElementById("frozenAmount");
             const balanceProgress = document.getElementById("balanceProgress");
-            const alertBox = document.getElementById("alertBox");
 
             // 顯示查詢進度條
             progressBarContainer.style.display = "block";
@@ -322,12 +239,12 @@
                     // 顯示查詢結果
                     if (balanceData[userId]) {
                         const userBalance = balanceData[userId];
+                        const holdPercentage = (userBalance.hold / userBalance.balance) * 100;
                         const availablePercentage = (userBalance.available / userBalance.balance) * 100;
 
                         totalBalance.innerHTML = `總餘額：${userBalance.balance} 元`;
                         holdAmount.innerHTML = `保留款：${userBalance.hold} 元`;
                         availableBalance.innerHTML = `可用餘額：${userBalance.available} 元`;
-                        frozenAmount.innerHTML = `凍結款：${userBalance.frozen} 元`;
 
                         balanceProgress.style.width = `${availablePercentage}%`;
                         balanceProgress.style.backgroundColor = "#FFD700"; // 金色
@@ -336,19 +253,9 @@
                         totalBalance.innerHTML = "查無此用戶ID";
                         balanceContainer.style.display = "block";
                     }
-
-                    // 顯示提示
-                    alertBox.style.display = 'block';
-                    alertBox.innerHTML = "如果30秒無操作，將自動登出！";
                 }
             }, 50); // 每50毫秒更新一次進度
-
-            // 重設倒計時
-            resetLogoutTimer();
         }
-
-        // 啟動頁面時倒計時
-        window.onload = startLogoutTimer;
     </script>
 
 </body>
