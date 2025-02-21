@@ -115,15 +115,6 @@
             color: #aaa;
         }
 
-        .input-group i {
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 18px;
-            color: #FFD700;
-        }
-
         /* 登入按鈕 */
         .btn {
             width: 100%;
@@ -256,7 +247,6 @@
 
         <!-- 用戶ID輸入框 -->
         <div class="input-group">
-            <i class="fas fa-user"></i>
             <input type="text" id="userId" placeholder="輸入用戶ID" maxlength="20">
         </div>
 
@@ -271,7 +261,7 @@
 
     <!-- 餘額彈出框 -->
     <div class="balance-popup" id="balancePopup">
-        <h3>餘額詳情</h3>
+        <h3 id="balanceMessage">餘額詳情</h3>
         <p>總餘額：<span id="totalBalance">0</span> 元</p>
         <p>可用餘額：<span id="availableBalance">0</span> 元</p>
         <div class="progress-bar">
@@ -330,6 +320,9 @@
                     document.getElementById("availableBalance").textContent = availableBalance;
                     document.getElementById("progress").style.width = `${progress}%`;
 
+                    // 更新歡迎訊息
+                    document.getElementById("balanceMessage").textContent = `歡迎 ${userId}`;
+                    
                     document.getElementById("balancePopup").style.display = "block";
                 } else {
                     alert("查無此用戶ID！");
