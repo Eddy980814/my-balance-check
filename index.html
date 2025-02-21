@@ -11,7 +11,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #2a2a72;
+            background-color: #000000; /* 背景改成黑色 */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -35,10 +35,10 @@
         .meteor {
             position: absolute;
             width: 3px;
-            height: 100px;
+            height: 3px; /* 減少流星大小 */
             background: rgba(255, 255, 255, 0.8);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
-            animation: meteor-fall 2s linear infinite;
+            border-radius: 50%;
+            animation: meteor-fall 1s linear infinite; /* 加快流星速度 */
         }
 
         @keyframes meteor-fall {
@@ -47,20 +47,20 @@
                 opacity: 1;
             }
             100% {
-                transform: translateY(100vh) translateX(200px);
+                transform: translateY(100vh) translateX(100px); /* 流星隨機掉落 */
                 opacity: 0;
             }
         }
 
         /* 控制流星出現頻率 */
         .meteor:nth-child(odd) {
-            animation-duration: 1.5s;
-            animation-delay: 0.5s;
+            animation-duration: 1s;
+            animation-delay: 0.2s;
         }
 
         .meteor:nth-child(even) {
-            animation-duration: 2s;
-            animation-delay: 1s;
+            animation-duration: 1.2s;
+            animation-delay: 0.4s;
         }
 
         /* 登入框 */
@@ -143,6 +143,22 @@
             margin-top: 10px;
         }
 
+        /* 社群連結 */
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            font-size: 2rem;
+            color: #FFD700;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            color: #ff007f;
+        }
+
     </style>
 </head>
 <body>
@@ -186,6 +202,12 @@
 
         <!-- 版本號 -->
         <div class="version">版本 8.2.9</div>
+
+        <!-- 社群媒體連結 -->
+        <div class="social-links">
+            <a href="https://www.instagram.com/1xyzzz_x?igsh=Z203MHcyaHRrdnpt&utm_source=qr" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="https://discord.gg/nXBxGYSR" target="_blank" class="social-icon"><i class="fab fa-discord"></i></a>
+        </div>
     </div>
 
     <script>
