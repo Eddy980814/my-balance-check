@@ -9,8 +9,8 @@
         /* 全局設置 */
         body {
             background-color: #0d0d0d;
-            font-family: 'Courier New', Courier, monospace;
-            color: #00ff00;
+            font-family: 'Arial', sans-serif;
+            color: white;
             margin: 0;
             padding: 0;
             display: flex;
@@ -19,26 +19,25 @@
             height: 100vh;
             padding: 0 20px;
             flex-direction: column;
-            overflow: hidden;
+            overflow-y: auto; /* 允許頁面滾動 */
         }
 
         /* 主要容器 */
         .login-box {
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: #1a1a1a;
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
             width: 100%;
             max-width: 400px;
             text-align: center;
-            transition: all 0.3s;
             margin-bottom: 30px;
         }
 
         .login-box h2 {
             margin-bottom: 20px;
-            font-size: 2.5rem;
-            color: #00ff00;
+            font-size: 2rem;
+            color: #FFD700; /* 金色 */
             font-weight: 600;
         }
 
@@ -63,7 +62,7 @@
         }
 
         .input-group input:focus {
-            border-color: #00ff00;
+            border-color: #FFD700; /* 金色 */
         }
 
         .input-group i {
@@ -85,13 +84,13 @@
             font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
-            background-color: #00ff00;
+            background-color: #FFD700;
             color: white;
             transition: 0.3s;
         }
 
         .btn:hover {
-            background-color: #009900;
+            background-color: #cc9a00;
         }
 
         /* 查詢進度條 */
@@ -106,26 +105,24 @@
 
         .progress-bar {
             height: 100%;
-            background-color: #00ff00;
+            background-color: #FFD700;
             width: 0%;
             border-radius: 5px;
         }
 
         /* 餘額框框 */
         .balance-container {
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: #1a1a1a;
             padding: 20px;
             margin-top: 20px;
             border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
             display: none;
         }
 
         .balance-container p {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             margin-bottom: 10px;
-            color: #00ff00;
-            text-shadow: 0 0 10px #00ff00;
         }
 
         /* 餘額進度條 */
@@ -145,7 +142,7 @@
 
         /* 版權與社交媒體連結 */
         .footer {
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: #ccc;
             text-align: center;
             margin-top: 30px;
@@ -156,10 +153,10 @@
         }
 
         .social-links a {
-            color: #00ff00;
+            color: #FFD700;
             text-decoration: none;
             margin: 0 15px;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
         }
 
         .social-links a:hover {
@@ -211,7 +208,7 @@
     </div>
 
     <script>
-        // 模擬資料庫資料（20組）
+        // 模擬資料庫資料
         const balanceData = {
             "A4uu7014": { "balance": 15388, "hold": 0, "available": 15388 },
             "user456": { "balance": 2000, "hold": 200, "available": 1700 },
@@ -272,16 +269,14 @@
                         availableBalance.innerHTML = `可用餘額：${userBalance.available} 元`;
 
                         balanceProgress.style.width = `${availablePercentage}%`;
-                        balanceProgress.style.backgroundColor = "#00ff00";
+                        balanceProgress.style.backgroundColor = "#FFD700"; // 金色
                         balanceContainer.style.display = "block";
                     } else {
                         totalBalance.innerHTML = "查無此用戶ID";
-                        holdAmount.innerHTML = "";
-                        availableBalance.innerHTML = "";
-                        balanceProgress.style.width = "0%";
+                        balanceContainer.style.display = "block";
                     }
                 }
-            }, 100);
+            }, 50); // 設定進度條增加速度
         }
     </script>
 </body>
