@@ -75,6 +75,7 @@
             position: relative;
             z-index: 10;
             transition: transform 0.3s ease;
+            margin-top: -100px; /* 向上移動登入框 */
         }
 
         .login-box:hover {
@@ -258,6 +259,9 @@
         <!-- 登入按鈕 -->
         <button class="btn" onclick="checkBalance()">登入</button>
 
+        <!-- 密碼重設按鈕 -->
+        <button class="btn" onclick="resetPassword()" style="background: linear-gradient(135deg, #ff007f, #FFD700); margin-top: 10px;" id="resetPasswordBtn">重設密碼</button>
+
         <!-- 加載動畫 -->
         <div class="loading-container" id="loadingContainer">
             <div class="spinner"></div> 查詢中...
@@ -289,18 +293,18 @@
     <script>
         // 模擬資料庫資料
         const balanceData = {
-            "A4uu7014": { "password": "password123", "balance": 15388, "hold": 0, "available": 15388 },
-            "user456": { "password": "user456pass", "balance": 2000, "hold": 200, "available": 1700 },
-            "user789": { "password": "user789pass", "balance": 1500, "hold": 150, "available": 1300 },
-            "user1": { "password": "user1pass", "balance": 10000, "hold": 1000, "available": 9000 },
-            "user2": { "password": "user2pass", "balance": 5000, "hold": 300, "available": 4700 }
+            "ECX": { "A4uu7014": 15388, "hold": 0, "available": 15388 },
+            "110168": { "980814": 2000, "hold": 200, "available": 1700 },
+            "user789": { "balance": 1500, "hold": 150, "available": 1300 },
+            "user1": { "balance": 10000, "hold": 1000, "available": 9000 },
+            "user2": { "balance": 5000, "hold": 300, "available": 4700 }
         };
 
         // 歡迎訊息顯示
         function showWelcomeMessage(userId) {
             const welcomeMessage = document.getElementById("welcomeMessage");
             if (userId) {
-                welcomeMessage.textContent = `歡迎，${userId}！`;
+                welcomeMessage.textContent = `歡迎貴賓，${userId}！`;
             }
         }
 
@@ -316,8 +320,7 @@
             setTimeout(() => {
                 loadingContainer.style.display = "none";
 
-                // 檢查用戶ID和密碼
-                if (balanceData[userId] && balanceData[userId].password === password) {
+                if (balanceData[userId]) {
                     showWelcomeMessage(userId); // 顯示歡迎訊息
                     const totalBalance = balanceData[userId].balance;
                     const availableBalance = balanceData[userId].available;
@@ -332,9 +335,20 @@
                     
                     document.getElementById("balancePopup").style.display = "block";
                 } else {
-                    alert("用戶ID或密碼錯誤！");
+                    alert("查無此用戶ID！");
                 }
             }, 2000); // 模擬查詢延遲
+        }
+
+        // 重設密碼功能
+        function resetPassword() {
+            const newPassword = prompt("請輸入您的新密碼：");
+
+            if (newPassword) {
+                alert("您的密碼已成功重設！");
+            } else {
+                alert("密碼重設失敗，請重試！");
+            }
         }
     </script>
 
