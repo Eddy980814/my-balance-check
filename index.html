@@ -8,9 +8,9 @@
     <style>
         /* 全局設置 */
         body {
-            background-color: #1c1c1c;
+            background-color: #1d1d1d;
             font-family: 'Arial', sans-serif;
-            color: #f0f0f0;
+            color: white;
             margin: 0;
             padding: 0;
             display: flex;
@@ -24,46 +24,44 @@
 
         /* 主要容器 */
         .login-box {
-            background-color: #232323;
-            padding: 40px;
-            border-radius: 25px;
-            box-shadow: 0 0 50px rgba(255, 215, 0, 0.6);
+            background-color: #2a2a2a;
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
             width: 100%;
-            max-width: 420px;
+            max-width: 450px;
             text-align: center;
-            margin-bottom: 30px;
         }
 
         .login-box h2 {
-            margin-bottom: 30px;
-            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-size: 2rem;
             color: #FFD700;
-            font-weight: 700;
-            letter-spacing: 1px;
+            font-weight: 600;
         }
 
         /* 輸入框設計 */
         .input-group {
             position: relative;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             text-align: left;
         }
 
         .input-group input {
             width: 100%;
-            padding: 15px;
-            padding-left: 50px;
-            border: 2px solid #444;
-            border-radius: 12px;
+            padding: 12px;
+            padding-left: 40px;
+            border: 2px solid #333;
+            border-radius: 10px;
             background-color: #333;
-            color: #fff;
-            font-size: 1.2rem;
+            color: white;
+            font-size: 1.1rem;
             outline: none;
-            transition: border 0.3s ease;
+            transition: 0.3s;
         }
 
         .input-group input:focus {
-            border-color: #FFD700;
+            border-color: #FFD700; /* 金色 */
         }
 
         .input-group i {
@@ -71,28 +69,27 @@
             left: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: #888;
+            color: #ccc;
         }
 
         /* 查詢按鈕設計 */
         .btn {
             display: block;
             width: 100%;
-            padding: 15px;
+            padding: 12px;
             margin-bottom: 20px;
             border: none;
-            border-radius: 12px;
-            font-size: 1.3rem;
+            border-radius: 10px;
+            font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
-            background: linear-gradient(135deg, #FFD700, #FFAA00);
+            background-color: #FFD700;
             color: white;
-            transition: 0.3s ease-in-out;
+            transition: 0.3s;
         }
 
         .btn:hover {
-            background: linear-gradient(135deg, #FFAA00, #FFD700);
-            transform: scale(1.05);
+            background-color: #cc9a00;
         }
 
         /* 查詢進度條 */
@@ -114,24 +111,24 @@
 
         /* 餘額框框 */
         .balance-container {
-            background-color: #232323;
-            padding: 25px;
+            background-color: #2a2a2a;
+            padding: 20px;
             margin-top: 20px;
             border-radius: 15px;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
             display: none;
         }
 
         .balance-container p {
-            font-size: 1.3rem;
-            margin-bottom: 12px;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
         }
 
         /* 餘額進度條 */
         .balance-progress-bar {
             width: 100%;
             height: 8px;
-            background-color: #444;
+            background-color: #555;
             border-radius: 5px;
             margin-top: 15px;
         }
@@ -144,7 +141,7 @@
 
         /* 版權與社交媒體連結 */
         .footer {
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: #ccc;
             text-align: center;
             margin-top: 30px;
@@ -157,13 +154,12 @@
         .social-links a {
             color: #FFD700;
             text-decoration: none;
-            margin: 0 20px;
-            font-size: 1.3rem;
-            transition: 0.3s ease;
+            margin: 0 15px;
+            font-size: 1.1rem;
         }
 
         .social-links a:hover {
-            color: #FFAA00;
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -176,7 +172,7 @@
         <!-- 用戶ID輸入 -->
         <div class="input-group">
             <i class="fas fa-user"></i>
-            <input type="text" id="userId" placeholder="輸入用戶ID" maxlength="20">
+            <input type="text" id="userId" placeholder="用戶ID" maxlength="20">
         </div>
 
         <!-- 查詢餘額按鈕 -->
@@ -216,26 +212,7 @@
             "A4uu7014": { "balance": 15388, "hold": 0, "available": 15388 },
             "user456": { "balance": 2000, "hold": 200, "available": 1700 },
             "user789": { "balance": 1500, "hold": 150, "available": 1300 },
-            "user1": { "balance": 10000, "hold": 1000, "available": 9000 },
-            "user2": { "balance": 5000, "hold": 300, "available": 4700 },
-            "user3": { "balance": 1200, "hold": 150, "available": 1050 },
-            "user4": { "balance": 2500, "hold": 400, "available": 2100 },
-            "user5": { "balance": 8000, "hold": 200, "available": 7800 },
-            "user6": { "balance": 900, "hold": 50, "available": 850 },
-            "user7": { "balance": 3000, "hold": 100, "available": 2900 },
-            "user8": { "balance": 25000, "hold": 5000, "available": 20000 },
-            "user9": { "balance": 4500, "hold": 500, "available": 4000 },
-            "user10": { "balance": 10000, "hold": 500, "available": 9500 },
-            "user11": { "balance": 2000, "hold": 100, "available": 1900 },
-            "user12": { "balance": 3500, "hold": 200, "available": 3300 },
-            "user13": { "balance": 5000, "hold": 1000, "available": 4000 },
-            "user14": { "balance": 1000, "hold": 200, "available": 800 },
-            "user15": { "balance": 6000, "hold": 600, "available": 5400 },
-            "user16": { "balance": 7000, "hold": 300, "available": 6700 },
-            "user17": { "balance": 1500, "hold": 100, "available": 1400 },
-            "user18": { "balance": 30000, "hold": 2000, "available": 28000 },
-            "user19": { "balance": 4000, "hold": 300, "available": 3700 },
-            "user20": { "balance": 8500, "hold": 1000, "available": 7500 }
+            // 其他用戶資料
         };
 
         // 查詢餘額功能
@@ -252,32 +229,36 @@
             // 顯示查詢進度條
             progressBarContainer.style.display = "block";
             progressBar.style.width = "0%";
-            let progress = 0;
-            let progressInterval = setInterval(function() {
-                if (progress < 100) {
-                    progress += 5;
-                    progressBar.style.width = progress + "%";
-                } else {
-                    clearInterval(progressInterval);
-                }
-            }, 50);
 
-            // 等待一段時間後顯示餘額結果
-            setTimeout(function() {
-                if (balanceData[userId]) {
-                    const data = balanceData[userId];
-                    totalBalance.innerText = "總餘額：NT$ " + data.balance;
-                    holdAmount.innerText = "暫時冻结：NT$ " + data.hold;
-                    availableBalance.innerText = "可用餘額：NT$ " + data.available;
-                    const progressWidth = (data.available / data.balance) * 100;
-                    balanceProgress.style.width = progressWidth + "%";
-                    balanceContainer.style.display = "block";
-                } else {
-                    alert("無此用戶ID");
-                    progressBarContainer.style.display = "none";
+            let progress = 0;
+            let interval = setInterval(() => {
+                progress += 10;
+                progressBar.style.width = `${progress}%`;
+
+                if (progress === 100) {
+                    clearInterval(interval);
+
+                    // 顯示查詢結果
+                    if (balanceData[userId]) {
+                        const userBalance = balanceData[userId];
+                        const holdPercentage = (userBalance.hold / userBalance.balance) * 100;
+                        const availablePercentage = (userBalance.available / userBalance.balance) * 100;
+
+                        totalBalance.innerHTML = `總餘額：${userBalance.balance} 元`;
+                        holdAmount.innerHTML = `保留款：${userBalance.hold} 元`;
+                        availableBalance.innerHTML = `可用餘額：${userBalance.available} 元`;
+
+                        balanceProgress.style.width = `${availablePercentage}%`;
+                        balanceProgress.style.backgroundColor = "#FFD700"; // 金色
+                        balanceContainer.style.display = "block";
+                    } else {
+                        totalBalance.innerHTML = "查無此用戶ID";
+                        balanceContainer.style.display = "block";
+                    }
                 }
-            }, 1500);
+            }, 100); // 每100毫秒更新一次進度
         }
     </script>
+
 </body>
 </html>
