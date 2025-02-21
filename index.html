@@ -16,10 +16,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: 100%;
             flex-direction: column;
-            overflow-y: auto;
-            padding: 0 20px;
+            overflow-y: auto; /* 允許滾動 */
         }
 
         /* 主要容器 */
@@ -90,22 +89,54 @@
             display: none;
             margin-top: 20px;
             font-size: 24px;
-            color: #FFD700;
+            color: white;
         }
 
         .spinner {
+            position: relative;
             display: inline-block;
-            width: 30px;
-            height: 30px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            border: 4px solid #fff;
-            border-top: 4px solid #FFD700;
-            animation: spin 1s linear infinite;
+            border: 5px solid transparent;
+            border-top: 5px solid #FFD700;
+            border-right: 5px solid #ff007f;
+            border-bottom: 5px solid #7fff00;
+            animation: rotate 1.5s linear infinite, colorShift 3s ease-in-out infinite;
         }
 
-        @keyframes spin {
+        /* 彩色閃爍動畫 */
+        @keyframes rotate {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+
+        @keyframes colorShift {
+            0% {
+                border-top-color: #FFD700;
+                border-right-color: #ff007f;
+                border-bottom-color: #7fff00;
+            }
+            25% {
+                border-top-color: #ff007f;
+                border-right-color: #FFD700;
+                border-bottom-color: #7fff00;
+            }
+            50% {
+                border-top-color: #7fff00;
+                border-right-color: #ff007f;
+                border-bottom-color: #FFD700;
+            }
+            75% {
+                border-top-color: #7fff00;
+                border-right-color: #FFD700;
+                border-bottom-color: #ff007f;
+            }
+            100% {
+                border-top-color: #FFD700;
+                border-right-color: #ff007f;
+                border-bottom-color: #7fff00;
+            }
         }
 
         /* 查詢進度條 */
