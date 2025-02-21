@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NR Pay v3.73</title>
+    <title>NR PAY 4.8.1</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         /* 背景設置 */
@@ -12,29 +12,37 @@
             font-family: 'Arial', sans-serif;
             color: white;
             text-align: center;
+            margin: 0;
+            padding: 0;
         }
 
-        /* 登入卡片 */
+        /* 登入容器 */
         .login-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
+            padding: 20px;
         }
 
+        /* 登入卡片 */
         .login-box {
             background-color: #1a1a1a;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
-            width: 300px;
+            width: 100%;
+            max-width: 350px;
         }
 
         .login-box h2 {
             margin-bottom: 20px;
+            font-size: 1.8rem;
+            font-weight: bold;
         }
 
+        /* 輸入框 */
         .input-group {
             position: relative;
             margin-bottom: 15px;
@@ -42,13 +50,19 @@
 
         .input-group input {
             width: 100%;
-            padding: 10px;
+            max-width: 100%; /* 確保輸入框不會超出容器範圍 */
+            padding: 12px;
             padding-left: 35px;
             border: none;
             border-radius: 5px;
             background-color: #333;
             color: white;
             outline: none;
+            transition: background-color 0.3s;
+        }
+
+        .input-group input:focus {
+            background-color: #444;
         }
 
         .input-group i {
@@ -59,31 +73,18 @@
             color: #ccc;
         }
 
-        /* 記住密碼與顯示密碼 */
-        .options {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            color: #ccc;
-            margin-bottom: 15px;
-        }
-
-        .options input {
-            margin-right: 5px;
-        }
-
         /* 按鈕樣式 */
         .btn {
             display: block;
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin-bottom: 10px;
             border: none;
             border-radius: 5px;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.3s;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
         .btn-green {
@@ -93,6 +94,7 @@
 
         .btn-green:hover {
             background-color: #00994d;
+            transform: scale(1.05);
         }
 
         .btn-blue {
@@ -102,6 +104,7 @@
 
         .btn-blue:hover {
             background-color: #0056b3;
+            transform: scale(1.05);
         }
 
         /* 分隔線 */
@@ -124,9 +127,9 @@
             font-size: 30px;
             color: #fff;
             background-color: #222;
-            padding: 10px;
+            padding: 12px;
             border-radius: 50%;
-            transition: 0.3s;
+            transition: background-color 0.3s;
         }
 
         .social-icons a:hover {
@@ -139,30 +142,62 @@
             font-size: 0.8rem;
             color: #ccc;
         }
+
+        .footer p {
+            margin: 0;
+        }
+
+        /* 進度條 */
+        .progress-bar-container {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: #444;
+            height: 20px;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar span {
+            display: block;
+            height: 100%;
+            background-color: #00cc66;
+            width: 0%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: width 2s;
+        }
+
     </style>
 </head>
 <body>
 
     <div class="login-container">
         <div class="login-box">
-            <h2>NR Pay v3.73</h2>
+            <h2>NR PAY 4.8.1</h2>
             
             <!-- 用戶ID輸入 -->
             <div class="input-group">
                 <i class="fas fa-user"></i>
-                <input type="text" placeholder="用戶ID">
-            </div>
-
-            <!-- 記住密碼與顯示密碼 -->
-            <div class="options">
-                <label><input type="checkbox"> Remember</label>
-                <label><input type="checkbox"> Show Pass</label>
+                <input type="text" id="userId" placeholder="用戶ID">
             </div>
 
             <!-- 登入按鈕 -->
-            <button class="btn btn-green"><i class="fas fa-sign-in-alt"></i> 登入</button>
+            <button class="btn btn-green" id="loginBtn"><i class="fas fa-sign-in-alt"></i> 登入</button>
             <div class="divider">or</div>
             <button class="btn btn-blue"><i class="fas fa-user-cog"></i> 訪客登入</button>
+
+            <!-- 查詢餘額後的進度條 -->
+            <div class="progress-bar-container" id="progressContainer">
+                <div class="progress-bar">
+                    <span id="progress"></span>
+                </div>
+            </div>
 
             <!-- 社交媒體按鈕 -->
             <div class="social-icons">
@@ -181,6 +216,34 @@
             <p>新融國際科技，禁止轉售、租借或破解</p>
         </div>
     </div>
+
+    <script>
+        // 模擬用戶登入邏輯
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            const userId = document.getElementById('userId').value;
+            const correctUserId = 'admin';  // 這是測試用的用戶ID，你可以換成其他ID
+            
+            if (userId === correctUserId) {
+                alert('登入成功！');
+                
+                // 顯示進度條
+                document.getElementById('progressContainer').style.display = 'block';
+                
+                let progress = 0;
+                let interval = setInterval(function() {
+                    progress += 10;
+                    document.getElementById('progress').style.width = progress + '%';
+                    
+                    if (progress >= 100) {
+                        clearInterval(interval);
+                        alert('查詢餘額完成！');
+                    }
+                }, 500);
+            } else {
+                alert('用戶ID錯誤，請再試一次。');
+            }
+        });
+    </script>
 
 </body>
 </html>
