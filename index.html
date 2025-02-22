@@ -6,6 +6,7 @@
     <title>NR PAY 8.2.9</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
+        /* 保持原本的樣式 */
         body {
             margin: 0;
             padding: 0;
@@ -20,7 +21,7 @@
         }
 
         .login-box {
-            background-color: rgba(0, 0, 0, 0.85);
+            background-color: rgba(0, 0, 0, 0.9);
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(255, 215, 0, 0.5);
@@ -37,7 +38,6 @@
         }
 
         .input-group {
-            position: relative;
             margin-bottom: 15px;
         }
 
@@ -52,15 +52,6 @@
             text-align: center;
         }
 
-        .toggle-password {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #FFD700;
-        }
-
         .btn {
             width: 100%;
             padding: 12px;
@@ -71,11 +62,6 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn:hover {
-            background: linear-gradient(135deg, #ff007f, #FFD700);
         }
 
         .error-message {
@@ -94,14 +80,28 @@
             box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3);
         }
 
-        .balance-total, .balance-available, .balance-reserved {
+        .balance-title {
             font-size: 1.2rem;
-            font-weight: bold;
+            margin-bottom: 10px;
         }
 
-        .balance-total { color: cyan; }
-        .balance-available { color: lime; }
-        .balance-reserved { color: red; }
+        .balance-total {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: cyan;
+        }
+
+        .balance-available {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: lime;
+        }
+
+        .balance-reserved {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: red;
+        }
 
         /* 進度條 */
         .progress-bar {
@@ -111,7 +111,6 @@
             border-radius: 5px;
             overflow: hidden;
             margin-top: 10px;
-            position: relative;
         }
 
         .progress-fill {
@@ -119,14 +118,12 @@
             transition: width 0.5s ease-in-out;
         }
 
-        .reserved-bar { background-color: red; }
-        .available-bar { background-color: lime; }
+        .reserved-bar {
+            background-color: red;
+        }
 
-        /* 語言切換 */
-        .language-switch {
-            margin-top: 15px;
-            cursor: pointer;
-            color: #FFD700;
+        .available-bar {
+            background-color: lime;
         }
 
     </style>
@@ -134,7 +131,7 @@
 <body>
 
     <div class="login-box">
-        <h2 id="title">NR PAY 8.2.9</h2>
+        <h2>NR PAY 8.2.9</h2>
 
         <div class="input-group">
             <input type="text" id="userId" placeholder="輸入用戶ID">
@@ -142,31 +139,33 @@
 
         <div class="input-group">
             <input type="password" id="password" placeholder="輸入密碼">
-            <i class="fa fa-eye toggle-password" onclick="togglePassword()"></i>
         </div>
 
         <button class="btn" onclick="checkBalance()">登入</button>
 
         <div id="errorMessage" class="error-message"></div>
 
+        <!-- 餘額顯示區塊 -->
         <div class="balance-container" id="balanceContainer">
-            <div class="balance-total" id="totalBalance"></div>
-            <div class="balance-available" id="availableBalance"></div>
-            <div class="balance-reserved" id="reservedBalance"></div>
+            <div class="balance-title">帳戶餘額</div>
+            <div class="balance-total" id="totalBalance">總餘額: $0</div>
+            <div class="balance-available" id="availableBalance">可用餘額: $0</div>
+            <div class="balance-reserved" id="reservedBalance">保留款: $0</div>
+
+            <!-- 進度條 -->
             <div class="progress-bar">
                 <div class="progress-fill available-bar" id="availableBar" style="width: 0%;"></div>
                 <div class="progress-fill reserved-bar" id="reservedBar" style="width: 0%;"></div>
             </div>
         </div>
-
-        <div class="language-switch" onclick="switchLanguage()">🌐 切換語言</div>
     </div>
 
     <script>
         const balanceData = {
             "ECX": { "balance": 15388, "available": 15388, "password": "A4uu7014" },
-            "110168": { "balance": 9999, "available": 9999, "password": "980814" }
-            "0906752358": { "balance": 9999, "available": 9999, "password": "19980814" }
+            "110168": { "balance": 9999, "available": 9999, "password": "980814" },
+            "user789": { "balance": 1500, "available": 1300, "password": "user789" },
+            "user1": { "balance": 10000, "available": 9000, "password": "user1" }
         };
 
         function checkBalance() {
@@ -175,7 +174,7 @@
             const errorMessage = document.getElementById("errorMessage");
             const balanceContainer = document.getElementById("balanceContainer");
 
-            errorMessage.textContent = "";
+            errorMessage.textContent = ""; // 清空錯誤訊息
 
             if (!userId || !password) {
                 errorMessage.textContent = "請輸入用戶ID和密碼！";
@@ -184,30 +183,26 @@
             }
 
             if (balanceData[userId] && balanceData[userId].password === password) {
-                localStorage.setItem("userId", userId);
-                localStorage.setItem("password", password);
+                const totalBalance = balanceData[userId].balance;
+                const availableBalance = balanceData[userId].available;
+                const reservedBalance = totalBalance - availableBalance;
 
-                const total = balanceData[userId].balance;
-                const available = balanceData[userId].available;
-                const reserved = total - available;
+                document.getElementById("totalBalance").textContent = `總餘額: $${totalBalance}`;
+                document.getElementById("availableBalance").textContent = `可用餘額: $${availableBalance}`;
+                document.getElementById("reservedBalance").textContent = `保留款: $${reservedBalance}`;
 
-                document.getElementById("totalBalance").textContent = `總餘額: $${total}`;
-                document.getElementById("availableBalance").textContent = `可用餘額: $${available}`;
-                document.getElementById("reservedBalance").textContent = `保留款: $${reserved}`;
+                // 計算比例
+                const availablePercentage = (availableBalance / totalBalance) * 100;
+                const reservedPercentage = 100 - availablePercentage;
 
-                document.getElementById("availableBar").style.width = `${(available / total) * 100}%`;
-                document.getElementById("reservedBar").style.width = `${(reserved / total) * 100}%`;
+                document.getElementById("availableBar").style.width = `${availablePercentage}%`;
+                document.getElementById("reservedBar").style.width = `${reservedPercentage}%`;
 
                 balanceContainer.style.display = "block";
             } else {
                 errorMessage.textContent = "用戶ID或密碼錯誤！";
                 balanceContainer.style.display = "none";
             }
-        }
-
-        function togglePassword() {
-            const passField = document.getElementById("password");
-            passField.type = passField.type === "password" ? "text" : "password";
         }
     </script>
 
