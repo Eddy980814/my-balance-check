@@ -6,12 +6,12 @@
     <title>NR PAY 8.2.9</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        /* 保持原本的樣式 */
+        /* 全局設置 */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #000;
+            background-color: #000000; /* 背景改成黑色 */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -20,36 +20,86 @@
             overflow: hidden;
         }
 
+        /* 流星背景 */
+        .background-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .meteor {
+            position: absolute;
+            width: 3px;
+            height: 3px; /* 減少流星大小 */
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: meteor-fall 1s linear infinite; /* 加快流星速度 */
+        }
+
+        @keyframes meteor-fall {
+            0% {
+                transform: translateY(-100px) translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) translateX(100px); /* 流星隨機掉落 */
+                opacity: 0;
+            }
+        }
+
+        /* 控制流星出現頻率 */
+        .meteor:nth-child(odd) {
+            animation-duration: 1s;
+            animation-delay: 0.2s;
+        }
+
+        .meteor:nth-child(even) {
+            animation-duration: 1.2s;
+            animation-delay: 0.4s;
+        }
+
+        /* 登入框 */
         .login-box {
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.7);
             padding: 40px;
             border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             text-align: center;
             width: 100%;
             max-width: 400px;
             position: relative;
+            z-index: 10;
         }
 
         .login-box h2 {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             font-size: 2rem;
             color: #FFD700;
+            font-weight: bold;
         }
 
         .input-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .input-group input {
             width: 100%;
-            padding: 12px;
+            padding: 12px 20px;
             font-size: 16px;
             border-radius: 8px;
             border: 2px solid #444;
-            background-color: #222;
+            outline: none;
+            background-color: #333;
             color: #fff;
-            text-align: center;
+        }
+
+        .input-group input:focus {
+            border-color: #FFD700;
         }
 
         .btn {
@@ -64,103 +114,104 @@
             cursor: pointer;
         }
 
+        /* 版本號 */
+        .version {
+            font-size: 0.8rem;
+            color: #FFD700;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        /* 重設密碼 */
+        .reset-password-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .reset-password-btn {
+            color: #FFD700;
+            background: none;
+            border: none;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        /* 錯誤提示 */
         .error-message {
             color: red;
+            font-size: 0.9rem;
             margin-top: 10px;
         }
 
-        /* 餘額區塊 */
-        .balance-container {
-            display: none;
-            text-align: center;
+        /* 社群連結 */
+        .social-links {
             margin-top: 20px;
-            padding: 15px;
-            background-color: rgba(0, 0, 0, 0.8);
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3);
         }
 
-        .balance-title {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+        .social-links a {
+            font-size: 2rem;
+            color: #FFD700;
+            margin: 0 10px;
+            text-decoration: none;
         }
 
-        .balance-total {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: cyan;
-        }
-
-        .balance-available {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: lime;
-        }
-
-        .balance-reserved {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: red;
-        }
-
-        /* 進度條 */
-        .progress-bar {
-            width: 100%;
-            height: 10px;
-            background-color: #555;
-            border-radius: 5px;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            transition: width 0.5s ease-in-out;
-        }
-
-        .reserved-bar {
-            background-color: red;
-        }
-
-        .available-bar {
-            background-color: lime;
+        .social-links a:hover {
+            color: #ff007f;
         }
 
     </style>
 </head>
 <body>
 
+    <div class="background-shapes">
+        <!-- 流星元素 -->
+        <div class="meteor" style="top: 10%; left: 20%; animation-delay: 0s;"></div>
+        <div class="meteor" style="top: 30%; left: 40%; animation-delay: 1s;"></div>
+        <div class="meteor" style="top: 50%; left: 60%; animation-delay: 0.5s;"></div>
+        <div class="meteor" style="top: 70%; left: 80%; animation-delay: 1.2s;"></div>
+        <div class="meteor" style="top: 10%; left: 50%; animation-delay: 2s;"></div>
+    </div>
+
+    <!-- 登入框 -->
     <div class="login-box">
         <h2>NR PAY 8.2.9</h2>
 
+        <!-- 歡迎訊息 -->
+        <div id="welcomeMessage" style="color: #FFD700; margin-bottom: 20px;"></div>
+
+        <!-- 用戶ID輸入框 -->
         <div class="input-group">
-            <input type="text" id="userId" placeholder="輸入用戶ID">
+            <input type="text" id="userId" placeholder="輸入用戶ID" maxlength="20">
         </div>
 
+        <!-- 密碼輸入框 -->
         <div class="input-group">
-            <input type="password" id="password" placeholder="輸入密碼">
+            <input type="password" id="password" placeholder="輸入密碼" maxlength="20">
         </div>
 
+        <!-- 登入按鈕 -->
         <button class="btn" onclick="checkBalance()">登入</button>
 
+        <!-- 重設密碼按鈕 -->
+        <div class="reset-password-container">
+            <button class="reset-password-btn" onclick="resetPassword()">重設密碼</button>
+        </div>
+
+        <!-- 錯誤訊息顯示 -->
         <div id="errorMessage" class="error-message"></div>
 
-        <!-- 餘額顯示區塊 -->
-        <div class="balance-container" id="balanceContainer">
-            <div class="balance-title">帳戶餘額</div>
-            <div class="balance-total" id="totalBalance">總餘額: $0</div>
-            <div class="balance-available" id="availableBalance">可用餘額: $0</div>
-            <div class="balance-reserved" id="reservedBalance">保留款: $0</div>
+        <!-- 版本號 -->
+        <div class="version">版本 8.2.9</div>
 
-            <!-- 進度條 -->
-            <div class="progress-bar">
-                <div class="progress-fill available-bar" id="availableBar" style="width: 0%;"></div>
-                <div class="progress-fill reserved-bar" id="reservedBar" style="width: 0%;"></div>
-            </div>
+        <!-- 社群媒體連結 -->
+        <div class="social-links">
+            <a href="https://www.instagram.com/1xyzzz_x?igsh=Z203MHcyaHRrdnpt&utm_source=qr" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="https://discord.gg/nXBxGYSR" target="_blank" class="social-icon"><i class="fab fa-discord"></i></a>
         </div>
     </div>
 
     <script>
+        // 模擬資料庫資料
         const balanceData = {
             "ECX": { "balance": 15388, "available": 15388, "password": "A4uu7014" },
             "110168": { "balance": 9999, "available": 9999, "password": "980814" },
@@ -168,40 +219,65 @@
             "user1": { "balance": 10000, "available": 9000, "password": "user1" }
         };
 
+        // 歡迎訊息顯示
+        function showWelcomeMessage(userId) {
+            const welcomeMessage = document.getElementById("welcomeMessage");
+            if (userId) {
+                welcomeMessage.textContent = `歡迎，${userId}！`;
+            }
+        }
+
+        // 顯示錯誤訊息
+        function showErrorMessage(message) {
+            const errorMessage = document.getElementById("errorMessage");
+            errorMessage.textContent = message;
+        }
+
+        // 清除錯誤訊息
+        function clearErrorMessage() {
+            const errorMessage = document.getElementById("errorMessage");
+            errorMessage.textContent = "";
+        }
+
+        // 查詢餘額
         function checkBalance() {
             const userId = document.getElementById("userId").value;
             const password = document.getElementById("password").value;
-            const errorMessage = document.getElementById("errorMessage");
-            const balanceContainer = document.getElementById("balanceContainer");
 
-            errorMessage.textContent = ""; // 清空錯誤訊息
+            clearErrorMessage(); // 清除錯誤訊息
 
             if (!userId || !password) {
-                errorMessage.textContent = "請輸入用戶ID和密碼！";
-                balanceContainer.style.display = "none";
+                showErrorMessage("請填寫用戶ID和密碼！");
                 return;
             }
 
             if (balanceData[userId] && balanceData[userId].password === password) {
+                // 顯示歡迎訊息
+                showWelcomeMessage(userId);
+
                 const totalBalance = balanceData[userId].balance;
                 const availableBalance = balanceData[userId].available;
-                const reservedBalance = totalBalance - availableBalance;
 
-                document.getElementById("totalBalance").textContent = `總餘額: $${totalBalance}`;
-                document.getElementById("availableBalance").textContent = `可用餘額: $${availableBalance}`;
-                document.getElementById("reservedBalance").textContent = `保留款: $${reservedBalance}`;
-
-                // 計算比例
-                const availablePercentage = (availableBalance / totalBalance) * 100;
-                const reservedPercentage = 100 - availablePercentage;
-
-                document.getElementById("availableBar").style.width = `${availablePercentage}%`;
-                document.getElementById("reservedBar").style.width = `${reservedPercentage}%`;
-
-                balanceContainer.style.display = "block";
+                // 顯示金額
+                alert(`歡迎 ${userId}\n總餘額：${totalBalance} 元\n可用餘額：${availableBalance} 元`);
             } else {
-                errorMessage.textContent = "用戶ID或密碼錯誤！";
-                balanceContainer.style.display = "none";
+                showErrorMessage("用戶ID或密碼錯誤！");
+            }
+        }
+
+        // 重設密碼
+        function resetPassword() {
+            const userId = document.getElementById("userId").value;
+            if (balanceData[userId]) {
+                const newPassword = prompt("請輸入新密碼：");
+                if (newPassword && newPassword.length >= 6) {
+                    balanceData[userId].password = newPassword;
+                    alert("密碼已成功重設！");
+                } else {
+                    alert("新密碼必須至少 6 位字符！");
+                }
+            } else {
+                showErrorMessage("查無此用戶ID！");
             }
         }
     </script>
