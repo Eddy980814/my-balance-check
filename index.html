@@ -6,12 +6,11 @@
     <title>NR PAY 8.2.9</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        /* 全局設置 */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #000000; /* 黑色背景 */
+            background-color: #000;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -20,35 +19,8 @@
             overflow: hidden;
         }
 
-        /* 流星背景 */
-        .background-shapes {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .meteor {
-            position: absolute;
-            width: 3px;
-            height: 3px; /* 減小流星大小 */
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            animation: meteor-fall 1s linear infinite;
-        }
-
-        @keyframes meteor-fall {
-            0% { transform: translateY(-100px) translateX(0); opacity: 1; }
-            100% { transform: translateY(100vh) translateX(100px); opacity: 0; }
-        }
-
-        /* 登入框 */
         .login-box {
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.85);
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(255, 215, 0, 0.5);
@@ -56,22 +28,17 @@
             width: 100%;
             max-width: 400px;
             position: relative;
-            z-index: 10;
         }
 
         .login-box h2 {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             font-size: 2rem;
             color: #FFD700;
-            font-weight: bold;
         }
 
         .input-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            margin-bottom: 20px;
+            position: relative;
+            margin-bottom: 15px;
         }
 
         .input-group input {
@@ -80,14 +47,18 @@
             font-size: 16px;
             border-radius: 8px;
             border: 2px solid #444;
-            outline: none;
-            background-color: #333;
+            background-color: #222;
             color: #fff;
             text-align: center;
         }
 
-        .input-group input:focus {
-            border-color: #FFD700;
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #FFD700;
         }
 
         .btn {
@@ -100,134 +71,143 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            margin-top: 10px;
+            transition: 0.3s;
         }
 
-        .version {
-            font-size: 0.8rem;
-            color: #FFD700;
-            margin-top: 20px;
-            font-weight: bold;
-        }
-
-        .reset-password-container {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .reset-password-btn {
-            color: #FFD700;
-            background: none;
-            border: none;
-            text-decoration: underline;
-            cursor: pointer;
+        .btn:hover {
+            background: linear-gradient(135deg, #ff007f, #FFD700);
         }
 
         .error-message {
             color: red;
-            font-size: 0.9rem;
             margin-top: 10px;
         }
 
-        /* 社群連結 */
-        .social-links {
+        /* 餘額區塊 */
+        .balance-container {
+            display: none;
+            text-align: center;
             margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3);
         }
 
-        .social-links a {
-            font-size: 2rem;
+        .balance-total, .balance-available, .balance-reserved {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .balance-total { color: cyan; }
+        .balance-available { color: lime; }
+        .balance-reserved { color: red; }
+
+        /* 進度條 */
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #555;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .reserved-bar { background-color: red; }
+        .available-bar { background-color: lime; }
+
+        /* 語言切換 */
+        .language-switch {
+            margin-top: 15px;
+            cursor: pointer;
             color: #FFD700;
-            margin: 0 10px;
-            text-decoration: none;
         }
 
-        .social-links a:hover {
-            color: #ff007f;
-        }
     </style>
 </head>
 <body>
 
-    <div class="background-shapes">
-        <div class="meteor" style="top: 10%; left: 20%;"></div>
-        <div class="meteor" style="top: 30%; left: 40%;"></div>
-        <div class="meteor" style="top: 50%; left: 60%;"></div>
-        <div class="meteor" style="top: 70%; left: 80%;"></div>
-        <div class="meteor" style="top: 10%; left: 50%;"></div>
-    </div>
-
-    <!-- 登入框 -->
     <div class="login-box">
-        <h2>NR PAY 8.2.9</h2>
-
-        <!-- 歡迎訊息 -->
-        <div id="welcomeMessage" style="color: #FFD700; margin-bottom: 20px;"></div>
+        <h2 id="title">NR PAY 8.2.9</h2>
 
         <div class="input-group">
-            <input type="text" id="userId" placeholder="輸入用戶ID" maxlength="20">
+            <input type="text" id="userId" placeholder="輸入用戶ID">
         </div>
 
         <div class="input-group">
-            <input type="password" id="password" placeholder="輸入密碼" maxlength="20">
+            <input type="password" id="password" placeholder="輸入密碼">
+            <i class="fa fa-eye toggle-password" onclick="togglePassword()"></i>
         </div>
 
         <button class="btn" onclick="checkBalance()">登入</button>
 
-        <div class="reset-password-container">
-            <button class="reset-password-btn" onclick="resetPassword()">重設密碼</button>
-        </div>
-
         <div id="errorMessage" class="error-message"></div>
 
-        <div class="version">版本 8.2.9</div>
-
-        <div class="social-links">
-            <a href="https://www.instagram.com/1xyzzz_x?igsh=Z203MHcyaHRrdnpt&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://discord.gg/nXBxGYSR" target="_blank"><i class="fab fa-discord"></i></a>
+        <div class="balance-container" id="balanceContainer">
+            <div class="balance-total" id="totalBalance"></div>
+            <div class="balance-available" id="availableBalance"></div>
+            <div class="balance-reserved" id="reservedBalance"></div>
+            <div class="progress-bar">
+                <div class="progress-fill available-bar" id="availableBar" style="width: 0%;"></div>
+                <div class="progress-fill reserved-bar" id="reservedBar" style="width: 0%;"></div>
+            </div>
         </div>
+
+        <div class="language-switch" onclick="switchLanguage()">🌐 切換語言</div>
     </div>
 
     <script>
         const balanceData = {
             "ECX": { "balance": 15388, "available": 15388, "password": "A4uu7014" },
-            "110168": { "balance": 9999, "available": 9999, "password": "980814" },
-            "user789": { "balance": 1500, "available": 1300, "password": "user789" },
-            "user1": { "balance": 10000, "available": 9000, "password": "user1" }
+            "110168": { "balance": 9999, "available": 9999, "password": "980814" }
+            "0906752358": { "balance": 9999, "available": 9999, "password": "19980814" }
         };
-
-        function showWelcomeMessage(userId) {
-            document.getElementById("welcomeMessage").textContent = `歡迎，${userId}！`;
-        }
-
-        function showErrorMessage(message) {
-            document.getElementById("errorMessage").textContent = message;
-        }
-
-        function clearErrorMessage() {
-            document.getElementById("errorMessage").textContent = "";
-        }
 
         function checkBalance() {
             const userId = document.getElementById("userId").value;
             const password = document.getElementById("password").value;
+            const errorMessage = document.getElementById("errorMessage");
+            const balanceContainer = document.getElementById("balanceContainer");
 
-            clearErrorMessage();
+            errorMessage.textContent = "";
 
             if (!userId || !password) {
-                showErrorMessage("請填寫用戶ID和密碼！");
+                errorMessage.textContent = "請輸入用戶ID和密碼！";
+                balanceContainer.style.display = "none";
                 return;
             }
 
             if (balanceData[userId] && balanceData[userId].password === password) {
-                showWelcomeMessage(userId);
-                alert(`歡迎 ${userId}\n總餘額：${balanceData[userId].balance} 元\n可用餘額：${balanceData[userId].available} 元`);
+                localStorage.setItem("userId", userId);
+                localStorage.setItem("password", password);
+
+                const total = balanceData[userId].balance;
+                const available = balanceData[userId].available;
+                const reserved = total - available;
+
+                document.getElementById("totalBalance").textContent = `總餘額: $${total}`;
+                document.getElementById("availableBalance").textContent = `可用餘額: $${available}`;
+                document.getElementById("reservedBalance").textContent = `保留款: $${reserved}`;
+
+                document.getElementById("availableBar").style.width = `${(available / total) * 100}%`;
+                document.getElementById("reservedBar").style.width = `${(reserved / total) * 100}%`;
+
+                balanceContainer.style.display = "block";
             } else {
-                showErrorMessage("用戶ID或密碼錯誤！");
+                errorMessage.textContent = "用戶ID或密碼錯誤！";
+                balanceContainer.style.display = "none";
             }
         }
 
-        function resetPassword() {
-            alert("請聯繫客服重設密碼！");
+        function togglePassword() {
+            const passField = document.getElementById("password");
+            passField.type = passField.type === "password" ? "text" : "password";
         }
     </script>
 
