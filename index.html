@@ -146,23 +146,28 @@
     <tr><td>可用餘額</td><td class="amount" id="availableBalance"></td></tr>
     <tr><td>帳戶餘額</td><td class="amount" id="accountBalance"></td></tr>
   </table>
+  <!-- 積分系統 -->
+  <p><strong>積分：<span id="userPoints">0</span></strong></p>
+  <p>積分使用方式：</p>
+  <div class="btn-register" onclick="showPointsUsage()">查看積分使用方式</div>
 </div>
 
 <script>
 // 用戶資料
 const users = [
-  { id: "980814", phone: "0912345601", email: "user1@example.com", password: "980814", reserved: 110, pending: 55, frozen: 22, available: 520, accountBalance: 1050 },
-  { id: "1000000000002", phone: "0912345602", email: "user2@example.com", password: "pass0002", reserved: 120, pending: 60, frozen: 24, available: 540, accountBalance: 1100 },
-  { id: "1000000000003", phone: "0912345603", email: "user3@example.com", password: "pass0003", reserved: 130, pending: 65, frozen: 26, available: 560, accountBalance: 1150 },
-  { id: "1000000000004", phone: "0912345604", email: "user4@example.com", password: "pass0004", reserved: 140, pending: 70, frozen: 28, available: 580, accountBalance: 1200 },
-  { id: "1000000000005", phone: "0912345605", email: "user5@example.com", password: "pass0005", reserved: 150, pending: 75, frozen: 30, available: 600, accountBalance: 1250 },
-  // ... (補充剩餘用戶資料)
+  { id: "980814", phone: "0912345601", email: "user1@example.com", password: "980814", reserved: 110, pending: 55, frozen: 22, available: 520, accountBalance: 1050, points: 577 },
+  { id: "1000000000001", phone: "0912345601", email: "user1@example.com", password: "pass0001", reserved: 110, pending: 55, frozen: 22, available: 520, accountBalance: 1050, points: 100 },
+  { id: "1000000000002", phone: "0912345602", email: "user2@example.com", password: "pass0002", reserved: 120, pending: 60, frozen: 24, available: 540, accountBalance: 1100, points: 120 },
+  // ... (其他用戶資料)
 ];
+
+// 顯示積分使用方式通知
+function showPointsUsage() {
+  alert("積分由系統自動回饋，每積分等於一元，依此類推。如有任何疑問，請聯絡我們的客服中心。");
+}
 
 // 設定倒數時間，300秒（5分鐘）無操作自動登出
 let inactivityTime = 300; // 300秒
-
-// 開始計時
 let timer;
 
 function resetTimer() {
@@ -192,6 +197,7 @@ function login() {
     document.getElementById('frozenFunds').innerText = user.frozen;
     document.getElementById('availableBalance').innerText = user.available;
     document.getElementById('accountBalance').innerText = user.accountBalance;
+    document.getElementById('userPoints').innerText = user.points;
 
     // 開始計時
     resetTimer();
