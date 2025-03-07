@@ -154,12 +154,6 @@
     立即開設帳戶
   </div>
   <p style="font-size: 0.8em;">Register an account now.</p>
-
-  <!-- 積分功能顯示 -->
-  <p><strong>積分：<span id="userPoints">0</span></strong></p>
-  <p>積分使用方式：</p>
-  <div class="btn-register" onclick="showPointsUsage()">查看積分使用方式</div>
-  <p style="font-size: 0.8em;">Points: <span id="userPoints">0</span><br>Click to check point usage rules.</p>
 </div>
 
 <!-- 餘額查詢頁面 -->
@@ -177,12 +171,13 @@
     <tr><td>可用餘額</td><td class="amount" id="availableBalance">0</td></tr>
     <tr><td>帳戶餘額</td><td class="amount" id="accountBalance">0</td></tr>
   </table>
-  <p style="font-size: 0.8em;">Account Balance Information</p>
 
-  <!-- 积分使用方式 -->
+  <!-- 積分顯示 -->
+  <p><strong>積分：<span id="userPoints">0</span></strong></p>
   <p>積分使用方式：</p>
   <div class="btn-register" onclick="showPointsUsage()">查看積分使用方式</div>
-  <p style="font-size: 0.8em;">Click to check how to use points.</p>
+
+  <p style="font-size: 0.8em;">Points: <span id="userPoints">0</span><br>Click to check point usage rules.</p>
 </div>
 
 <script>
