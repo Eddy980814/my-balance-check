@@ -14,9 +14,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
       flex-direction: column;
-      overflow: hidden;
+      min-height: 100vh;
+      overflow-y: auto;
     }
 
     h1 {
@@ -138,24 +138,28 @@
 <body>
 
 <h1>新融科技 NR PAY</h1>
+<p style="text-align:center; font-size: 1em;">New Integration Technology NR PAY</p>
 
 <!-- 登入表單 -->
 <div id="login">
-  <input type="text" id="account" placeholder="請輸入用戶名 / 電話號碼 / 郵箱">
-  <input type="password" id="password" placeholder="請輸入密碼">
+  <input type="text" id="account" placeholder="請輸入用戶名 / 電話號碼 / 郵箱" />
+  <input type="password" id="password" placeholder="請輸入密碼" />
   <button onclick="login()">登入</button>
   <p id="loginStatus"></p>
   <p id="welcomeMessage">您好，您已登入成功</p>
+  <p style="font-size: 0.8em;">Hello, you have successfully logged in.</p>
   
   <!-- 立即開戶按鈕 -->
   <div class="btn-register" onclick="window.location.href='https://lin.ee/DQE1KNNV'">
     立即開設帳戶
   </div>
+  <p style="font-size: 0.8em;">Register an account now.</p>
 
   <!-- 積分功能顯示 -->
   <p><strong>積分：<span id="userPoints">0</span></strong></p>
   <p>積分使用方式：</p>
   <div class="btn-register" onclick="showPointsUsage()">查看積分使用方式</div>
+  <p style="font-size: 0.8em;">Points: <span id="userPoints">0</span><br>Click to check point usage rules.</p>
 </div>
 
 <!-- 餘額查詢頁面 -->
@@ -173,10 +177,12 @@
     <tr><td>可用餘額</td><td class="amount" id="availableBalance">0</td></tr>
     <tr><td>帳戶餘額</td><td class="amount" id="accountBalance">0</td></tr>
   </table>
+  <p style="font-size: 0.8em;">Account Balance Information</p>
 
   <!-- 积分使用方式 -->
   <p>積分使用方式：</p>
   <div class="btn-register" onclick="showPointsUsage()">查看積分使用方式</div>
+  <p style="font-size: 0.8em;">Click to check how to use points.</p>
 </div>
 
 <script>
@@ -225,7 +231,8 @@ function login() {
 <footer>
   © 2025 新融科技 NR PAY ｜ 版權所有<br>
   客服專線：05-3791191 ｜ 服務時間：08:00 - 21:30<br>
-  聯絡信箱：nrt.tw.2025@gmail.com
+  聯絡信箱：nrt.tw.2025@gmail.com<br>
+  <p style="font-size: 0.8em;">Customer Service Phone: 05-3791191 | Service Hours: 08:00 AM - 09:30 PM</p>
 </footer>
 
 </body>
