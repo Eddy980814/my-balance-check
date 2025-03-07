@@ -9,8 +9,8 @@
       margin: 0;
       padding: 0;
       font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: #e2e8f0;
+      background-color: #f8fafc;
+      color: #333;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -20,7 +20,7 @@
     }
 
     h1 {
-      font-size: 3em;
+      font-size: 2.5em;
       color: #38bdf8;
       margin-bottom: 20px;
       text-align: center;
@@ -28,21 +28,21 @@
     }
 
     #login {
-      background: rgba(0, 0, 0, 0.7);
-      padding: 40px;
+      background-color: #ffffff;
+      padding: 30px;
       border-radius: 12px;
       box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
-      width: 400px;
+      width: 80%;
+      max-width: 400px;
       text-align: center;
-      box-sizing: border-box;
     }
 
     input, button {
       width: 100%;
-      padding: 15px;
-      margin: 10px 0;
-      background-color: #2d3748;
-      color: #e2e8f0;
+      padding: 16px;
+      margin: 12px 0;
+      background-color: #edf2f7;
+      color: #333;
       border: 2px solid #38bdf8;
       border-radius: 8px;
       font-size: 16px;
@@ -78,10 +78,36 @@
       color: #38bdf8;
       font-size: 1.2em;
       margin-top: 20px;
-      text-shadow: 0 0 10px #38bdf8;
     }
 
-    /* 積分和立即開戶部分 */
+    /* 餘額查詢頁面 */
+    #balance {
+      display: none;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+      width: 80%;
+      max-width: 500px;
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+    td.amount {
+      color: #38bdf8;
+    }
+
+    /* 立即開戶按鈕 */
     .btn-register {
       background-color: #10b981;
       color: white;
@@ -97,28 +123,6 @@
       background-color: #059669;
     }
 
-    /* 餘額查詢 */
-    #balance {
-      display: none;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 40px;
-      border-radius: 12px;
-      width: 500px;
-      margin-top: 20px;
-    }
-    table {
-      width: 100%;
-      margin-top: 20px;
-      border-collapse: collapse;
-    }
-    th, td {
-      padding: 12px;
-      border-bottom: 1px solid #ddd;
-      text-align: left;
-    }
-    td.amount {
-      color: #38bdf8;
-    }
     footer {
       margin-top: 50px;
       padding: 20px;
@@ -147,11 +151,6 @@
   <div class="btn-register" onclick="window.location.href='https://lin.ee/DQE1KNNV'">
     立即開設帳戶
   </div>
-
-  <!-- 積分功能顯示 -->
-  <p><strong>積分：<span id="userPoints">0</span></strong></p>
-  <p>積分使用方式：</p>
-  <div class="btn-register" onclick="showPointsUsage()">查看積分使用方式</div>
 </div>
 
 <!-- 餘額查詢頁面 -->
@@ -169,14 +168,18 @@
     <tr><td>可用餘額</td><td class="amount" id="availableBalance">0</td></tr>
     <tr><td>帳戶餘額</td><td class="amount" id="accountBalance">0</td></tr>
   </table>
+
+  <!-- 积分使用方式 -->
+  <p>積分使用方式：</p>
+  <div class="btn-register" onclick="showPointsUsage()">查看積分使用方式</div>
 </div>
 
 <script>
 // 用戶資料模擬
 const users = [
-  { id: "1000000000001", phone: "0912345601", email: "user1@example.com", password: "pass0001", points: 100, reserved: 150, pending: 80, frozen: 50, available: 1000, accountBalance: 1200, currentTransactionAmount: 200, nextTransactionAmount: 150, securitiesAmount: 100, overdraftAmount: 200 },
+  { id: "980814", phone: "0912345601", email: "user1@example.com", password: "980814", points: 100, reserved: 150, pending: 80, frozen: 50, available: 1000, accountBalance: 1200, currentTransactionAmount: 200, nextTransactionAmount: 150, securitiesAmount: 100, overdraftAmount: 200 },
   { id: "1000000000002", phone: "0912345602", email: "user2@example.com", password: "pass0002", points: 150, reserved: 100, pending: 60, frozen: 30, available: 800, accountBalance: 900, currentTransactionAmount: 100, nextTransactionAmount: 120, securitiesAmount: 90, overdraftAmount: 150 },
-    { id: "980814", phone: "0912345602", email: "user2@example.com", password: "980814", points: 500, reserved: 0, pending: 2000, frozen: 0, available: 67800, accountBalance: 67800, currentTransactionAmount: 0, nextTransactionAmount: 0, securitiesAmount: 0, overdraftAmount: 0 },
+    { id: "100000000000", phone: "091234560", email: "user2@exampl.com", password: "pass000", points: 150, reserved: 100, pending: 60, frozen: 30, available: 800, accountBalance: 900, currentTransactionAmount: 100, nextTransactionAmount: 120, securitiesAmount: 90, overdraftAmount: 150 },
   // 更多用戶資料...
 ];
 
