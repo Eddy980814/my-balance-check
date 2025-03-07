@@ -2,15 +2,78 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>新融科技 NR PAY - 餘額查詢</title>
   <style>
-    body { background-color: white; font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-    h1 { color: #0066cc; margin-bottom: 20px; }
-    input, button { padding: 10px; margin: 5px; width: 250px; }
-    table { width: 90%; margin: 20px auto; border-collapse: collapse; }
-    th, td { padding: 10px; border: 1px solid #ccc; }
-    td.amount { color: blue; }
-    #login, #balance { display: none; }
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #e2e8f0;
+    }
+    h1 {
+      text-align: center;
+      color: #38bdf8;
+      margin-bottom: 30px;
+    }
+    #login, #balance {
+      max-width: 400px;
+      margin: 20px auto;
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+    }
+    input, button {
+      width: 100%;
+      padding: 14px;
+      margin: 12px 0;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      box-sizing: border-box;
+    }
+    input {
+      background-color: #334155;
+      color: #e2e8f0;
+    }
+    input:focus {
+      outline: 2px solid #38bdf8;
+    }
+    button {
+      background: #38bdf8;
+      color: #0f172a;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    button:hover {
+      background: #0ea5e9;
+      box-shadow: 0 0 10px #38bdf8;
+    }
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #334155;
+      text-align: left;
+    }
+    td.amount {
+      color: #38bdf8;
+    }
+    footer {
+      margin-top: 50px;
+      padding: 20px;
+      background: #0f172a;
+      color: #94a3b8;
+      font-size: 12px;
+      text-align: center;
+      line-height: 1.8;
+      border-top: 1px solid #334155;
+    }
   </style>
 </head>
 <body>
@@ -19,13 +82,13 @@
 
 <div id="login">
   <h2>登入系統</h2>
-  <input type="text" id="account" placeholder="用戶ID / 電話 / 信箱"><br>
-  <input type="password" id="password" placeholder="密碼"><br>
+  <input type="text" id="account" placeholder="用戶ID / 電話 / 信箱">
+  <input type="password" id="password" placeholder="密碼">
   <button onclick="login()">登入</button>
   <p id="loginStatus"></p>
 </div>
 
-<div id="balance">
+<div id="balance" style="display:none;">
   <h2>餘額查詢</h2>
   <p>查詢帳號：<span id="userId"></span></p>
   <table>
@@ -42,39 +105,47 @@
 </div>
 
 <script>
-  const users = [
-    // 以下是20組完整用戶資料（只貼前5組示範，剩下的自己填滿就好）
-    { id: "Wag0906752358", phone: "0906752358", email: "Wag123890@gmail.com", password: "Wag980814", reserved: 0, pending: 2000, frozen: 0, available: 23760, accountBalance: 23760 },
-    { id: "1000000000002", phone: "0912345602", email: "user2@example.com", password: "pass0002", reserved: 120, pending: 60, frozen: 24, available: 540, accountBalance: 1100 },
-    { id: "1000000000003", phone: "0912345603", email: "user3@example.com", password: "pass0003", reserved: 130, pending: 65, frozen: 26, available: 560, accountBalance: 1150 },
-    { id: "1000000000004", phone: "0912345604", email: "user4@example.com", password: "pass0004", reserved: 140, pending: 70, frozen: 28, available: 580, accountBalance: 1200 },
-    { id: "1000000000005", phone: "0912345605", email: "user5@example.com", password: "pass0005", reserved: 150, pending: 75, frozen: 30, available: 600, accountBalance: 1250 },
-    // ...請繼續補齊到第20組
-  ];
+const users = [
+  { id: "Wag0906752358", phone: "0906752358", email: "Wag123890@gmail.com", password: "Wag980814", reserved: 0, pending:2599, frozen: 0, available: 25635, accountBalance:25635 },
+  { id: "1000000000002", phone: "0912345602", email: "user2@example.com", password: "pass0002", reserved: 120, pending: 60, frozen: 24, available: 540, accountBalance: 1100 },
+  { id: "1000000000003", phone: "0912345603", email: "user3@example.com", password: "pass0003", reserved: 130, pending: 65, frozen: 26, available: 560, accountBalance: 1150 },
+  { id: "1000000000004", phone: "0912345604", email: "user4@example.com", password: "pass0004", reserved: 140, pending: 70, frozen: 28, available: 580, accountBalance: 1200 },
+  { id: "1000000000005", phone: "0912345605", email: "user5@example.com", password: "pass0005", reserved: 150, pending: 75, frozen: 30, available: 600, accountBalance: 1250 },
+  { id: "1000000000006", phone: "0912345606", email: "user6@example.com", password: "pass0006", reserved: 160, pending: 80, frozen: 32, available: 620, accountBalance: 1300 },
+  { id: "1000000000007", phone: "0912345607", email: "user7@example.com", password: "pass0007", reserved: 170, pending: 85, frozen: 34, available: 640, accountBalance: 1350 },
+  { id: "1000000000008", phone: "0912345608", email: "user8@example.com", password: "pass0008", reserved: 180, pending: 90, frozen: 36, available: 660, accountBalance: 1400 },
+  { id: "1000000000009", phone: "0912345609", email: "user9@example.com", password: "pass0009", reserved: 190, pending: 95, frozen: 38, available: 680, accountBalance: 1450 },
+  { id: "1000000000010", phone: "0912345610", email: "user10@example.com", password: "pass0010", reserved: 200, pending: 100, frozen: 40, available: 700, accountBalance: 1500 },
+  // ...繼續填滿到20組
+];
 
-  window.onload = () => {
-    document.getElementById("login").style.display = "block";
-  };
+function login() {
+  const account = document.getElementById('account').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const user = users.find(u =>
+    (u.id === account || u.phone === account || u.email === account) && u.password === password
+  );
 
-  function login() {
-    const account = document.getElementById('account').value.trim();
-    const password = document.getElementById('password').value.trim();
-    const user = users.find(u => (u.id === account || u.phone === account || u.email === account) && u.password === password);
-
-    if (user) {
-      document.getElementById('login').style.display = 'none';
-      document.getElementById('balance').style.display = 'block';
-      document.getElementById('userId').innerText = user.id;
-      document.getElementById('reservedFunds').innerText = user.reserved;
-      document.getElementById('pendingFunds').innerText = user.pending;
-      document.getElementById('frozenFunds').innerText = user.frozen;
-      document.getElementById('availableBalance').innerText = user.available;
-      document.getElementById('accountBalance').innerText = user.accountBalance;
-    } else {
-      document.getElementById('loginStatus').innerText = "登入失敗，帳號或密碼錯誤！";
-    }
+  if (user) {
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('balance').style.display = 'block';
+    document.getElementById('userId').innerText = user.id;
+    document.getElementById('reservedFunds').innerText = user.reserved;
+    document.getElementById('pendingFunds').innerText = user.pending;
+    document.getElementById('frozenFunds').innerText = user.frozen;
+    document.getElementById('availableBalance').innerText = user.available;
+    document.getElementById('accountBalance').innerText = user.accountBalance;
+  } else {
+    document.getElementById('loginStatus').innerText = "登入失敗，帳號或密碼錯誤！";
   }
+}
 </script>
+
+<footer>
+  © 2025 新融科技 NR PAY ｜ 版權所有<br>
+  客服專線：05-3791191 ｜ 服務時間：08:00 - 21:30<br>
+  聯絡信箱：nrt.tw.2025@gmail.com
+</footer>
 
 </body>
 </html>
