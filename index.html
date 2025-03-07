@@ -1,286 +1,80 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NR PAY 8.2.9</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <style>
-        /* 全局設置 */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #000000; /* 背景改成黑色 */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: #fff;
-            overflow: hidden;
-        }
-
-        /* 流星背景 */
-        .background-shapes {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .meteor {
-            position: absolute;
-            width: 3px;
-            height: 3px; /* 減少流星大小 */
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            animation: meteor-fall 1s linear infinite; /* 加快流星速度 */
-        }
-
-        @keyframes meteor-fall {
-            0% {
-                transform: translateY(-100px) translateX(0);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) translateX(100px); /* 流星隨機掉落 */
-                opacity: 0;
-            }
-        }
-
-        /* 控制流星出現頻率 */
-        .meteor:nth-child(odd) {
-            animation-duration: 1s;
-            animation-delay: 0.2s;
-        }
-
-        .meteor:nth-child(even) {
-            animation-duration: 1.2s;
-            animation-delay: 0.4s;
-        }
-
-        /* 登入框 */
-        .login-box {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            width: 100%;
-            max-width: 400px;
-            position: relative;
-            z-index: 10;
-        }
-
-        .login-box h2 {
-            margin-bottom: 30px;
-            font-size: 2rem;
-            color: #FFD700;
-            font-weight: bold;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 12px 20px;
-            font-size: 16px;
-            border-radius: 8px;
-            border: 2px solid #444;
-            outline: none;
-            background-color: #333;
-            color: #fff;
-        }
-
-        .input-group input:focus {
-            border-color: #FFD700;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #FFD700, #ff007f);
-            color: #333;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        /* 版本號 */
-        .version {
-            font-size: 0.8rem;
-            color: #FFD700;
-            margin-top: 20px;
-            font-weight: bold;
-        }
-
-        /* 重設密碼 */
-        .reset-password-container {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .reset-password-btn {
-            color: #FFD700;
-            background: none;
-            border: none;
-            text-decoration: underline;
-            cursor: pointer;
-        }
-
-        /* 錯誤提示 */
-        .error-message {
-            color: red;
-            font-size: 0.9rem;
-            margin-top: 10px;
-        }
-
-        /* 社群連結 */
-        .social-links {
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            font-size: 2rem;
-            color: #FFD700;
-            margin: 0 10px;
-            text-decoration: none;
-        }
-
-        .social-links a:hover {
-            color: #ff007f;
-        }
-
-    </style>
+  <meta charset="UTF-8">
+  <title>新融科技 NR PAY - 餘額查詢</title>
+  <style>
+    body { background-color: white; font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+    h1 { color: #0066cc; margin-bottom: 20px; }
+    input, button { padding: 10px; margin: 5px; width: 250px; }
+    table { width: 90%; margin: 20px auto; border-collapse: collapse; }
+    th, td { padding: 10px; border: 1px solid #ccc; }
+    td.amount { color: blue; }
+    #login, #balance { display: none; }
+  </style>
 </head>
 <body>
 
-    <div class="background-shapes">
-        <!-- 流星元素 -->
-        <div class="meteor" style="top: 10%; left: 20%; animation-delay: 0s;"></div>
-        <div class="meteor" style="top: 30%; left: 40%; animation-delay: 1s;"></div>
-        <div class="meteor" style="top: 50%; left: 60%; animation-delay: 0.5s;"></div>
-        <div class="meteor" style="top: 70%; left: 80%; animation-delay: 1.2s;"></div>
-        <div class="meteor" style="top: 10%; left: 50%; animation-delay: 2s;"></div>
-    </div>
+<h1>新融科技 NR PAY</h1>
 
-    <!-- 登入框 -->
-    <div class="login-box">
-        <h2>NR PAY 8.2.9</h2>
+<div id="login">
+  <h2>登入系統</h2>
+  <input type="text" id="account" placeholder="用戶ID / 電話 / 信箱"><br>
+  <input type="password" id="password" placeholder="密碼"><br>
+  <button onclick="login()">登入</button>
+  <p id="loginStatus"></p>
+</div>
 
-        <!-- 歡迎訊息 -->
-        <div id="welcomeMessage" style="color: #FFD700; margin-bottom: 20px;"></div>
+<div id="balance">
+  <h2>餘額查詢</h2>
+  <p>查詢帳號：<span id="userId"></span></p>
+  <table>
+    <tr><td>今交易票金額</td><td>0</td></tr>
+    <tr><td>次交易票金額</td><td>0</td></tr>
+    <tr><td>證交款圈存額</td><td>0</td></tr>
+    <tr><td>透支額度</td><td>0</td></tr>
+    <tr><td>保留款</td><td id="reservedFunds"></td></tr>
+    <tr><td>待處理款</td><td id="pendingFunds"></td></tr>
+    <tr><td>凍結款</td><td id="frozenFunds"></td></tr>
+    <tr><td>可用餘額</td><td class="amount" id="availableBalance"></td></tr>
+    <tr><td>帳戶餘額</td><td class="amount" id="accountBalance"></td></tr>
+  </table>
+</div>
 
-        <!-- 用戶ID輸入框 -->
-        <div class="input-group">
-            <input type="text" id="userId" placeholder="輸入用戶ID" maxlength="20">
-        </div>
+<script>
+  const users = [
+    // 以下是20組完整用戶資料（只貼前5組示範，剩下的自己填滿就好）
+    { id: "Wag0906752358", phone: "0906752358", email: "Wag123890@gmail.com", password: "Wag980814", reserved: 0, pending: 2000, frozen: 0, available: 23760, accountBalance: 23760 },
+    { id: "1000000000002", phone: "0912345602", email: "user2@example.com", password: "pass0002", reserved: 120, pending: 60, frozen: 24, available: 540, accountBalance: 1100 },
+    { id: "1000000000003", phone: "0912345603", email: "user3@example.com", password: "pass0003", reserved: 130, pending: 65, frozen: 26, available: 560, accountBalance: 1150 },
+    { id: "1000000000004", phone: "0912345604", email: "user4@example.com", password: "pass0004", reserved: 140, pending: 70, frozen: 28, available: 580, accountBalance: 1200 },
+    { id: "1000000000005", phone: "0912345605", email: "user5@example.com", password: "pass0005", reserved: 150, pending: 75, frozen: 30, available: 600, accountBalance: 1250 },
+    // ...請繼續補齊到第20組
+  ];
 
-        <!-- 密碼輸入框 -->
-        <div class="input-group">
-            <input type="password" id="password" placeholder="輸入密碼" maxlength="20">
-        </div>
+  window.onload = () => {
+    document.getElementById("login").style.display = "block";
+  };
 
-        <!-- 登入按鈕 -->
-        <button class="btn" onclick="checkBalance()">登入</button>
+  function login() {
+    const account = document.getElementById('account').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const user = users.find(u => (u.id === account || u.phone === account || u.email === account) && u.password === password);
 
-        <!-- 重設密碼按鈕 -->
-        <div class="reset-password-container">
-            <button class="reset-password-btn" onclick="resetPassword()">重設密碼</button>
-        </div>
-
-        <!-- 錯誤訊息顯示 -->
-        <div id="errorMessage" class="error-message"></div>
-
-        <!-- 版本號 -->
-        <div class="version">版本 8.2.9</div>
-
-        <!-- 社群媒體連結 -->
-        <div class="social-links">
-            <a href="https://www.instagram.com/1xyzzz_x?igsh=Z203MHcyaHRrdnpt&utm_source=qr" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
-            <a href="https://discord.gg/nXBxGYSR" target="_blank" class="social-icon"><i class="fab fa-discord"></i></a>
-        </div>
-    </div>
-
-    <script>
-        // 模擬資料庫資料
-        const balanceData = {
-            "ECX": { "balance": 15388, "available": 15388, "password": "A4uu7014" },
-            "110168": { "balance": 9999, "available": 9999, "password": "980814" },
-            "user789": { "balance": 1500, "available": 1300, "password": "user789" },
-            "user1": { "balance": 10000, "available": 9000, "password": "user1" }
-        };
-
-        // 歡迎訊息顯示
-        function showWelcomeMessage(userId) {
-            const welcomeMessage = document.getElementById("welcomeMessage");
-            if (userId) {
-                welcomeMessage.textContent = `歡迎，${userId}！`;
-            }
-        }
-
-        // 顯示錯誤訊息
-        function showErrorMessage(message) {
-            const errorMessage = document.getElementById("errorMessage");
-            errorMessage.textContent = message;
-        }
-
-        // 清除錯誤訊息
-        function clearErrorMessage() {
-            const errorMessage = document.getElementById("errorMessage");
-            errorMessage.textContent = "";
-        }
-
-        // 查詢餘額
-        function checkBalance() {
-            const userId = document.getElementById("userId").value;
-            const password = document.getElementById("password").value;
-
-            clearErrorMessage(); // 清除錯誤訊息
-
-            if (!userId || !password) {
-                showErrorMessage("請填寫用戶ID和密碼！");
-                return;
-            }
-
-            if (balanceData[userId] && balanceData[userId].password === password) {
-                // 顯示歡迎訊息
-                showWelcomeMessage(userId);
-
-                const totalBalance = balanceData[userId].balance;
-                const availableBalance = balanceData[userId].available;
-
-                // 顯示金額
-                alert(`歡迎 ${userId}\n總餘額：${totalBalance} 元\n可用餘額：${availableBalance} 元`);
-            } else {
-                showErrorMessage("用戶ID或密碼錯誤！");
-            }
-        }
-
-        // 重設密碼
-        function resetPassword() {
-            const userId = document.getElementById("userId").value;
-            if (balanceData[userId]) {
-                const newPassword = prompt("請輸入新密碼：");
-                if (newPassword && newPassword.length >= 6) {
-                    balanceData[userId].password = newPassword;
-                    alert("密碼已成功重設！");
-                } else {
-                    alert("新密碼必須至少 6 位字符！");
-                }
-            } else {
-                showErrorMessage("查無此用戶ID！");
-            }
-        }
-    </script>
+    if (user) {
+      document.getElementById('login').style.display = 'none';
+      document.getElementById('balance').style.display = 'block';
+      document.getElementById('userId').innerText = user.id;
+      document.getElementById('reservedFunds').innerText = user.reserved;
+      document.getElementById('pendingFunds').innerText = user.pending;
+      document.getElementById('frozenFunds').innerText = user.frozen;
+      document.getElementById('availableBalance').innerText = user.available;
+      document.getElementById('accountBalance').innerText = user.accountBalance;
+    } else {
+      document.getElementById('loginStatus').innerText = "登入失敗，帳號或密碼錯誤！";
+    }
+  }
+</script>
 
 </body>
 </html>
