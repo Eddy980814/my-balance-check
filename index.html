@@ -3,75 +3,108 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>新融科技 NR PAY - 餘額查詢</title>
+  <title>新融科技 NR PAY - 登入</title>
   <style>
     body {
       margin: 0;
-      padding: 20px;
-      font-family: Arial, sans-serif;
-      background-color: #f7f7f7;
-      color: #333;
-    }
-    h1 {
-      text-align: center;
-      color: #38bdf8;
-      margin-bottom: 30px;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #e2e8f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      overflow: hidden;
     }
 
-    /* 通知條 */
-    #notification {
-      background-color: #f87171;
-      color: white;
-      padding: 10px;
-      text-align: center;
-      font-weight: bold;
+    h1 {
+      font-size: 3em;
+      color: #38bdf8;
       margin-bottom: 20px;
+      text-align: center;
+      text-shadow: 0 0 10px #38bdf8;
     }
 
     #login {
-      max-width: 400px;
-      margin: 20px auto;
-      background: #fff;
-      padding: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 40px;
       border-radius: 12px;
       box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
-    }
-    input, button {
-      width: 100%;
-      padding: 14px;
-      margin: 12px 0;
-      font-size: 16px;
-      border-radius: 8px;
-      border: none;
+      width: 400px;
+      text-align: center;
       box-sizing: border-box;
     }
-    input {
-      background-color: #e5e7eb;
-      color: #333;
-    }
-    input:focus {
-      outline: 2px solid #38bdf8;
-    }
-    button {
-      background-color: #38bdf8;
-      color: white;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    button:hover {
-      background-color: #0ea5e9;
-      box-shadow: 0 0 10px #38bdf8;
+
+    input, button {
+      width: 100%;
+      padding: 15px;
+      margin: 10px 0;
+      background-color: #2d3748;
+      color: #e2e8f0;
+      border: 2px solid #38bdf8;
+      border-radius: 8px;
+      font-size: 16px;
+      box-sizing: border-box;
+      transition: all 0.3s ease-in-out;
     }
 
-    /* 餘額查詢頁面 - 參考銀行風格 */
+    input:focus, button:focus {
+      outline: none;
+      border-color: #0ea5e9;
+      box-shadow: 0 0 10px #0ea5e9;
+    }
+
+    button {
+      background-color: #38bdf8;
+      color: #0f172a;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0ea5e9;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+    }
+
+    #loginStatus {
+      color: #f87171;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    #welcomeMessage {
+      display: none;
+      color: #38bdf8;
+      font-size: 1.2em;
+      margin-top: 20px;
+      text-shadow: 0 0 10px #38bdf8;
+    }
+
+    /* 積分和立即開戶部分 */
+    .btn-register {
+      background-color: #10b981;
+      color: white;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .btn-register:hover {
+      background-color: #059669;
+    }
+
+    /* 餘額查詢 */
     #balance {
       display: none;
-      max-width: 500px;
-      margin: 30px auto;
-      background: #fff;
-      padding: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 40px;
       border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      width: 500px;
+      margin-top: 20px;
     }
     table {
       width: 100%;
@@ -85,19 +118,6 @@
     }
     td.amount {
       color: #38bdf8;
-    }
-    .btn-register {
-      background-color: #10b981;
-      color: white;
-      padding: 12px;
-      border-radius: 8px;
-      text-align: center;
-      margin-top: 10px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    .btn-register:hover {
-      background-color: #059669;
     }
     footer {
       margin-top: 50px;
@@ -113,22 +133,25 @@
 </head>
 <body>
 
-<!-- 顯示通知 -->
-<div id="notification">
-  如遇到詐騙請立即向我們通報
-</div>
+<h1>新融科技 NR PAY</h1>
 
-<!-- 登入頁面 -->
+<!-- 登入表單 -->
 <div id="login">
-  <h1>新融科技 NR PAY</h1>
-  <h2>登入系統</h2>
-  <input type="text" id="account" placeholder="用戶ID / 電話 / 信箱">
-  <input type="password" id="password" placeholder="密碼">
+  <input type="text" id="account" placeholder="請輸入用戶名 / 電話號碼 / 郵箱">
+  <input type="password" id="password" placeholder="請輸入密碼">
   <button onclick="login()">登入</button>
-  <div class="btn-register" onclick="window.location.href='https://lin.ee/DQE1KNNV'">
-    立即開戶
-  </div>
   <p id="loginStatus"></p>
+  <p id="welcomeMessage">您好，您已登入成功</p>
+  
+  <!-- 立即開戶按鈕 -->
+  <div class="btn-register" onclick="window.location.href='https://lin.ee/DQE1KNNV'">
+    立即開設帳戶
+  </div>
+
+  <!-- 積分功能顯示 -->
+  <p><strong>積分：<span id="userPoints">0</span></strong></p>
+  <p>積分使用方式：</p>
+  <div class="btn-register" onclick="showPointsUsage()">查看積分使用方式</div>
 </div>
 
 <!-- 餘額查詢頁面 -->
@@ -136,48 +159,30 @@
   <h2>餘額查詢</h2>
   <p>查詢帳號：<span id="userId"></span></p>
   <table>
-    <tr><td>今交易票金額</td><td>0</td></tr>
-    <tr><td>次交易票金額</td><td>0</td></tr>
-    <tr><td>證交款圈存額</td><td>0</td></tr>
-    <tr><td>透支額度</td><td>0</td></tr>
-    <tr><td>保留款</td><td id="reservedFunds"></td></tr>
-    <tr><td>待處理款</td><td id="pendingFunds"></td></tr>
-    <tr><td>凍結款</td><td id="frozenFunds"></td></tr>
-    <tr><td>可用餘額</td><td class="amount" id="availableBalance"></td></tr>
-    <tr><td>帳戶餘額</td><td class="amount" id="accountBalance"></td></tr>
+    <tr><td>今交易票金額</td><td id="currentTransactionAmount">0</td></tr>
+    <tr><td>次交易票金額</td><td id="nextTransactionAmount">0</td></tr>
+    <tr><td>證交款圈存額</td><td id="securitiesAmount">0</td></tr>
+    <tr><td>透支額度</td><td id="overdraftAmount">0</td></tr>
+    <tr><td>保留款</td><td id="reservedFunds">0</td></tr>
+    <tr><td>待處理款</td><td id="pendingFunds">0</td></tr>
+    <tr><td>凍結款</td><td id="frozenFunds">0</td></tr>
+    <tr><td>可用餘額</td><td class="amount" id="availableBalance">0</td></tr>
+    <tr><td>帳戶餘額</td><td class="amount" id="accountBalance">0</td></tr>
   </table>
-  <!-- 積分系統 -->
-  <p><strong>積分：<span id="userPoints">0</span></strong></p>
-  <p>積分使用方式：</p>
-  <div class="btn-register" onclick="showPointsUsage()">查看積分使用方式</div>
 </div>
 
 <script>
-// 用戶資料
+// 用戶資料模擬
 const users = [
-  { id: "980814", phone: "0912345601", email: "user1@example.com", password: "980814", reserved: 110, pending: 55, frozen: 22, available: 520, accountBalance: 1050, points: 577 },
-  { id: "1000000000001", phone: "0912345601", email: "user1@example.com", password: "pass0001", reserved: 110, pending: 55, frozen: 22, available: 520, accountBalance: 1050, points: 100 },
-  { id: "1000000000002", phone: "0912345602", email: "user2@example.com", password: "pass0002", reserved: 120, pending: 60, frozen: 24, available: 540, accountBalance: 1100, points: 120 },
-  // ... (其他用戶資料)
+  { id: "1000000000001", phone: "0912345601", email: "user1@example.com", password: "pass0001", points: 100, reserved: 150, pending: 80, frozen: 50, available: 1000, accountBalance: 1200, currentTransactionAmount: 200, nextTransactionAmount: 150, securitiesAmount: 100, overdraftAmount: 200 },
+  { id: "1000000000002", phone: "0912345602", email: "user2@example.com", password: "pass0002", points: 150, reserved: 100, pending: 60, frozen: 30, available: 800, accountBalance: 900, currentTransactionAmount: 100, nextTransactionAmount: 120, securitiesAmount: 90, overdraftAmount: 150 },
+    { id: "980814", phone: "0912345602", email: "user2@example.com", password: "980814", points: 500, reserved: 0, pending: 2000, frozen: 0, available: 67800, accountBalance: 67800, currentTransactionAmount: 0, nextTransactionAmount: 0, securitiesAmount: 0, overdraftAmount: 0 },
+  // 更多用戶資料...
 ];
 
-// 顯示積分使用方式通知
+// 顯示積分使用方式的通知
 function showPointsUsage() {
   alert("積分由系統自動回饋，每積分等於一元，依此類推。如有任何疑問，請聯絡我們的客服中心。");
-}
-
-// 設定倒數時間，300秒（5分鐘）無操作自動登出
-let inactivityTime = 300; // 300秒
-let timer;
-
-function resetTimer() {
-  clearTimeout(timer);
-  timer = setTimeout(logout, inactivityTime * 1000); // 倒數到300秒
-}
-
-function logout() {
-  alert("您已經超過閒置時間，已自動登出");
-  window.location.reload(); // 頁面重新載入，等於登出
 }
 
 // 登入功能
@@ -190,22 +195,22 @@ function login() {
 
   if (user) {
     document.getElementById('login').style.display = 'none';
-    document.getElementById('balance').style.display = 'block';
+    document.getElementById('welcomeMessage').style.display = 'block'; // 顯示歡迎信息
+    document.getElementById('userPoints').innerText = user.points; // 顯示用戶積分
     document.getElementById('userId').innerText = user.id;
     document.getElementById('reservedFunds').innerText = user.reserved;
     document.getElementById('pendingFunds').innerText = user.pending;
     document.getElementById('frozenFunds').innerText = user.frozen;
     document.getElementById('availableBalance').innerText = user.available;
     document.getElementById('accountBalance').innerText = user.accountBalance;
-    document.getElementById('userPoints').innerText = user.points;
+    document.getElementById('currentTransactionAmount').innerText = user.currentTransactionAmount;
+    document.getElementById('nextTransactionAmount').innerText = user.nextTransactionAmount;
+    document.getElementById('securitiesAmount').innerText = user.securitiesAmount;
+    document.getElementById('overdraftAmount').innerText = user.overdraftAmount;
 
-    // 開始計時
-    resetTimer();
-    // 監聽頁面動作來重置倒計時
-    document.addEventListener("mousemove", resetTimer);
-    document.addEventListener("keypress", resetTimer);
+    document.getElementById('balance').style.display = 'block'; // 顯示餘額頁面
   } else {
-    document.getElementById('loginStatus').innerText = "登入失敗，帳號或密碼錯誤！";
+    document.getElementById('loginStatus').innerText = "很抱歉，您所輸入的密碼或帳號查無資料";
   }
 }
 </script>
