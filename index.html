@@ -5,22 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>新融科技 NR PAY - 餘額查詢</title>
   <style>
+    /* 登入頁面 - 玉山銀行風格 */
     body {
       margin: 0;
       padding: 20px;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: #e2e8f0;
+      background-color: #f4f7f9;
+      color: #333;
     }
     h1 {
       text-align: center;
       color: #38bdf8;
       margin-bottom: 30px;
     }
-    #login, #balance {
+    #login {
       max-width: 400px;
       margin: 20px auto;
-      background: #1e293b;
+      background: #fff;
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
@@ -35,21 +36,29 @@
       box-sizing: border-box;
     }
     input {
-      background-color: #334155;
-      color: #e2e8f0;
-    }
-    input:focus {
-      outline: 2px solid #38bdf8;
+      background-color: #e5e7eb;
+      color: #333;
     }
     button {
-      background: #38bdf8;
-      color: #0f172a;
+      background-color: #38bdf8;
+      color: white;
       cursor: pointer;
       transition: all 0.3s ease;
     }
     button:hover {
-      background: #0ea5e9;
+      background-color: #0ea5e9;
       box-shadow: 0 0 10px #38bdf8;
+    }
+
+    /* 餘額查詢頁面 - 參考銀行風格 */
+    #balance {
+      display: none;
+      max-width: 500px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     }
     table {
       width: 100%;
@@ -58,11 +67,24 @@
     }
     th, td {
       padding: 12px;
-      border-bottom: 1px solid #334155;
+      border-bottom: 1px solid #ddd;
       text-align: left;
     }
     td.amount {
       color: #38bdf8;
+    }
+    .btn-register {
+      background-color: #10b981;
+      color: white;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .btn-register:hover {
+      background-color: #059669;
     }
     footer {
       margin-top: 50px;
@@ -78,9 +100,9 @@
 </head>
 <body>
 
-<h1>新融科技 NR PAY</h1>
-
+<!-- 登入頁面 -->
 <div id="login">
+  <h1>新融科技 NR PAY</h1>
   <h2>登入系統</h2>
   <input type="text" id="account" placeholder="用戶ID / 電話 / 信箱">
   <input type="password" id="password" placeholder="密碼">
@@ -88,7 +110,8 @@
   <p id="loginStatus"></p>
 </div>
 
-<div id="balance" style="display:none;">
+<!-- 餘額查詢頁面 -->
+<div id="balance">
   <h2>餘額查詢</h2>
   <p>查詢帳號：<span id="userId"></span></p>
   <table>
@@ -102,21 +125,19 @@
     <tr><td>可用餘額</td><td class="amount" id="availableBalance"></td></tr>
     <tr><td>帳戶餘額</td><td class="amount" id="accountBalance"></td></tr>
   </table>
+  <div class="btn-register" onclick="window.location.href='https://lin.ee/DQE1KNNV'">
+    立即開戶
+  </div>
 </div>
 
 <script>
 const users = [
-  { id: "Wag0906752358", phone: "0906752358", email: "Wag123890@gmail.com", password: "Wag980814", reserved: 0, pending:2599, frozen: 0, available: 25635, accountBalance:25635 },
+  { id: "980814", phone: "0912345601", email: "user1@example.com", password: "980814", reserved: 110, pending: 55, frozen: 22, available: 520, accountBalance: 1050 },
   { id: "1000000000002", phone: "0912345602", email: "user2@example.com", password: "pass0002", reserved: 120, pending: 60, frozen: 24, available: 540, accountBalance: 1100 },
   { id: "1000000000003", phone: "0912345603", email: "user3@example.com", password: "pass0003", reserved: 130, pending: 65, frozen: 26, available: 560, accountBalance: 1150 },
   { id: "1000000000004", phone: "0912345604", email: "user4@example.com", password: "pass0004", reserved: 140, pending: 70, frozen: 28, available: 580, accountBalance: 1200 },
   { id: "1000000000005", phone: "0912345605", email: "user5@example.com", password: "pass0005", reserved: 150, pending: 75, frozen: 30, available: 600, accountBalance: 1250 },
-  { id: "1000000000006", phone: "0912345606", email: "user6@example.com", password: "pass0006", reserved: 160, pending: 80, frozen: 32, available: 620, accountBalance: 1300 },
-  { id: "1000000000007", phone: "0912345607", email: "user7@example.com", password: "pass0007", reserved: 170, pending: 85, frozen: 34, available: 640, accountBalance: 1350 },
-  { id: "1000000000008", phone: "0912345608", email: "user8@example.com", password: "pass0008", reserved: 180, pending: 90, frozen: 36, available: 660, accountBalance: 1400 },
-  { id: "1000000000009", phone: "0912345609", email: "user9@example.com", password: "pass0009", reserved: 190, pending: 95, frozen: 38, available: 680, accountBalance: 1450 },
-  { id: "1000000000010", phone: "0912345610", email: "user10@example.com", password: "pass0010", reserved: 200, pending: 100, frozen: 40, available: 700, accountBalance: 1500 },
-  // ...繼續填滿到20組
+  // ... (補充剩餘用戶資料)
 ];
 
 function login() {
