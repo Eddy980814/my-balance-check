@@ -39,6 +39,9 @@
       background-color: #e5e7eb;
       color: #333;
     }
+    input:focus {
+      outline: 2px solid #38bdf8;
+    }
     button {
       background-color: #38bdf8;
       color: white;
@@ -107,6 +110,9 @@
   <input type="text" id="account" placeholder="用戶ID / 電話 / 信箱">
   <input type="password" id="password" placeholder="密碼">
   <button onclick="login()">登入</button>
+  <div class="btn-register" onclick="window.location.href='https://lin.ee/DQE1KNNV'">
+    立即開戶
+  </div>
   <p id="loginStatus"></p>
 </div>
 
@@ -125,9 +131,6 @@
     <tr><td>可用餘額</td><td class="amount" id="availableBalance"></td></tr>
     <tr><td>帳戶餘額</td><td class="amount" id="accountBalance"></td></tr>
   </table>
-  <div class="btn-register" onclick="window.location.href='https://lin.ee/DQE1KNNV'">
-    立即開戶
-  </div>
 </div>
 
 <script>
