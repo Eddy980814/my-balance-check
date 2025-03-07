@@ -133,62 +133,6 @@
       line-height: 1.8;
       border-top: 1px solid #334155;
     }
-
-    /* 模態窗口 */
-    #modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
-      z-index: 999;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-content {
-      background-color: white;
-      padding: 30px;
-      border-radius: 8px;
-      width: 80%;
-      max-width: 400px;
-      text-align: center;
-    }
-
-    /* 進度條 */
-    #progress-bar-container {
-      width: 100%;
-      background-color: #f3f3f3;
-      height: 30px;
-      margin-top: 20px;
-    }
-
-    #progress-bar {
-      height: 100%;
-      background-color: #38bdf8;
-      width: 0;
-      border-radius: 8px;
-      transition: width 2s ease-in-out;
-    }
-
-    /* 返回頂部按鈕 */
-    #back-to-top {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #38bdf8;
-      color: white;
-      padding: 15px;
-      border-radius: 50%;
-      display: none;
-      cursor: pointer;
-    }
-
-    #back-to-top:hover {
-      background-color: #0ea5e9;
-    }
   </style>
 </head>
 <body>
@@ -229,41 +173,23 @@
     <tr><td>可用餘額</td><td class="amount" id="availableBalance">0</td></tr>
     <tr><td>帳戶餘額</td><td class="amount" id="accountBalance">0</td></tr>
   </table>
-  <!-- 進度條 -->
-  <div id="progress-bar-container">
-    <div id="progress-bar"></div>
-  </div>
 
-  <!-- 返回頂部按鈕 -->
-  <button id="back-to-top" onclick="scrollToTop()">返回頂部</button>
-</div>
-
-<!-- 模態窗口 -->
-<div id="modal">
-  <div class="modal-content">
-    <p>積分由系統自動回饋，每積分等於一元，依此類推。如有任何疑問，請聯絡我們的客服中心。</p>
-    <button onclick="closeModal()">關閉</button>
-  </div>
+  <!-- 积分使用方式 -->
+  <p>積分使用方式：</p>
+  <div class="btn-register" onclick="showPointsUsage()">查看積分使用方式</div>
 </div>
 
 <script>
 // 用戶資料模擬
 const users = [
   { id: "980814", phone: "0912345601", email: "user1@example.com", password: "980814", points: 100, reserved: 150, pending: 80, frozen: 50, available: 1000, accountBalance: 1200, currentTransactionAmount: 200, nextTransactionAmount: 150, securitiesAmount: 100, overdraftAmount: 200 },
-  { id: "19980814", phone: "0912345602", email: "user2@example.com", password: "19980814", points: 150, reserved: 100, pending: 60, frozen: 30, available: 800, accountBalance: 900, currentTransactionAmount: 100, nextTransactionAmount: 120, securitiesAmount: 90, overdraftAmount: 150 },
-  { id: "1000000000001", phone: "0912345601", email: "user1@example.com", password: "pass0001", points: 100, reserved: 150, pending: 80, frozen: 50, available: 1000, accountBalance: 1200, currentTransactionAmount: 200, nextTransactionAmount: 150, securitiesAmount: 100, overdraftAmount: 200 },
   { id: "1000000000002", phone: "0912345602", email: "user2@example.com", password: "pass0002", points: 150, reserved: 100, pending: 60, frozen: 30, available: 800, accountBalance: 900, currentTransactionAmount: 100, nextTransactionAmount: 120, securitiesAmount: 90, overdraftAmount: 150 },
-  { id: "1000000000003", phone: "0912345603", email: "user3@example.com", password: "pass0003", points: 120, reserved: 110, pending: 50, frozen: 60, available: 1300, accountBalance: 1500, currentTransactionAmount: 300, nextTransactionAmount: 180, securitiesAmount: 110, overdraftAmount: 250 },
+  // 更多用戶資料...
 ];
 
 // 顯示積分使用方式的通知
 function showPointsUsage() {
-  document.getElementById("modal").style.display = "flex"; // 顯示模態窗口
-}
-
-// 關閉模態窗口
-function closeModal() {
-  document.getElementById("modal").style.display = "none"; // 關閉模態窗口
+  alert("積分由系統自動回饋，每積分等於一元，依此類推。如有任何疑問，請聯絡我們的客服中心。");
 }
 
 // 登入功能
@@ -290,31 +216,9 @@ function login() {
     document.getElementById('overdraftAmount').innerText = user.overdraftAmount;
 
     document.getElementById('balance').style.display = 'block'; // 顯示餘額頁面
-    showProgressBar(user.available); // 顯示餘額進度條
   } else {
     document.getElementById('loginStatus').innerText = "很抱歉，您所輸入的密碼或帳號查無資料";
   }
-}
-
-// 顯示餘額進度條
-function showProgressBar(balance) {
-  const progressBar = document.getElementById("progress-bar");
-  const maxBalance = 1200; // 設定最大餘額（假設帳戶總額為 1200）
-  const progressWidth = (balance / maxBalance) * 100;
-  progressBar.style.width = progressWidth + "%";
-}
-
-// 返回頂部功能
-window.onscroll = function() {
-  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-    document.getElementById('back-to-top').style.display = 'block';
-  } else {
-    document.getElementById('back-to-top').style.display = 'none';
-  }
-};
-
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 </script>
 
