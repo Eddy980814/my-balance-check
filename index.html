@@ -16,13 +16,12 @@
       align-items: center;
       flex-direction: column;
       min-height: 100vh;
-      overflow-y: auto;
     }
 
     h1 {
       font-size: 2.5em;
       color: #38bdf8;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       text-align: center;
       text-shadow: 0 0 10px #38bdf8;
     }
@@ -39,14 +38,12 @@
 
     input, button {
       width: 100%;
-      padding: 16px;
-      margin: 12px 0;
+      padding: 14px;
+      margin: 10px 0;
       background-color: #edf2f7;
-      color: #333;
       border: 2px solid #38bdf8;
       border-radius: 8px;
       font-size: 16px;
-      box-sizing: border-box;
       transition: all 0.3s ease-in-out;
     }
 
@@ -58,7 +55,7 @@
 
     button {
       background-color: #38bdf8;
-      color: #0f172a;
+      color: white;
       cursor: pointer;
     }
 
@@ -69,18 +66,16 @@
 
     #loginStatus {
       color: #f87171;
-      margin-top: 15px;
       font-weight: bold;
+      opacity: 0;
+      transition: opacity 0.5s, transform 0.3s;
     }
 
-    #welcomeMessage {
-      display: none;
-      color: #38bdf8;
-      font-size: 1.2em;
-      margin-top: 20px;
+    .error {
+      opacity: 1 !important;
+      transform: translateY(5px);
     }
 
-    /* 餘額查詢頁面 */
     #balance {
       display: none;
       background-color: #ffffff;
@@ -89,8 +84,8 @@
       box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
       width: 80%;
       max-width: 500px;
-      margin-top: 20px;
       text-align: left;
+      margin-top: 20px;
     }
 
     table {
@@ -98,29 +93,16 @@
       margin-top: 20px;
       border-collapse: collapse;
     }
+
     th, td {
       padding: 12px;
       border-bottom: 1px solid #ddd;
       text-align: left;
     }
+
     td.amount {
       color: #38bdf8;
-    }
-
-    /* 立即開戶按鈕 */
-    .btn-register {
-      background-color: #10b981;
-      color: white;
-      padding: 12px;
-      border-radius: 8px;
-      text-align: center;
-      margin-top: 10px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .btn-register:hover {
-      background-color: #059669;
+      font-weight: bold;
     }
 
     footer {
@@ -130,7 +112,6 @@
       color: #94a3b8;
       font-size: 12px;
       text-align: center;
-      line-height: 1.8;
       border-top: 1px solid #334155;
     }
   </style>
@@ -138,25 +119,14 @@
 <body>
 
 <h1>新融科技 NR PAY</h1>
-<p style="text-align:center; font-size: 1em;">New Integration Technology NR PAY</p>
 
-<!-- 登入表單 -->
 <div id="login">
   <input type="text" id="account" placeholder="請輸入用戶名 / 電話號碼 / 郵箱" />
   <input type="password" id="password" placeholder="請輸入密碼" />
   <button onclick="login()">登入</button>
   <p id="loginStatus"></p>
-  <p id="welcomeMessage">您好，您已登入成功</p>
-  <p style="font-size: 0.8em;">Hello, you have successfully logged in.</p>
-  
-  <!-- 立即開戶按鈕 -->
-  <div class="btn-register" onclick="window.location.href='https://lin.ee/DQE1KNNV'">
-    立即開設帳戶
-  </div>
-  <p style="font-size: 0.8em;">Register an account now.</p>
 </div>
 
-<!-- 餘額查詢頁面 -->
 <div id="balance">
   <h2>餘額查詢</h2>
   <p>查詢帳號：<span id="userId"></span></p>
@@ -171,54 +141,37 @@
     <tr><td>可用餘額</td><td class="amount" id="availableBalance">0</td></tr>
     <tr><td>帳戶餘額</td><td class="amount" id="accountBalance">0</td></tr>
   </table>
-
-  <!-- 積分顯示 -->
-  <p><strong>積分：<span id="userPoints">0</span></strong></p>
-  <p>積分使用方式：</p>
-  <div class="btn-register" onclick="showPointsUsage()">查看積分使用方式</div>
-
-  <p style="font-size: 0.8em;">Points: <span id="userPoints">0</span><br>Click to check point usage rules.</p>
 </div>
 
 <script>
 // 用戶資料模擬
 const users = [
   { id: "980814", phone: "1", email: "user1@example.com", password: "980814", points: 100, reserved: 150, pending: 80, frozen: 50, available: 1000, accountBalance: 1200, currentTransactionAmount: 200, nextTransactionAmount: 150, securitiesAmount: 100, overdraftAmount: 200 },
-  { id: "ECX", phone: "0989518765", email: "fakkeangle333@gmail.com", password: "A4uu7014", points: 46, reserved: 1500, pending: 5015, frozen: 0, available: 3270, accountBalance: 9770, currentTransactionAmount: 0, nextTransactionAmount: 0, securitiesAmount: 0, overdraftAmount: 224,958 },
-  // 更多用戶資料...
+  { id: "ECX", phone: "0989518765", email: "fakkeangle333@gmail.com", password: "A4uu7014", points: 46, reserved: 1500, pending: 5015, frozen: 0, available: 3270, accountBalance: 9770, currentTransactionAmount: 0, nextTransactionAmount: 0, securitiesAmount: 0, overdraftAmount: 224958 }
 ];
-
-// 顯示積分使用方式的通知
-function showPointsUsage() {
-  alert("積分由系統自動回饋，每積分等於一元，依此類推。如有任何疑問，請聯絡我們的客服中心。");
-}
 
 // 登入功能
 function login() {
   const account = document.getElementById('account').value.trim();
   const password = document.getElementById('password').value.trim();
+  const loginStatus = document.getElementById('loginStatus');
   const user = users.find(u =>
     (u.id === account || u.phone === account || u.email === account) && u.password === password
   );
 
   if (user) {
     document.getElementById('login').style.display = 'none';
-    document.getElementById('welcomeMessage').style.display = 'block'; // 顯示歡迎信息
-    document.getElementById('userPoints').innerText = user.points; // 顯示用戶積分
     document.getElementById('userId').innerText = user.id;
     document.getElementById('reservedFunds').innerText = user.reserved;
     document.getElementById('pendingFunds').innerText = user.pending;
     document.getElementById('frozenFunds').innerText = user.frozen;
     document.getElementById('availableBalance').innerText = user.available;
     document.getElementById('accountBalance').innerText = user.accountBalance;
-    document.getElementById('currentTransactionAmount').innerText = user.currentTransactionAmount;
-    document.getElementById('nextTransactionAmount').innerText = user.nextTransactionAmount;
-    document.getElementById('securitiesAmount').innerText = user.securitiesAmount;
-    document.getElementById('overdraftAmount').innerText = user.overdraftAmount;
-
-    document.getElementById('balance').style.display = 'block'; // 顯示餘額頁面
+    document.getElementById('balance').style.display = 'block';
   } else {
-    document.getElementById('loginStatus').innerText = "很抱歉，您所輸入的密碼或帳號查無資料";
+    loginStatus.innerText = "帳號或密碼錯誤";
+    loginStatus.classList.add("error");
+    setTimeout(() => loginStatus.classList.remove("error"), 2000);
   }
 }
 </script>
@@ -226,8 +179,7 @@ function login() {
 <footer>
   © 2025 新融科技 NR PAY ｜ 版權所有<br>
   客服專線：05-3791191 ｜ 服務時間：08:00 - 21:30<br>
-  聯絡信箱：nrt.tw.2025@gmail.com<br>
-  <p style="font-size: 0.8em;">Customer Service Phone: 05-3791191 | Service Hours: 08:00 AM - 09:30 PM</p>
+  聯絡信箱：nrt.tw.2025@gmail.com
 </footer>
 
 </body>
